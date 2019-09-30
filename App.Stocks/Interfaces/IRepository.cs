@@ -7,12 +7,13 @@ namespace App.Stocks.Interfaces
 {
     public interface IRepository
     {
-        // IQueryable<Company> AllCompanies();
+        IQueryable<Company> Companies { get; }
 
-         Company CompanyById(int id);
+        Company CompanyById(int id);
+        //IQueryable<Company> AllCompanies();
 
          //IQueryable<Stock> CompaniesStocks(int companyId);
 
-         IQueryable<Company> FilteredCompanies(Func<Company, Boolean> predicate);
+        IQueryable<Company> FilteredCompanies(Func<Company, Boolean> predicate);
     }
 }

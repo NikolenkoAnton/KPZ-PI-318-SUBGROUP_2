@@ -8,7 +8,7 @@ namespace App.Stocks.Interfaces
 {
     public interface IStocksManager
     {
-        Task<IEnumerable<Stock>> CompanyStocks(int companyId);
-        Task<IEnumerable<Stock>> CompanyStocksByDate(int companyId, DateTime date);
+        Task<StocksListView> CompanyStocks(int companyId);
+        Task<StockView> CompanyStockByDate(int companyId, DateTime date);
     }
 }

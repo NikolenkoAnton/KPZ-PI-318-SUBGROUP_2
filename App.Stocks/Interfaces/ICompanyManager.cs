@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace App.Stocks.Interfaces
 {
-    public interface ICompanyManager
+    public interface ICompaniesManager
     {
-         Task<IQueryable<Company>> CompaniesWithOpenStocks();
-         Task<Company> CompanyById(int id);
+        Task<IEnumerable<CompanyView>> AvailableCompanies();
+
+        Task<IEnumerable<CompanyView>> AllCompanies();
+
+        Task<CompanyView> CompanyById(int id);
     }
 }

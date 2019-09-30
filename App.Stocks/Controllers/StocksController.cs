@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using App.Stocks.Interfaces;
+using App.Stocks.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -11,37 +14,58 @@ namespace App.Stocks.Controllers
     [ApiController]
     public class StocksController : ControllerBase
     {
-        readonly ICompanyManager companyManager;
+        readonly ICompaniesManager companyManager;
         readonly IStocksManager stocksManager;
         readonly ILogger<StocksController> logger;
+        readonly IMapper mapper;
         public StocksController(
-            ICompanyManager companyManager,
+            ICompaniesManager companyManager,
             IStocksManager stocksManager,
-            ILogger<StocksController> logger)
+            ILogger<StocksController> logger,
+            IMapper mapper)
         {
             this.companyManager = companyManager;
             this.stocksManager = stocksManager;
             this.logger = logger;
+            this.mapper = mapper;
 
         }
 
-       [HttpGet]
-       public async Task<IActionResult> StockByDate([FromQuery] string Date, [FromQuery] int companyId)
-       {
-            return null;
-       }
-
-        [HttpGet("companies")]
-        public async Task<IActionResult> OpenCompanies()
+        [HttpGet("companies/{id}/stocks/all")] 
+        public async Task<StocksListView> CompanyStocks(int id)
         {
-            return null;
-            //return await companyManager;
+            return await stocksManager.CompanyStocks(id);
         }
+
+        [HttpGet("companies/{id}/stocks")]
+        public async Task<StockView> StockByDate([FromQuery] string Date,int id)
+        {
+            return await stocksManager.CompanyStockByDate(id, DateTime.Parse(Date));
+        }
+
+
         [HttpGet("companies/{id}")]
-        public async Task<IActionResult> Company([FromQuery] string Date)
+        public async Task<CompanyView> Company(int id)
         {
-            return null;
+            return await companyManager.CompanyById(id);
         }
+        [HttpGet("companies/open")]
+        public async Task<IEnumerable<CompanyView>> AvailableCompanies()
+        {
+            return await companyManager.AvailableCompanies();
+        }
+
+        [HttpGet("companies/all")]
+        public async Task<IEnumerable<CompanyView>> AllCompanies()
+        {
+           return await companyManager.AllCompanies();
+           
+        }
+        //[HttpGet("companies/{id}")]
+        //public async Task<Company> Company([FromRoute] int id)
+        //{
+        //    return await companyManager.CompanyById(id);
+        //}
         
 
     }
