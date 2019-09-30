@@ -29,4 +29,13 @@ namespace App.Stocks.Exception
 
         }
     }
+
+    public class DateException : WebException
+    {
+        public DateException(string message)
+           : base(message)
+        {
+
+        }
+    }
 }

@@ -18,6 +18,7 @@ namespace App.Stocks.Models
         public bool IsAvailableToView { get; set; }
         public Stock[] Stocks { get; set; }
 
+        public async Task<Stock> GetStockByDate(DateTime Date) => await Task.Run(() => Stocks.Where(st => st.CompareDate(Date)).FirstOrDefault());
         public Decimal GetStockCostByDate(DateTime date)
         {
             return Stocks.Where(stc => stc.CompareDate(date)).FirstOrDefault()?.Cost?? 0;

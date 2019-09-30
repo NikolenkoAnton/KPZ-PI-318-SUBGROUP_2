@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.Stocks.Exception;
 using App.Stocks.Interfaces;
 using App.Stocks.Models;
 using App.Stocks.Services;
@@ -45,9 +46,18 @@ namespace App.Stocks.Controllers
         [HttpGet("companies/{id}/stocks")]
         public async Task<StockView> StockByDate([FromQuery] string date,int id)
         {
-            var Date = DateTime.Parse(date);
-            validateService.ValidateDate(Date);
-            return await stocksManager.CompanyStockByDate(id, Date);
+            try
+            {
+                var Date = DateTime.Parse(date);
+                validateService.ValidateDate(Date);
+                return await stocksManager.CompanyStockByDate(id, Date);
+
+            }
+            catch (FormatException)
+            {
+                throw new DateException("Incorrect parameter format!Correct date format - XX.XX.XXXX");
+            }
+            
         }
 
 

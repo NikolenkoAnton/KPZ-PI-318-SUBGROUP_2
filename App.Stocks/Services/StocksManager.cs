@@ -45,45 +45,57 @@ namespace App.Stocks.Services
             var company = await Task.Run(() => repository.CompanyById(companyId));
 
            
-
             var stock = await Task.Run(()=>company.Stocks.Where(el => el.CompareDate(date)).FirstOrDefault());
 
             validateServices.ValidateStocksCompany(stock, company);
 
+            var prevStock = await Task.Run(() => company.GetStockByDate(stock.Date.AddDays(-1)));
 
-            return await GetStockWithDifferencePrice(company, stock);
+            var nextStock = await Task.Run(() => company.GetStockByDate(stock.Date.AddDays(1)));
 
-        }
+            var stockView = await Task.Run(() => mapper.Map<StockView>(stock));
 
-        private decimal GetDiff(decimal curr, decimal other) => other == 0? other : curr - other;
-        private async Task<StockView> GetStockWithDifferencePrice(Company company,Stock stock)
-        {
-            var stockView = await Task.Run(()=>mapper.Map<StockView>(stock));
-            stockView.Company = company.Name;
+            stockView.SetPriceDifference(prevStock);
+            stockView.SetPriceDifference(nextStock);
 
-            var currentStockDate = stock.Date;
-            var currCost = stock.Cost;
+            if (stockView.DifferenceNextDay == null) stockView.DifferenceNextDay = "0";
 
-            Task[] tasks = new Task[2]
-            {
-                 new Task(async () => {
-                    var cost = await Task.Run(()=>company.GetStockCostByDate(currentStockDate.AddDays(1)));
-                    stockView.DifferenceNextDay =  GetDiff(currCost,cost).ToString() + " $";
-                    }),
-                 new Task(async () =>{
-                    var cost = await Task.Run(()=>company.GetStockCostByDate(currentStockDate.AddDays(-1)));
-
-                    stockView.DifferencePrevDay =  GetDiff(currCost,cost).ToString() + " $";
-                    })
-            };
-
-            foreach (var t in tasks)
-                t.Start();
-
-            Task.WaitAll(tasks);
+            if (stockView.DifferencePrevDay == null) stockView.DifferencePrevDay = "0";
 
             return stockView;
+
         }
+
+
+        //private decimal GetDiff(decimal curr, decimal other) => other == 0? other : curr - other;
+        //private async Task<StockView> GetStockWithDifferencePrice(Company company,Stock stock)
+        //{
+        //    var stockView = await Task.Run(()=>mapper.Map<StockView>(stock));
+        //    stockView.Company = company.Name;
+
+        //    var currentStockDate = stock.Date;
+        //    var currCost = stock.Cost;
+
+        //    Task[] tasks = new Task[2]
+        //    {
+        //         new Task(async () => {
+        //            var cost = await Task.Run(()=>company.GetStockCostByDate(currentStockDate.AddDays(1)));
+        //            stockView.DifferenceNextDay =  GetDiff(currCost,cost).ToString() + " $";
+        //            }),
+        //         new Task(async () =>{
+        //            var cost = await Task.Run(()=>company.GetStockCostByDate(currentStockDate.AddDays(-1)));
+
+        //            stockView.DifferencePrevDay =  GetDiff(currCost,cost).ToString() + " $";
+        //            })
+        //    };
+
+        //    foreach (var t in tasks)
+        //        t.Start();
+
+        //    Task.WaitAll(tasks);
+
+        //    return stockView;
+        //}
 
        
     }

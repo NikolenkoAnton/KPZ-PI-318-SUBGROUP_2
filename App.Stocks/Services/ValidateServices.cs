@@ -34,10 +34,7 @@ namespace App.Stocks.Services
         }
         public void ValidateDate(DateTime Date)
         {
-
-            var compare = (DateTime.Parse(Date.ToShortDateString())).CompareTo(DateTime.Parse(DateTime.Now.ToShortDateString()));
-
-            if (compare > 0) throw new WebException("Incorrect date!");
+            if (Date.CompareTo(DateTime.Now) > 0) throw new DateException("Incorrect date!");
         }
     }
 

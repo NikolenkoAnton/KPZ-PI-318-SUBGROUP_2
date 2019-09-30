@@ -42,5 +42,18 @@ namespace App.Stocks.Models
 
         public string DifferenceNextDay { get; set; }
 
+        public void SetPriceDifference(Stock stock)
+        {
+            //Date.CompareTo(DateTime.Now) > 0
+            if (stock != null)
+            {
+                if (stock.Date.CompareTo(DateTime.Parse(Date)) > 0)
+                    DifferenceNextDay = (Decimal.Parse(Cost) - stock.Cost).ToString();
+
+                else
+                    DifferencePrevDay = (Decimal.Parse(Cost) - stock.Cost).ToString();
+            }
+        }
+
     }
 }
