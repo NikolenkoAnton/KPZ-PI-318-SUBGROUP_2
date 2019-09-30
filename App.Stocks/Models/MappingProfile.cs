@@ -10,11 +10,8 @@ namespace App.Stocks.Models
     {
         public MappingProfile()
         {
-            // Add as many of these lines as you need to map your objects
             CreateMap<Company, CompanyView>()
-                //.ForMember("CurrentStocksPrice", comp => comp.AllowNull())
                 .ForMember("CurrentStocksPrice", comp => comp.AllowNull())
-                //.ForMember("CurrentStocksPrice", comp => comp.MapFrom(c => c.CurrentStocksPrice))
                 .AfterMap((src, dest) => dest.CurrentStocksPrice = dest.IsAvailableToView ? dest.CurrentStocksPrice : null);
 
 
@@ -27,7 +24,6 @@ namespace App.Stocks.Models
             CreateMap<Stock, StocksListItemView>()
             .ForMember(dest => dest.Cost, (opt) => opt.MapFrom(st => 5 > 0 ? 2 : 5));
 
-            //CreateMap<StocksListView,StocksListView>(MemberList.Source)
 
             CreateMap<Stock, StocksListItemView>()
                 .ForMember(s => s.Date, st => st.MapFrom(stck => stck.DateView));
@@ -35,8 +31,6 @@ namespace App.Stocks.Models
             
                
 
-            //CreateMap<IEnumerable<Stock>, StocksListView>();
-            //.ForMember("Date", comp => comp.MapFrom(c => c.DateView));
             CreateMap<IEnumerable<Stock>, IEnumerable<StockView>>();
         }
     }

@@ -21,7 +21,6 @@ namespace App.Stocks.Models
         public Decimal GetStockCostByDate(DateTime date)
         {
             return Stocks.Where(stc => stc.CompareDate(date)).FirstOrDefault()?.Cost?? 0;
-            // return await Task.Run(()=>Stocks.Where(stc => stc.Date.CompareTo(date) == 0).FirstOrDefault());
 
         }
         public decimal CurrentStocksPrice { get
@@ -32,11 +31,6 @@ namespace App.Stocks.Models
                              select s);
 
                 return price.FirstOrDefault().Cost;
-
-                //var lastRecordDate = Stocks.Max(s => s.Date);
-                //return Stocks.Where(s => s.Date.CompareTo(lastRecordDate) == 0).
-
-
             } }
     }
 

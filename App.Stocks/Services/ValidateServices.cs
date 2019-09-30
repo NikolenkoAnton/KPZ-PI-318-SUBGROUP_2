@@ -1,6 +1,8 @@
-﻿using App.Stocks.Models;
+﻿using App.Stocks.Exception;
+using App.Stocks.Models;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 
 namespace App.Stocks.Services
@@ -8,20 +10,46 @@ namespace App.Stocks.Services
     public class ValidateServices : IValidateServices
     {
 
-        public bool ValidateCompany(Company company) => company != null && company.IsAvailableToView;
+        public void ValidateCompany(Company company) 
+        {
 
-        public bool ValidateStock(Stock stock) => stock != null;
+            if (company == null)
+                throw new CompanyNotFoundException("Company doesn't exist!");
 
-        public bool ValidateStocksCompany(Stock stock, Company company) => ValidateCompany(company) && ValidateStock(stock);
+            if (!company.IsAvailableToView)
+                throw new CompanyNotAvailable("Company isn't public!You can't see detail information.");
+        }
+
+        public void ValidateStock(Stock stock)
+        {
+           if(stock == null)
+                throw new CompanyNotFoundException("Information about stock on this date doesn't exist!");
+
+        }
+
+        public void ValidateStocksCompany(Stock stock, Company company)
+        {
+            ValidateCompany(company);
+            ValidateStock(stock);
+        }
+        public void ValidateDate(DateTime Date)
+        {
+
+            var compare = (DateTime.Parse(Date.ToShortDateString())).CompareTo(DateTime.Parse(DateTime.Now.ToShortDateString()));
+
+            if (compare > 0) throw new WebException("Incorrect date!");
+        }
     }
 
     public interface IValidateServices
     {
-        bool ValidateCompany(Company company);
+        void ValidateCompany(Company company);
 
-        bool ValidateStock(Stock stock);
+        void ValidateDate(DateTime Date);
 
-        bool ValidateStocksCompany(Stock stock, Company company);
+        void ValidateStock(Stock stock);
+
+        void ValidateStocksCompany(Stock stock, Company company);
 
     }
 }

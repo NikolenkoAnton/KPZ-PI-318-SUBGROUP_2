@@ -30,13 +30,12 @@ namespace App.Stocks.Services
 
             var company = await Task.Run(() => repository.CompanyById(companyId));
 
-            if(!validateServices.ValidateCompany(company))
-            {
-                throw new Exception();
-            }
+            validateServices.ValidateCompany(company);
 
-            var Stocks = await Task.Run(() => mapper.Map<IEnumerable<StocksListItemView>>(company.Stocks));
-            return new StocksListView { Company = company.Name, Stocks = Stocks };
+            var stocks = await Task.Run(() => mapper.Map<IEnumerable<StocksListItemView>>(company.Stocks));
+
+            
+            return new StocksListView { Company = company.Name, Stocks = stocks };
 
 
         }
@@ -45,27 +44,18 @@ namespace App.Stocks.Services
         {
             var company = await Task.Run(() => repository.CompanyById(companyId));
 
-            if (!validateServices.ValidateCompany(company))
-            {
-                throw new Exception();
-            }
+           
 
             var stock = await Task.Run(()=>company.Stocks.Where(el => el.CompareDate(date)).FirstOrDefault());
 
-            if(stock == null)
-            {
-                throw new Exception();
-            }
+            validateServices.ValidateStocksCompany(stock, company);
 
 
             return await GetStockWithDifferencePrice(company, stock);
 
         }
 
-        //private  decimal GetDifferencePrice(Stock stock, decimal cost)
-        //{
         private decimal GetDiff(decimal curr, decimal other) => other == 0? other : curr - other;
-        //}
         private async Task<StockView> GetStockWithDifferencePrice(Company company,Stock stock)
         {
             var stockView = await Task.Run(()=>mapper.Map<StockView>(stock));
@@ -93,13 +83,9 @@ namespace App.Stocks.Services
             Task.WaitAll(tasks);
 
             return stockView;
-            //var prevStock = company.GetStocks
         }
 
        
     }
 }
 
-//companies, which has open stocks
-//stocks any companies
-//stocks any companies by date

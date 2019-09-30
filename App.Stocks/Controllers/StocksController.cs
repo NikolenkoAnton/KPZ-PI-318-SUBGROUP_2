@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using App.Stocks.Interfaces;
 using App.Stocks.Models;
+using App.Stocks.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -18,16 +19,20 @@ namespace App.Stocks.Controllers
         readonly IStocksManager stocksManager;
         readonly ILogger<StocksController> logger;
         readonly IMapper mapper;
+        readonly IValidateServices validateService;
+
         public StocksController(
             ICompaniesManager companyManager,
             IStocksManager stocksManager,
             ILogger<StocksController> logger,
-            IMapper mapper)
+            IMapper mapper,
+            IValidateServices validateService)
         {
             this.companyManager = companyManager;
             this.stocksManager = stocksManager;
             this.logger = logger;
             this.mapper = mapper;
+            this.validateService = validateService;
 
         }
 
@@ -38,9 +43,11 @@ namespace App.Stocks.Controllers
         }
 
         [HttpGet("companies/{id}/stocks")]
-        public async Task<StockView> StockByDate([FromQuery] string Date,int id)
+        public async Task<StockView> StockByDate([FromQuery] string date,int id)
         {
-            return await stocksManager.CompanyStockByDate(id, DateTime.Parse(Date));
+            var Date = DateTime.Parse(date);
+            validateService.ValidateDate(Date);
+            return await stocksManager.CompanyStockByDate(id, Date);
         }
 
 
@@ -61,11 +68,7 @@ namespace App.Stocks.Controllers
            return await companyManager.AllCompanies();
            
         }
-        //[HttpGet("companies/{id}")]
-        //public async Task<Company> Company([FromRoute] int id)
-        //{
-        //    return await companyManager.CompanyById(id);
-        //}
+        
         
 
     }

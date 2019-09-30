@@ -16,9 +16,6 @@ namespace App.Stocks.Models
 
         public bool CompareDate(DateTime date) => date.ToShortDateString().CompareTo(DateView) == 0;
         
-         //  return DateTime.Parse(Date.ToShortDateString()).CompareTo(DateTime.Parse(date.ToShortDateString())) == 0;
-       
-
     }
 
     public class StocksListItemView

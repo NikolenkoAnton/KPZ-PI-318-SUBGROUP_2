@@ -18,7 +18,7 @@ namespace App.Stocks.Repositories
         {
             Companies = Initializer.InitCompanies();
         }
-        public Company CompanyById(int id) => Companies.FirstOrDefault(comp => comp.Id == id && comp.IsAvailableToView);
+        public Company CompanyById(int id) => Companies.FirstOrDefault(comp => comp.Id == id);
 
         public IQueryable<Company> FilteredCompanies(Func<Company, bool> predicate) => Companies.Where(predicate).AsQueryable();
 
@@ -31,7 +31,6 @@ namespace App.Stocks.Repositories
         private static IEnumerable<Stock> GenerateStocks()
         {
             Stock[] stocks = new Stock[7];
-            //var a = DateTime.Now.Date;
 
             for (int i = 0; i < 7; i++)
                             stocks[i] = new Stock { Date = DateTime.Now.AddDays(i*-1), Cost = new Random().Next(200 * i, 400 * i) + 470 * (i+1) };

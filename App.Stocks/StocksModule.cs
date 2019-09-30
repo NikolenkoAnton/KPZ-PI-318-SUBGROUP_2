@@ -17,7 +17,6 @@ namespace App.Example
         /// <param name="container"></param>
         public void Initialize(IWindsorContainer container)
         {
-            // example of manually registered components
             container.Register(Component.For<IValidateServices>().ImplementedBy<ValidateServices>().LifestyleSingleton());//.LifestyleTransient());
         }
     }

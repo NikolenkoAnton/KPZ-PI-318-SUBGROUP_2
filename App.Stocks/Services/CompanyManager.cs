@@ -42,8 +42,8 @@ namespace App.Stocks.Services
            // var test = await Task.Run(() => repository.Companies);
 
             var company = await Task.Run(() => repository.CompanyById(id));
-
-            if (!validateServices.ValidateCompany(company)) throw new Exception();
+            validateServices.ValidateCompany(company);
+           // if (!validateServices.ValidateCompany(company)) throw new Exception();
 
             return mapper.Map<CompanyView>(company);
         }

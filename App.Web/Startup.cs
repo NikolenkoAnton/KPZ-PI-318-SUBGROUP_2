@@ -1,4 +1,5 @@
 ﻿using System;
+using App.Stocks.Exception;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +26,8 @@ namespace App.Web
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // ## ASP NET Core template code
+
+           // services.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -56,6 +59,7 @@ namespace App.Web
             }
 
             app.UseHttpsRedirection();
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseMvc();
             // ##
 
