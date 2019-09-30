@@ -12,13 +12,15 @@ namespace App.Stocks.Repositories
     public class Repository : IRepository, ITransientDependency
     {
 
-        public IQueryable<Company> Companies { get; }
+        readonly IQueryable<Company> Companies;
 
         public Repository()
         {
             Companies = Initializer.InitCompanies();
         }
         public Company CompanyById(int id) => Companies.FirstOrDefault(comp => comp.Id == id);
+
+        public IQueryable<Company> AllCompanies() => Companies;
 
         public IQueryable<Company> FilteredCompanies(Func<Company, bool> predicate) => Companies.Where(predicate).AsQueryable();
 

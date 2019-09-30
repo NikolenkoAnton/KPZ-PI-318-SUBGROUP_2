@@ -7,7 +7,7 @@ namespace App.Stocks.Interfaces
 {
     public interface IRepository
     {
-        IQueryable<Company> Companies { get; }
+        IQueryable<Company> AllCompanies();
 
         Company CompanyById(int id);
         //IQueryable<Company> AllCompanies();

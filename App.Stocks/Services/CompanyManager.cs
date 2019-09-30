@@ -25,25 +25,18 @@ namespace App.Stocks.Services
             this.repository = repository;
         }
 
-        public async Task<IEnumerable<CompanyView>> AllCompanies() {
+        public async Task<IEnumerable<CompanyView>> AllCompanies() => await Task.Run(
+                                            () => mapper.Map<IEnumerable<CompanyView>>(repository.AllCompanies().ToList()) );
+                                            
 
-            return await Task.Run(() => mapper.Map<IEnumerable<CompanyView>>(repository.Companies.ToList()));
-
-                
-        }
-
-        public async Task<IEnumerable<CompanyView>> AvailableCompanies() => await Task.Run(() =>
-
-                   mapper.Map<IEnumerable<CompanyView>>(repository.FilteredCompanies(comp => comp.IsAvailableToView).ToList())
-        );
+        public async Task<IEnumerable<CompanyView>> AvailableCompanies() => await Task.Run(
+                                            () => mapper.Map<IEnumerable<CompanyView>>(repository.FilteredCompanies(comp => comp.IsAvailableToView).ToList()));
 
         public async Task<CompanyView> CompanyById(int id)
         {
-           // var test = await Task.Run(() => repository.Companies);
 
             var company = await Task.Run(() => repository.CompanyById(id));
             validateServices.ValidateCompany(company);
-           // if (!validateServices.ValidateCompany(company)) throw new Exception();
 
             return mapper.Map<CompanyView>(company);
         }
