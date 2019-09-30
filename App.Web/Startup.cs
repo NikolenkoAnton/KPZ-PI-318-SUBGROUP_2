@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -24,11 +25,14 @@ namespace App.Web
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // ## ASP NET Core template code
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
             // ##
 
             // ## Code added to the template
             ConfigureSwaggerServices(services);
+            
 
             var serviceProvider = GetServiceProvider(services);
 
