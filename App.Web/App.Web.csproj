@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Castle.Core" Version="4.4.0" />
     <PackageReference Include="Castle.Facilities.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Castle.Windsor" Version="5.0.0" />

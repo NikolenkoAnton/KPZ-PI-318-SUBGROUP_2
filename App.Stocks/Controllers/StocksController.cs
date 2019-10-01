@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using App.Stocks.Exception;
 using App.Stocks.Interfaces;
 using App.Stocks.Models;
 using App.Stocks.Services;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -19,20 +17,17 @@ namespace App.Stocks.Controllers
         readonly ICompaniesManager companyManager;
         readonly IStocksManager stocksManager;
         readonly ILogger<StocksController> logger;
-        readonly IMapper mapper;
         readonly IValidateServices validateService;
 
         public StocksController(
             ICompaniesManager companyManager,
             IStocksManager stocksManager,
             ILogger<StocksController> logger,
-            IMapper mapper,
             IValidateServices validateService)
         {
             this.companyManager = companyManager;
             this.stocksManager = stocksManager;
             this.logger = logger;
-            this.mapper = mapper;
             this.validateService = validateService;
 
         }
@@ -55,7 +50,7 @@ namespace App.Stocks.Controllers
             }
             catch (FormatException)
             {
-                throw new DateException("Incorrect parameter format!Correct date format - XX.XX.XXXX");
+                throw new Exception("Incorrect parameter format!Correct date format - XX.XX.XXXX");
             }
             
         }

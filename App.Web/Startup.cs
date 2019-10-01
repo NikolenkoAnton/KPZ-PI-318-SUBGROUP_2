@@ -1,6 +1,4 @@
 ﻿using System;
-using App.Stocks.Exception;
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -59,7 +57,6 @@ namespace App.Web
             }
 
             app.UseHttpsRedirection();
-            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseMvc();
             // ##
 

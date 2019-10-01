@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using App.Configuration;
-using App.Stocks.Models;
-using AutoMapper;
 using Castle.Facilities.AspNetCore;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
@@ -16,21 +14,10 @@ namespace App.Web
         static readonly WindsorContainer Container = new WindsorContainer();
 
         // TODO add description
-        void RegisterMapper(IServiceCollection services)
-        {
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new MappingProfile());
-            });
-
-            IMapper mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);
-        }
+       
         IServiceProvider GetServiceProvider(IServiceCollection services)
         {
             var container = Container;
-
-            RegisterMapper(services);
 
             RegisterComponents(container);
 

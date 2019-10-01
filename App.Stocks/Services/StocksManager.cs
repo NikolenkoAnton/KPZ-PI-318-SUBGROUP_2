@@ -1,7 +1,6 @@
 ﻿using App.Configuration;
 using App.Stocks.Interfaces;
 using App.Stocks.Models;
-using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +12,12 @@ namespace App.Stocks.Services
     {
         private  IRepository repository;
 
-        private  IMapper mapper;
 
         private  IValidateServices validateServices;
 
 
-        public StocksManager(IRepository repository,IMapper mapper, IValidateServices validateServices)
+        public StocksManager(IRepository repository,IValidateServices validateServices)
         {
-            this.mapper = mapper;
             this.validateServices = validateServices;
             this.repository = repository;
         }
@@ -32,9 +29,9 @@ namespace App.Stocks.Services
 
             validateServices.ValidateCompany(company);
 
-            var stocks = await Task.Run(() => mapper.Map<IEnumerable<StocksListItemView>>(company.Stocks));
+            var stocks = new List<StocksListItemView>{ };//await Task.Run(() => mapper.Map<IEnumerable<StocksListItemView>>(company.Stocks));
 
-            
+
             return new StocksListView { Company = company.Name, Stocks = stocks };
 
 
@@ -53,7 +50,7 @@ namespace App.Stocks.Services
 
             var nextStock = await Task.Run(() => company.GetStockByDate(stock.Date.AddDays(1)));
 
-            var stockView = await Task.Run(() => mapper.Map<StockView>(stock));
+            var stockView = new StockView { }; //await Task.Run(() => mapper.Map<StockView>(stock));
 
             stockView.SetPriceDifference(prevStock);
             stockView.SetPriceDifference(nextStock);
