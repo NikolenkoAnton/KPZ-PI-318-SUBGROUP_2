@@ -31,29 +31,5 @@ namespace App.Stocks.Models
 
         public string Company { get; set; }
     }
-    public class StockView
-    {
-        public string Company { get; set; }
-        public string Cost { get; set; }
-
-        public string Date { get; set; }
-
-        public string DifferencePrevDay { get; set; }
-
-        public string DifferenceNextDay { get; set; }
-
-        public void SetPriceDifference(Stock stock)
-        {
-            //Date.CompareTo(DateTime.Now) > 0
-            if (stock != null)
-            {
-                if (stock.Date.CompareTo(DateTime.Parse(Date)) > 0)
-                    DifferenceNextDay = (Decimal.Parse(Cost) - stock.Cost).ToString();
-
-                else
-                    DifferencePrevDay = (Decimal.Parse(Cost) - stock.Cost).ToString();
-            }
-        }
-
-    }
+   
 }

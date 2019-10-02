@@ -25,8 +25,6 @@ namespace App.Web
         {
             // ## ASP NET Core template code
 
-           // services.UseMiddleware(typeof(ErrorHandlingMiddleware));
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // ##

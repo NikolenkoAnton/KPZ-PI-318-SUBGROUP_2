@@ -16,55 +16,42 @@ namespace App.Stocks.Controllers
     {
         readonly ICompaniesManager companyManager;
         readonly IStocksManager stocksManager;
-        readonly ILogger<StocksController> logger;
         readonly IValidateServices validateService;
 
         public StocksController(
             ICompaniesManager companyManager,
             IStocksManager stocksManager,
-            ILogger<StocksController> logger,
             IValidateServices validateService)
         {
             this.companyManager = companyManager;
             this.stocksManager = stocksManager;
-            this.logger = logger;
             this.validateService = validateService;
 
         }
 
         [HttpGet("companies/{id}/stocks/all")] 
-        public async Task<StocksListView> CompanyStocks(int id)
+        public async Task<IEnumerable<StockView>> CompanyStocks(int id)
         {
             return await stocksManager.CompanyStocks(id);
         }
 
         [HttpGet("companies/{id}/stocks")]
-        public async Task<StockView> StockByDate([FromQuery] string date,int id)
+        public async Task<StockView> StockByDate([FromQuery] string Date,int id)
         {
-            try
-            {
-                var Date = DateTime.Parse(date);
-                validateService.ValidateDate(Date);
-                return await stocksManager.CompanyStockByDate(id, Date);
-
-            }
-            catch (FormatException)
-            {
-                throw new Exception("Incorrect parameter format!Correct date format - XX.XX.XXXX");
-            }
-            
+            validateService.ValidateDate(Date);
+            return await stocksManager.CompanyStockByDate(id, DateTime.Parse(Date));
         }
-
 
         [HttpGet("companies/{id}")]
         public async Task<CompanyView> Company(int id)
         {
             return await companyManager.CompanyById(id);
         }
+
         [HttpGet("companies/open")]
-        public async Task<IEnumerable<CompanyView>> AvailableCompanies()
+        public async Task<IEnumerable<CompanyView>> CompaniesWithOpenStocks()
         {
-            return await companyManager.AvailableCompanies();
+            return await companyManager.CompaniesWithOpenStocks();
         }
 
         [HttpGet("companies/all")]
