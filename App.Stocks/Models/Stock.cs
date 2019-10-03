@@ -9,10 +9,11 @@ namespace App.Stocks.Models
         public decimal Cost {get;set;}
         public DateTime Date {get;set;}
 
-        public string DateView { 
-            get {
-                return Date.ToShortDateString();
-            } }
+        public string DateView 
+        { 
+        get => Date.ToShortDateString();
+            
+        }
 
         public bool CompareDate(DateTime date) => date.ToShortDateString().CompareTo(DateView) == 0;
         

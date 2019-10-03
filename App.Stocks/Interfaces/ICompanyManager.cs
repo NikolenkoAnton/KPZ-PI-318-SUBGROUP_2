@@ -9,10 +9,10 @@ namespace App.Stocks.Interfaces
 {
     public interface ICompaniesManager
     {
-        Task<IEnumerable<CompanyView>> CompaniesWithOpenStocks();
+        Task<IEnumerable<CompanyView>> GetCompaniesWithOpenStocksAsync();
 
-        Task<IEnumerable<CompanyView>> AllCompanies();
+        Task<IEnumerable<CompanyView>> GetAllCompaniesAsync();
 
-        Task<CompanyView> CompanyById(int id);
+        Task<CompanyView> GetCompanyByIdAsync(int id);
     }
 }

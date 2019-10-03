@@ -11,15 +11,22 @@ namespace App.Stocks.Services
 
         public void ValidateCompany(Company company, bool IsOpenStocks = true)
         {
-            if (company == null) throw new HttpListenerException(400, "Company doesn't exist");
-
-            if (!IsOpenStocks) throw new HttpListenerException(400, "You can't look to see stocks this company");
-
+            if (company == null)
+            {
+                throw new HttpListenerException(400, "Company doesn't exist");
+            }
+            if (!IsOpenStocks)
+            {
+                throw new HttpListenerException(400, "You can't look to see stocks this company");
+            }
         }
 
         public void ValidateStock(Stock stock)
         {
-            if (stock == null) throw new HttpListenerException(400, "Stock info with this date doesn't exist");
+            if (stock == null)
+            {
+                throw new HttpListenerException(400, "Stock info with this date doesn't exist");
+            }
         }
 
         public void ValidateStocksCompany(Stock stock, Company company)
@@ -30,8 +37,10 @@ namespace App.Stocks.Services
         }
         public void ValidateDate(string Date)
         {
-
-            if (DateTime.Parse(Date).CompareTo(DateTime.Now) > 0) throw new Exception("Incorrect date!");
+            if (DateTime.Parse(Date).CompareTo(DateTime.Now) > 0)
+            {
+                throw new Exception("Incorrect date!");
+            }
         }
     }
     public interface IValidateServices

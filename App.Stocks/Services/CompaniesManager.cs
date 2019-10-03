@@ -11,13 +11,13 @@ namespace App.Stocks.Services
 {
    public class CompaniesManager : ICompaniesManager, ITransientDependency
     {
-        private  ICompaniesRepository repository;
+        private  ICompaniesRepository repository;   
         public CompaniesManager(ICompaniesRepository repository)
         {
             this.repository = repository;
         }
 
-        public async Task<IEnumerable<CompanyView>> AllCompanies()
+        public async Task<IEnumerable<CompanyView>> GetAllCompaniesAsync()
         {
 
             var companies = await Task.Run(()=>repository.AllCompanies().ToList());
@@ -31,7 +31,7 @@ namespace App.Stocks.Services
             return companyViews;
         }
                                             
-        public async Task<IEnumerable<CompanyView>> CompaniesWithOpenStocks()
+        public async Task<IEnumerable<CompanyView>> GetCompaniesWithOpenStocksAsync()
         {
             var companies = await Task.Run(()=>repository.FilteredCompanies(x => x.IsOpenStocks));
 
@@ -44,7 +44,7 @@ namespace App.Stocks.Services
             return companyViews;
         }
 
-        public async Task<CompanyView> CompanyById(int id)
+        public async Task<CompanyView> GetCompanyByIdAsync(int id)
         {
             var company = await Task.Run(() => repository.CompanyById(id));
 

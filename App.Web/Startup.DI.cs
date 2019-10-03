@@ -14,7 +14,6 @@ namespace App.Web
         static readonly WindsorContainer Container = new WindsorContainer();
 
         // TODO add description
-       
         IServiceProvider GetServiceProvider(IServiceCollection services)
         {
             var container = Container;

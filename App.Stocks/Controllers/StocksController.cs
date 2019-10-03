@@ -30,9 +30,9 @@ namespace App.Stocks.Controllers
         }
 
         [HttpGet("companies/{id}/stocks/all")] 
-        public async Task<IEnumerable<StockView>> CompanyStocks(int id)
+        public async Task<IEnumerable<StockView>> CompanyStocks(int companyId)
         {
-            return await stocksManager.CompanyStocks(id);
+            return await stocksManager.CompanyStocks(companyId);
         }
 
         [HttpGet("companies/{id}/stocks")]
@@ -43,22 +43,21 @@ namespace App.Stocks.Controllers
         }
 
         [HttpGet("companies/{id}")]
-        public async Task<CompanyView> Company(int id)
+        public async Task<CompanyView> Company(int companyId)
         {
-            return await companyManager.CompanyById(id);
+            return await companyManager.GetCompanyByIdAsync(companyId);
         }
 
         [HttpGet("companies/open")]
         public async Task<IEnumerable<CompanyView>> CompaniesWithOpenStocks()
         {
-            return await companyManager.CompaniesWithOpenStocks();
+            return await companyManager.GetCompaniesWithOpenStocksAsync();
         }
 
         [HttpGet("companies/all")]
         public async Task<IEnumerable<CompanyView>> AllCompanies()
         {
-           return await companyManager.AllCompanies();
-           
+           return await companyManager.GetAllCompaniesAsync();
         }
         
         

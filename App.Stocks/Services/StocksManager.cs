@@ -33,12 +33,8 @@ namespace App.Stocks.Services
             {
                 stocksView.Add(MappSingleStock(s, company));
             }
-            //new List<StocksListItemView>{ };//await Task.Run(() => mapper.Map<IEnumerable<StocksListItemView>>(company.Stocks));
-
 
             return stocksView;
-
-
         }
 
         public async Task<StockView> CompanyStockByDate(int companyId, DateTime date)
@@ -54,8 +50,6 @@ namespace App.Stocks.Services
             return stockView;
 
         }
-        private Stock GetStockByDate(Company company,DateTime Date) => company.Stocks.Where(st => st.CompareDate(Date)).FirstOrDefault();
-
         private StockView MappSingleStock(Stock stock, Company company) =>
                 new StockView
                 {

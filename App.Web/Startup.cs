@@ -31,7 +31,6 @@ namespace App.Web
 
             // ## Code added to the template
             ConfigureSwaggerServices(services);
-            
 
             var serviceProvider = GetServiceProvider(services);
 
