@@ -22,8 +22,6 @@ namespace App.Stocks.Repositories
 
         public IQueryable<Company> AllCompanies() => Companies;
 
-        public IQueryable<Company> FilteredCompanies(Func<Company, bool> predicate) => Companies.Where(predicate).AsQueryable();
-
         static class CompaniesInitializer
         {
             readonly static string[] companiesName = new string[] { "Amazon", "McDonald’s", "GE", "Samsung", "Apple", "Huawei", "LG", "KFC", "Coca-Cola" };

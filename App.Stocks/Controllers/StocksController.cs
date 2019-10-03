@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using App.Stocks.Interfaces;
 using App.Stocks.Models;
 using App.Stocks.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace App.Stocks.Controllers
 {
@@ -30,11 +30,10 @@ namespace App.Stocks.Controllers
         }
 
         [HttpGet("companies/{id}/stocks/all")] 
-        public async Task<IEnumerable<StockView>> CompanyStocks(int companyId)
+        public async Task<IEnumerable<StockView>> CompanyStocks(int id)
         {
-            return await stocksManager.CompanyStocks(companyId);
+            return await stocksManager.CompanyStocks(id);
         }
-
         [HttpGet("companies/{id}/stocks")]
         public async Task<StockView> StockByDate([FromQuery] string Date,int id)
         {
@@ -43,9 +42,14 @@ namespace App.Stocks.Controllers
         }
 
         [HttpGet("companies/{id}")]
-        public async Task<CompanyView> Company(int companyId)
+        public async Task<CompanyView> Company(int id)
         {
-            return await companyManager.GetCompanyByIdAsync(companyId);
+            var company = await companyManager.GetCompanyByIdAsync(id);
+            if(company == null)
+            {
+                throw new HttpListenerException((int)HttpStatusCode.NotFound, "Company doesn't exist");
+            }
+            return company;
         }
 
         [HttpGet("companies/open")]

@@ -37,10 +37,15 @@ namespace App.Stocks.Services
             return stocksView;
         }
 
-        public async Task<StockView> CompanyStockByDate(int companyId, DateTime date)
+        public async Task<StockView> CompanyStockByDate(int id, DateTime date)
         {
-            var company = await Task.Run(() => repository.CompanyById(companyId));
+            var company = await Task.Run(() => repository.CompanyById(id));
            
+            if( company == null)
+            {
+                throw new Exception($"Company with id {id} not found!");
+            }
+
             var stock = await Task.Run(()=>company.Stocks.Where(el => el.CompareDate(date)).FirstOrDefault());
 
             validateServices.ValidateStocksCompany(stock, company);
@@ -48,8 +53,8 @@ namespace App.Stocks.Services
             var stockView = MappSingleStock(stock, company);
 
             return stockView;
-
         }
+
         private StockView MappSingleStock(Stock stock, Company company) =>
                 new StockView
                 {

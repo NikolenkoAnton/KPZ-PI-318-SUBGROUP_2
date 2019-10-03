@@ -33,7 +33,7 @@ namespace App.Stocks.Services
                                             
         public async Task<IEnumerable<CompanyView>> GetCompaniesWithOpenStocksAsync()
         {
-            var companies = await Task.Run(()=>repository.FilteredCompanies(x => x.IsOpenStocks));
+            var companies = await Task.Run(()=>repository.AllCompanies().Where(comp => comp.IsOpenStocks).ToList());
 
             List<CompanyView> companyViews = new List<CompanyView>();
 
@@ -48,10 +48,15 @@ namespace App.Stocks.Services
         {
             var company = await Task.Run(() => repository.CompanyById(id));
 
+            if (company == null)
+            {
+                return null;
+            }
+
             return MappSingleCompany(company);
         }
 
-        private CompanyView MappSingleCompany(Company company) =>
+        private CompanyView MappSingleCompany(Company company) => 
             new CompanyView
             {
                 Id = company.Id,
