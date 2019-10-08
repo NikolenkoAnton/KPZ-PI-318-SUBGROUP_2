@@ -17,12 +17,12 @@ namespace App.Loans.Controllers
         readonly ISomeService _service;
         readonly IAnotherService _anotherService;
         readonly ILogger<LoansController> _logger;
-        readonly IValuesManager _valuesManager;
+        readonly ILoansManager _valuesManager;
         public LoansController(
             ISomeService service,
             IAnotherService anotherService,
             ILogger<LoansController> logger,
-            IValuesManager valuesManager)
+            ILoansManager valuesManager)
         {
             _service = service;
             _anotherService = anotherService;
@@ -42,4 +42,4 @@ namespace App.Loans.Controllers
         }
     }
 }
-}
+
