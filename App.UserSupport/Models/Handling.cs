@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using App.UserSupport.Interface;
 using App.UserSupport.Models;
 
 namespace App.UserSupport.Models
 {
-    public class Handling : IHandling
+    public class Handling 
     {//unique id for Handling
         public int Id { get; set; }
         //context of Handling
@@ -17,7 +16,7 @@ namespace App.UserSupport.Models
         public Handling(Client client,string firstmessage,int id) 
         {
             Id = id;
-            status = true;
+            status = false;
             client_handling = client;
             WriteMessage(client_handling.Name, firstmessage);
         }
@@ -58,9 +57,10 @@ namespace App.UserSupport.Models
             }
             return temp;
             }
-        public void WriteMessage(string Name, string mess) {
-            if (status == true)
-                context.Add(Name + " :  " + mess + "\n");
+        public void WriteMessage(string Name, string mess)
+        {
+            if (status == false)
+                context.Add(Name + " :  " + mess + "   ");
         }
     }
 }

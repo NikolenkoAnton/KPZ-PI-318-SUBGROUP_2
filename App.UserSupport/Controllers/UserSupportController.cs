@@ -11,18 +11,12 @@ namespace App.UserSupport.Controllers
     public class UserSupportController : ControllerBase
     {
         readonly ISomeService _service;
-        readonly IAnotherService _anotherService;
-        readonly ILogger<UserSupportController> _logger;
         readonly IUserSupportManager _userSupportManager;
         public UserSupportController(
             ISomeService service,
-            IAnotherService anotherService,
-            ILogger<UserSupportController> logger,
             IUserSupportManager userSupportManager)
         {
             _service = service;
-            _anotherService = anotherService;
-            _logger = logger;
             _userSupportManager = userSupportManager;
         }
 
@@ -31,8 +25,6 @@ namespace App.UserSupport.Controllers
         public ActionResult<IEnumerable<string>> GetActiveValues()
         {
             _service.DoSmth();
-            _anotherService.DoAnything();
-            _logger.LogInformation("NOTHING");
             var serviceCallResult = _userSupportManager.GetActiveValues().ToList();
             return serviceCallResult;
         }
@@ -40,8 +32,6 @@ namespace App.UserSupport.Controllers
         public ActionResult<IEnumerable<string>> Get_Handling_10_last_messages(int id)
         {
             _service.DoSmth();
-            _anotherService.DoAnything();
-            _logger.LogInformation("NOTHING");
             var serviceCallResult = _userSupportManager.Get_Handling_10_last_messages(id).ToList();
             return serviceCallResult;
         }
@@ -49,8 +39,6 @@ namespace App.UserSupport.Controllers
         public ActionResult<IEnumerable<string>> Set_Handling_Status_Completed(int id)
         {
             _service.DoSmth();
-            _anotherService.DoAnything();
-            _logger.LogInformation("NOTHING");
             _userSupportManager.Set_Handling_Status_Completed(id);
             var serviceCallResult = _userSupportManager.GetActiveValues().ToList();
             return serviceCallResult;
