@@ -9,8 +9,8 @@ namespace App.Loans
 {
     public interface ILoansManager
     {
-        List<Loans> GetList();
-        Loans GetItem(int id);
+        List<Loan> GetList();
+        Loan GetItem(int id);
         IEnumerable<string> GetValues();
         double Get_money_left(int id);
     }
@@ -23,7 +23,7 @@ namespace App.Loans
         
         public List<Loan> GetList() => MLoan.Map<IEnumerable<Loan>, List<Loan>>(_repository.GetAll());
 
-        public Loans GetItem(int id) => _repository.Get(id);
+        public Loan GetItem(int id) => _repository.Get(id);
 
         public LoansManager(LoansRepository repository)
         {
