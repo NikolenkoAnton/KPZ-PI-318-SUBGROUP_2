@@ -47,6 +47,7 @@ namespace App.UserSupport.Models
             }
             return temp;
         }
+        //If closed handling, no display in active handlings
         public override string ToString()
         {
             string temp = "";
