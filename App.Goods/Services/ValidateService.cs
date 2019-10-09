@@ -14,7 +14,7 @@ namespace App.Goods.Services
             _productsManager = productsManager;
         }
 
-        public void ValidateIds(List<int> ids)
+        public void CleanIds(List<int> ids)
         {
             var goods = _productsManager.GetAllProducts().Select(good => good.Id);
 

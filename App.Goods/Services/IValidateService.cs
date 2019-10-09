@@ -4,6 +4,6 @@ namespace App.Goods.Services
 {
     public interface IValidateService
     {
-       void ValidateIds(List<int> ids);
+       void CleanIds(List<int> ids);
     }
 }

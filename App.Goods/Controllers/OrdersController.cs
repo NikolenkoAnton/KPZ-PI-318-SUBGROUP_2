@@ -28,7 +28,7 @@ namespace App.Goods.Controllers
         [HttpPost]
         public Order MakeOrder([FromBody] List<int> productsIds)
         {
-            _validateService.ValidateIds(productsIds);
+            _validateService.CleanIds(productsIds);
 
             return _ordersManager.MakeOrder(productsIds);
         }
