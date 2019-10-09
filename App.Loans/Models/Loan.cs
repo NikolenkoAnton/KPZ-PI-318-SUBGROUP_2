@@ -19,5 +19,15 @@ namespace App.Loans.Models
             this.percent = percent;
             this.money_back = 0;
         }
+        public void get_money_back(int money)
+        {
+            if(money>=money_left/time)
+            money_back += money;
+        }
+
+        public override string ToString()
+        {
+            return "Money taked: " + money_taked + "for time: " + time + "month by " + percent + " percent";
+        }
     }
 }

@@ -9,35 +9,35 @@ namespace App.Loans.Controllers
     /// This is example controller
     /// IMPORTANT the route to your won module should be 'api/{yourModuleName}' in order to avoid conflicts with other modules
     /// </summary>
-    [Route("api/example/values")]
+    [Route("api/loans")]
     [ApiController]
     public class LoansController : ControllerBase
     {
-        // depedencies will be automatically resolved with used DI system
-        readonly ISomeService _service;
-        readonly IAnotherService _anotherService;
         readonly ILogger<LoansController> _logger;
-        readonly ILoansManager _valuesManager;
+        readonly LoansManager _valuesManager;
         public LoansController(
-            ISomeService service,
-            IAnotherService anotherService,
+
             ILogger<LoansController> logger,
-            ILoansManager valuesManager)
+            LoansManager valuesManager)
         {
-            _service = service;
-            _anotherService = anotherService;
+
             _logger = logger;
             _valuesManager = valuesManager;
         }
 
         // GET api/example/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        [HttpGet("loans/all")]
+        public ActionResult<IEnumerable<string>> GetAll()
         {
-            _service.DoSmth();
-            _anotherService.DoAnything();
-            _logger.LogInformation("NOTHING");
             var serviceCallResult = _valuesManager.GetValues().ToList();
+            return serviceCallResult;
+        }
+        [HttpGet("loans/{id}")]
+        public ActionResult<IEnumerable<string>> Get_money_left_by_id_Loan(int id)
+        {
+            List<string> temp = new List<string>();
+            temp.Add(_valuesManager.Get_money_left(id).ToString());
+            var serviceCallResult = temp;
             return serviceCallResult;
         }
     }
