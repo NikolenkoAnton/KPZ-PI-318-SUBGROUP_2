@@ -4,8 +4,9 @@ using System.Text;
 
 namespace App.UserSupport.Models
 {
-    public class Client
+    public class Moderator
     {
         public string Name { get; set; }
+        public int CountHandlings { get; set; }
     }
 }

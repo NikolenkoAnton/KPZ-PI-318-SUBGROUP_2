@@ -7,20 +7,19 @@ using App.UserSupport.Models;
 namespace App.UserSupport.Models
 {
     public class Handling : IHandling
-    {   //unique id for Handling
+    {//unique id for Handling
         public int Id { get; set; }
         //context of Handling
         public List<string> context { get; set; } = new List<string>();
         //Status 
-        private Client client_handling;
         public bool status { get; set; }
         public Handling(Client client,string firstmessage,int id) 
         {
             Id = id;
-            status = false;
-            client_handling = client;
-            WriteMessage(firstmessage);
+            status = true;
+            WriteMessage(client.Name, firstmessage);
         }
+<<<<<<< HEAD
         public void Set_Handling_Status_Completed() => status = true;
         public void WriteMessage(string mess) {
             if (status == false)
@@ -57,6 +56,11 @@ namespace App.UserSupport.Models
                     temp += a;
             }
             return temp;
+=======
+        public void WriteMessage(string Name, string mess) {
+            if (status == true)
+                context.Add(Name + " :  " + mess + "\n");
+>>>>>>> parent of d02527c... Create repo, change models,some fixes
         }
     }
 }
