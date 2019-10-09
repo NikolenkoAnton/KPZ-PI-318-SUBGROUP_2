@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using App.Configuration;
 using App.Repositories;
+using App.UserSupport.Models;
 
 namespace App.UserSupport.Repositories
 {
     /// <summary>
     /// Fake repository implementation, which stores value in memory
     /// </summary>
-    public class InMemoryValuesRepository : IUserSupportMessagesRepository, ITransientDependency
+    public interface IUsersRepository
     {
-<<<<<<< HEAD
         IEnumerable<string> GetActiveValues();
         Handling Get(int id);
     }
@@ -38,11 +38,8 @@ namespace App.UserSupport.Repositories
             return handling;
         }
         public Handling Get(int id)
-=======
-        public IEnumerable<string> GetValues()
->>>>>>> parent of d02527c... Create repo, change models,some fixes
         {
-            return new string[] { "value1", "value2" };
+            return handlings[id];
         }
     }
 }

@@ -1,31 +1,36 @@
 ﻿using System.Collections.Generic;
 using App.Configuration;
-using App.Repositories;
-
+using App.UserSupport.Repositories;
 
 namespace App.UserSupport
 {
-         /// <summary>
-         /// Example manager class. Which should process business logic, and call required repository
-         /// </summary>
+    /// <summary>
+    /// Example manager class. Which should process business logic, and call required repository
+    /// </summary>
     public interface IUserSupportManager
     {
-        IEnumerable<string> GetValues();
+        void Set_Handling_Status_Completed(int id);
+        IEnumerable<string> GetActiveValues();
+        IEnumerable<string> Get_Handling_10_last_messages(int id);
     }
-
     public class UserSupportManager : IUserSupportManager, ITransientDependency
     {
-        // propoerty should be readonly, so it could not be changed after initialization
-        readonly IUserSupportMessagesRepository _repository;
-        // resolving repository through constructor dependency
-        public UserSupportManager(IUserSupportMessagesRepository repository)
+        readonly IUsersRepository repository;
+        public UserSupportManager(IUsersRepository repository)
         {
-            _repository = repository;
+            this.repository = repository;
         }
-
-        public IEnumerable<string> GetValues()
+        public void Set_Handling_Status_Completed(int id)
         {
-            return _repository.GetValues();
+            repository.Get(id).Set_Handling_Status_Completed();
+        }
+        public IEnumerable<string> Get_Handling_10_last_messages(int id)
+        {
+            return new string[] { repository.Get(id).Get_Handling_10_last_messages() };
+        }
+        public IEnumerable<string> GetActiveValues()
+        {
+            return repository.GetActiveValues();
         }
     }
 }

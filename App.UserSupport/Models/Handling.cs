@@ -13,13 +13,14 @@ namespace App.UserSupport.Models
         public List<string> context { get; set; } = new List<string>();
         //Status 
         public bool status { get; set; }
+        private Client client_handling;
         public Handling(Client client,string firstmessage,int id) 
         {
             Id = id;
             status = true;
-            WriteMessage(client.Name, firstmessage);
+            client_handling = client;
+            WriteMessage(client_handling.Name, firstmessage);
         }
-<<<<<<< HEAD
         public void Set_Handling_Status_Completed() => status = true;
         public void WriteMessage(string mess) {
             if (status == false)
@@ -56,11 +57,10 @@ namespace App.UserSupport.Models
                     temp += a;
             }
             return temp;
-=======
+            }
         public void WriteMessage(string Name, string mess) {
             if (status == true)
                 context.Add(Name + " :  " + mess + "\n");
->>>>>>> parent of d02527c... Create repo, change models,some fixes
         }
     }
 }
