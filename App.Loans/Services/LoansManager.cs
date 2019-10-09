@@ -5,7 +5,7 @@ using AutoMapper;
 using App.Loans.Models;
 using App.Loans.Repositories;
 
-namespace App.Loans
+namespace App.Loans.Services
 {
     public interface ILoansManager
     {
@@ -15,12 +15,12 @@ namespace App.Loans
         double Get_money_left(int id);
     }
 
-    public class LoansManager : ILoansManager
+    public class LoansManager : ILoansManager, ITransientDependency
     {
         readonly LoansRepository _repository;
 
         IMapper MLoan = new MapperConfiguration(cfg => cfg.CreateMap<Loan, Loan>()).CreateMapper();
-        
+
         public List<Loan> GetList() => MLoan.Map<IEnumerable<Loan>, List<Loan>>(_repository.GetAll());
 
         public Loan GetItem(int id) => _repository.Get(id);
@@ -32,12 +32,12 @@ namespace App.Loans
 
         public double Get_money_left(int id)
         {
-           return _repository.Get(id).money_left;
+            return _repository.Get(id).money_left;
         }
 
         public IEnumerable<string> GetValues()
         {
-            return _repository.GetInfo();
+            return _repository.GetValues();
         }
     }
 }

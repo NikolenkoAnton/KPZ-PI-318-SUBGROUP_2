@@ -16,7 +16,7 @@ namespace App.Loans
         public void Initialize(IWindsorContainer container)
         {
             // example of manually registered components
-            container.Register(Component.For<IAnotherService>().ImplementedBy<AnotherService>().LifestyleTransient());
+            container.Register(Component.For<IValidateServices>().ImplementedBy<ValidateServices>().LifestyleSingleton());
         }
     }
 }

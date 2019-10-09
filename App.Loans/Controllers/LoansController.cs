@@ -2,6 +2,8 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
+using App.Loans.Services;
 
 namespace App.Loans.Controllers
 {
@@ -15,27 +17,30 @@ namespace App.Loans.Controllers
     {
         readonly ILogger<LoansController> _logger;
         readonly LoansManager _valuesManager;
+        readonly IValidateServices _validateService;
         public LoansController(
-
+            IValidateServices validateService,
             ILogger<LoansController> logger,
             LoansManager valuesManager)
         {
-
+            _validateService = validateService;
             _logger = logger;
             _valuesManager = valuesManager;
         }
 
-        // GET api/example/values
-        [HttpGet("loans/all")]
-        public ActionResult<IEnumerable<string>> GetAll()
+        // GET api/loans/All
+        [HttpGet("All")]
+        public ActionResult<IEnumerable<string>> Get()
         {
-            var serviceCallResult = _valuesManager.GetValues().ToList();
-            return serviceCallResult;
+            _logger.LogInformation("NOTHING");
+            return _valuesManager.GetValues().ToList();
         }
-        [HttpGet("loans/{id}")]
+        
+        [HttpGet("{id}")]
         public ActionResult<IEnumerable<string>> Get_money_left_by_id_Loan(int id)
         {
             List<string> temp = new List<string>();
+            _validateService.ValidateLoan(_valuesManager.GetItem(id));
             temp.Add(_valuesManager.Get_money_left(id).ToString());
             var serviceCallResult = temp;
             return serviceCallResult;

@@ -18,6 +18,7 @@ namespace App.Loans.Models
             this.money_taked = money_take;
             this.percent = percent;
             this.money_back = 0;
+            money = money_taked + (money_taked * (time / 12) * percent) - money_back;
         }
         public void get_money_back(int money)
         {

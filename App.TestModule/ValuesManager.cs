@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using App.Configuration;
 using App.Repositories;
-
+using App.Loans.Repositories;
 namespace App.Example
 {
     /// <summary>
@@ -15,9 +15,9 @@ namespace App.Example
     public class ValuesManager : IValuesManager, ITransientDependency
     {
         // propoerty should be readonly, so it could not be changed after initialization
-        readonly IValuesRepository _repository;
+        readonly ILoansRepository _repository;
         // resolving repository through constructor dependency
-        public ValuesManager(IValuesRepository repository)
+        public ValuesManager(ILoansRepository repository)
         {
             _repository = repository;
         }
