@@ -12,7 +12,7 @@ namespace App.Loans.Services
         List<Loan> GetList();
         Loan GetItem(int id);
         IEnumerable<string> GetValues();
-        double Get_money_left(int id);
+        double GetMoneyLeft(int id);
     }
 
     public class LoansManager : ILoansManager, ITransientDependency
@@ -30,9 +30,9 @@ namespace App.Loans.Services
             _repository = repository;
         }
 
-        public double Get_money_left(int id)
+        public double GetMoneyLeft(int id)
         {
-            return _repository.Get(id).money_left;
+            return _repository.Get(id).moneyLeft;
         }
 
         public IEnumerable<string> GetValues()

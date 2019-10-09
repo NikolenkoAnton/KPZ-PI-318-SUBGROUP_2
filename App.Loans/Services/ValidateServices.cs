@@ -9,14 +9,13 @@ namespace App.Loans
     {
         public void ValidateLoan(Loan loan)
         {
-            if (loan == null)
-                throw new Exception("Loan doesn't exist");
+            if (loan.moneyLeft == 0)
+                throw new Exception("Loan is already paid!");
         }
     }
 
     public interface IValidateServices
     {
         void ValidateLoan(Loan loan);
-
     }
 }

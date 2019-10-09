@@ -8,27 +8,27 @@ namespace App.Loans.Models
     {
         private double money;//денежки
         public int time { get; set; }//кол-во платежей (ежемесячных)
-        public double money_taked { get; set; }//скок взял
-        public double money_back { get; set; }//скок вернул
-        public double money_left { get { return money; } set { money = money_taked + (money_taked * (time/12) *percent) - money_back; } } //скок осталось вернуть 
+        public double moneyTaked { get; set; }//скок взял
+        public double moneyBack { get; set; }//скок вернул
+        public double moneyLeft { get { return money; } }//скок осталось вернуть 
         public double percent { get; set; }//процентная ставка/годовых
-        public Loan(double money_take, double percent, int time)
+        public Loan(double moneyTake, double percent, int time)
         {
             this.time = time;
-            this.money_taked = money_take;
+            this.moneyTaked = moneyTake;
             this.percent = percent;
-            this.money_back = 0;
-            money = money_taked + (money_taked * (time / 12) * percent) - money_back;
+            this.moneyBack = 0;
+            money = moneyTaked + (moneyTaked * (time / 12) * percent) - moneyBack;
         }
         public void get_money_back(int money)
         {
-            if(money>=money_left/time)
-            money_back += money;
+            if(money>=moneyLeft/time)
+            moneyBack += money;
         }
 
         public override string ToString()
         {
-            return "Money taked: " + money_taked + "for time: " + time + "month by " + percent + " percent";
+            return "Money taked: " + moneyTaked + "for time: " + time + "month by " + percent + " percent";
         }
     }
 }
