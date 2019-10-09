@@ -10,10 +10,10 @@ namespace App.UserSupport.Controllers
     [ApiController]
     public class UserSupportController : ControllerBase
     {
-        readonly ISomeService _service;
+        readonly IAnotherService _service;
         readonly IUserSupportManager _userSupportManager;
         public UserSupportController(
-            ISomeService service,
+            IAnotherService service,
             IUserSupportManager userSupportManager)
         {
             _service = service;
@@ -24,21 +24,21 @@ namespace App.UserSupport.Controllers
         [HttpGet("active")]
         public ActionResult<IEnumerable<string>> GetActiveValues()
         {
-            _service.DoSmth();
+            _service.DoAnything();
             var serviceCallResult = _userSupportManager.GetActiveValues().ToList();
             return serviceCallResult;
         }
         [HttpGet("{id}/last_10_message")]
         public ActionResult<IEnumerable<string>> Get_Handling_10_last_messages(int id)
         {
-            _service.DoSmth();
+            _service.DoAnything();
             var serviceCallResult = _userSupportManager.Get_Handling_10_last_messages(id).ToList();
             return serviceCallResult;
         }
         [HttpPost]
         public ActionResult<IEnumerable<string>> Set_Handling_Status_Completed(int id)
         {
-            _service.DoSmth();
+            _service.DoAnything();
             _userSupportManager.Set_Handling_Status_Completed(id);
             var serviceCallResult = _userSupportManager.GetActiveValues().ToList();
             return serviceCallResult;
