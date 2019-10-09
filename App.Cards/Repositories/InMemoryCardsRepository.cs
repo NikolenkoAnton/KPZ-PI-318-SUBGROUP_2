@@ -1,4 +1,5 @@
 ﻿using App.Cards.Models;
+using App.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace App.Cards.Repositories
 
         Card GetCardById(int id);
     }
-    public class InMemoryCardsRepository
+    public class InMemoryCardsRepository : ICardsRepository, ITransientDependency
     {
         private static readonly List<Card> cards = Init();
 

@@ -21,26 +21,54 @@ namespace App.Cards.Controllers
         [HttpGet("{id}")]
         public ActionResult<Card> GetCardById(int id)
         {
-            return null;
+            var card = cardsManager.GetCardById(id);
+            
+            if(card == null)
+            {
+                return BadRequest("Card doesn't exist!");
+            }
+
+            return card;
         }
 
         [HttpPut("{id}/limit/set")]
         public ActionResult SetCardLimit(int id, [FromQuery]decimal limit)
         {
-            return null;
+            var actionStatus = cardsManager.SetCardLimit(id, limit);
+
+            if(actionStatus != "Successfull")
+            {
+                return BadRequest(actionStatus);
+            }
+
+            return Ok(actionStatus);
         }
 
         [HttpPut("{id}/limit/unset")]
         public ActionResult UnsetCardLimit(int id)
         {
-            return null;
+            var actionStatus = cardsManager.UnsetCardLimit(id);
+
+            if (actionStatus != "Successfull")
+            {
+                return BadRequest(actionStatus);
+            }
+
+            return Ok(actionStatus);
         }
 
 
         [HttpPut("{id}/block")]
-        public ActionResult BlockCardById(int id, [FromQuery]decimal limit)
+        public ActionResult BlockCardById(int id)
         {
-            return null;
+            var actionStatus = cardsManager.BlockCard(id);
+
+            if (actionStatus != "Successfull")
+            {
+                return BadRequest(actionStatus);
+            }
+
+            return Ok(actionStatus);
         }
 
     }
