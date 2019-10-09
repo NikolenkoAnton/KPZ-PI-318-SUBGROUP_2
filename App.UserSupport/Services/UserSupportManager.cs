@@ -8,7 +8,7 @@ namespace App.UserSupport
     {
         void Set_Handling_Status_Completed(int id);
         IEnumerable<string> GetActiveValues();
-        string Get_Handling_10_last_messages(int id);
+        IEnumerable<string> Get_Handling_10_last_messages(int id);
     }
     public class UserSupportManager : IUserSupportManager, ITransientDependency
     {

@@ -24,21 +24,26 @@ namespace App.UserSupport.Models
         public void Set_Handling_Status_Completed() => status = true;
         public void WriteMessage(string mess) {
             if (status == false)
-                context.Add(client_handling.Name + " :  " + mess + "\n");
+                context.Add(client_handling.Name + " :  " + mess +"   " );
         }
         public void WriteAnswer(string answer)
         {
             if (status == false)
-                context.Add("Moderator :  " + answer + "\n");
+                context.Add("   Moderator :  " + answer );
         }
         public string Get_Handling_10_last_messages()
         {
-            string temp = ""; 
-            int i = 0;
-            while (i < 10 || i < context.Count)
+            string temp = "";
+            List<string> somelist = context;
+            somelist.Reverse();
+            int i = context.Count-1;
+            int j = 0;
+            while (i >=0 )
             {
-                temp += context[i];
-                i++;
+                if (j < 10)
+                temp += somelist.ToArray()[i];
+                i--;
+                j++;
             }
             return temp;
         }

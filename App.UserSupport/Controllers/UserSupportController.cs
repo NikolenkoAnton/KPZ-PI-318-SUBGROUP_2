@@ -6,15 +6,10 @@ using Microsoft.Extensions.Logging;
 
 namespace App.UserSupport.Controllers
 {
-    /// <summary>
-    /// This is example controller
-    /// IMPORTANT the route to your won module should be 'api/{yourModuleName}' in order to avoid conflicts with other modules
-    /// </summary>
-    [Route("api/UserSupport/values")]
+    [Route("api/UserSupport")]
     [ApiController]
     public class UserSupportController : ControllerBase
     {
-        // depedencies will be automatically resolved with used DI system
         readonly ISomeService _service;
         readonly IAnotherService _anotherService;
         readonly ILogger<UserSupportController> _logger;
@@ -32,13 +27,32 @@ namespace App.UserSupport.Controllers
         }
 
         // GET api/example/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        [HttpGet("active")]
+        public ActionResult<IEnumerable<string>> GetActiveValues()
         {
             _service.DoSmth();
             _anotherService.DoAnything();
             _logger.LogInformation("NOTHING");
-            var serviceCallResult = _userSupportManager.GetValues().ToList();
+            var serviceCallResult = _userSupportManager.GetActiveValues().ToList();
+            return serviceCallResult;
+        }
+        [HttpGet("{id}/last_10_message")]
+        public ActionResult<IEnumerable<string>> Get_Handling_10_last_messages(int id)
+        {
+            _service.DoSmth();
+            _anotherService.DoAnything();
+            _logger.LogInformation("NOTHING");
+            var serviceCallResult = _userSupportManager.Get_Handling_10_last_messages(id).ToList();
+            return serviceCallResult;
+        }
+        [HttpPost]
+        public ActionResult<IEnumerable<string>> Set_Handling_Status_Completed(int id)
+        {
+            _service.DoSmth();
+            _anotherService.DoAnything();
+            _logger.LogInformation("NOTHING");
+            _userSupportManager.Set_Handling_Status_Completed(id);
+            var serviceCallResult = _userSupportManager.GetActiveValues().ToList();
             return serviceCallResult;
         }
     }
