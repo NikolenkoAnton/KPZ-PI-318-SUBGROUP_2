@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using App.Goods.Interfaces;
+using App.Goods.Common;
 using App.Goods.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +19,7 @@ namespace App.Goods.Controllers
         [HttpGet]
         public IEnumerable<Product> GetAllProducts()
         {
-            return _productsManager.GetAllGoods();
+            return _productsManager.GetAllProducts();
         }
     }
 }

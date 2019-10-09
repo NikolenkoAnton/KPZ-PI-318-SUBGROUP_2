@@ -1,4 +1,4 @@
-﻿using App.Goods.Interfaces;
+﻿using App.Goods.Common;
 
 namespace App.Goods.Models
 {

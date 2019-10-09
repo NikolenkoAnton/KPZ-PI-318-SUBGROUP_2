@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using App.Configuration;
-using App.Goods.Interfaces;
+using App.Goods.Common;
 
 namespace App.Goods.Services
 {
@@ -14,20 +14,18 @@ namespace App.Goods.Services
             _productsManager = productsManager;
         }
 
-        public IEnumerable<int> ValidateIds(int[] ids)
+        public void ValidateIds(List<int> ids)
         {
-            var goods = _productsManager.GetAllGoods().Select(good => good.Id);
-            var validIds = new List<int>();
+            var goods = _productsManager.GetAllProducts().Select(good => good.Id);
 
-            foreach (var id in ids)
+            for (int i = 0; i < ids.Count; i++)
             {
-                if (goods.Contains(id))
+                int id = ids[i];
+                if (!goods.Contains(id))
                 {
-                    validIds.Add(id);
+                    ids.Remove(id);
                 }
             }
-
-            return validIds;
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using App.Configuration;
-using App.Goods.Interfaces;
+using App.Goods.Common;
 using App.Goods.Models;
 
 namespace App.Goods.Repositories
@@ -13,11 +13,6 @@ namespace App.Goods.Repositories
         static ProductsRepository()
         {
             _products = ProductInitializer.Initialize();
-        }
-
-        public void Add(Product item)
-        {
-            _products = _products.Append(item);
         }
 
         public Product Get(int id) => _products.FirstOrDefault(pr => pr.Id == id);

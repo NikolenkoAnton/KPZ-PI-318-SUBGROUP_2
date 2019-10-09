@@ -1,4 +1,4 @@
-﻿namespace App.Goods.Interfaces
+﻿namespace App.Goods.Common
 {
     public interface IModel
     {

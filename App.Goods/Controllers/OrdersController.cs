@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using App.Goods.Interfaces;
+using App.Goods.Common;
 using App.Goods.Models;
+using App.Goods.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.Goods.Controllers
 {
-    [Route("api/goods/[controller]")]
+    [Route("api/goods/orders")]
     [ApiController]
     public class OrdersController : ControllerBase
     {
@@ -26,10 +26,11 @@ namespace App.Goods.Controllers
         }
 
         [HttpPost]
-        public void MakeOrder([FromBody] int[] productsIds)
+        public Order MakeOrder([FromBody] List<int> productsIds)
         {
-            var validIds = _validateService.ValidateIds(productsIds).ToArray();
-            _ordersManager.MakeOrder(validIds);
+            _validateService.ValidateIds(productsIds);
+
+            return _ordersManager.MakeOrder(productsIds);
         }
     }
 }

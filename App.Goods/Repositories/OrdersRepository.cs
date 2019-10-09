@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using App.Configuration;
-using App.Goods.Interfaces;
+using App.Goods.Common;
 using App.Goods.Models;
 
 namespace App.Goods.Repositories
 {
-    public class OrdersRepository : IRepository<Order>, ISingletoneDependency
+    public class OrdersRepository : IAddOnRepository<Order>, ISingletoneDependency
     {
         private static IEnumerable<Order> _orders;
         private static IRepository<Product> _productRepository;

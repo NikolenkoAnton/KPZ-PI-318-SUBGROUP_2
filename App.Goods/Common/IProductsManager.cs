@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using App.Goods.Models;
 
-namespace App.Goods.Interfaces
+namespace App.Goods.Common
 {
     public interface IProductsManager
     {
-        IEnumerable<Product> GetAllGoods();
+        IEnumerable<Product> GetAllProducts();
     }
 }
