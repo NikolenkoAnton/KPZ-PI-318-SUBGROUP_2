@@ -1,13 +1,9 @@
 ﻿using System.Collections.Generic;
 using App.Configuration;
-using App.Repositories;
 using App.UserSupport.Models;
 
 namespace App.UserSupport.Repositories
 {
-    /// <summary>
-    /// Fake repository implementation, which stores value in memory
-    /// </summary>
     public interface IUsersRepository
     {
         IEnumerable<string> GetActiveValues();
@@ -17,6 +13,7 @@ namespace App.UserSupport.Repositories
     {
         Handling[] handlings = new Handling[5];
         string[] handling = new string[5];
+
         public InMemoryUsersRepository()
         {
             handlings[0] = new Handling(new Client("Nikita"), "Some times i have troubles", 2);
@@ -28,6 +25,7 @@ namespace App.UserSupport.Repositories
             handlings[2].WriteAnswer("Give me pls more information");
 
         }
+
         public IEnumerable<string> GetActiveValues()
         {
             handling[0] = handlings[0].ToString();
@@ -37,6 +35,7 @@ namespace App.UserSupport.Repositories
             handling[4] = handlings[4].ToString();
             return handling;
         }
+
         public Handling Get(int id)
         {
             return handlings[id];

@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-
 
 namespace App.UserSupport.Controllers
 {
@@ -20,7 +18,6 @@ namespace App.UserSupport.Controllers
             _userSupportManager = userSupportManager;
         }
 
-        // GET api/example/values
         [HttpGet("active")]
         public ActionResult<IEnumerable<string>> GetActiveValues()
         {
@@ -28,18 +25,20 @@ namespace App.UserSupport.Controllers
             var serviceCallResult = _userSupportManager.GetActiveValues().ToList();
             return serviceCallResult;
         }
-        [HttpGet("{id}/last_10_message")]
-        public ActionResult<IEnumerable<string>> Get_Handling_10_last_messages(int id)
+
+        [HttpGet("{id}/last10Message")]
+        public ActionResult<IEnumerable<string>> GetHandling10LastMessages(int id)
         {
             _service.DoAnything();
-            var serviceCallResult = _userSupportManager.Get_Handling_10_last_messages(id).ToList();
+            var serviceCallResult = _userSupportManager.GetHandling10LastMessages(id).ToList();
             return serviceCallResult;
         }
+
         [HttpPost]
-        public ActionResult<IEnumerable<string>> Set_Handling_Status_Completed(int id)
+        public ActionResult<IEnumerable<string>> SetHandlingStatusCompleted(int id)
         {
             _service.DoAnything();
-            _userSupportManager.Set_Handling_Status_Completed(id);
+            _userSupportManager.SetHandlingStatusCompleted(id);
             var serviceCallResult = _userSupportManager.GetActiveValues().ToList();
             return serviceCallResult;
         }
