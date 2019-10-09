@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using App.Loans.Services;
+
 namespace App.Example.Controllers
 {
     /// <summary>
