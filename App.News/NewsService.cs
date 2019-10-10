@@ -2,7 +2,7 @@
 
 namespace App.News
 {
-    public class News
+    public class NewsManager
     {
     }
 }

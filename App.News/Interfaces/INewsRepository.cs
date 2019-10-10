@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace App.News.Repositories
+namespace App.News.Interfaces
 {
-    class InMemoryValuesComments
+    interface INewsRepository
     {
+       
     }
 }
