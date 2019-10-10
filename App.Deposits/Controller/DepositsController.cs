@@ -17,7 +17,7 @@ namespace App.Deposits.Controller
         }
 
         [HttpPost]
-        public ActionResult CreateDeposit(CreatedDepositDTO newDepositr)
+        public ActionResult CreateDeposit([FromBody]CreatedDepositDTO newDepositr)
         {
             return Ok();
         }
