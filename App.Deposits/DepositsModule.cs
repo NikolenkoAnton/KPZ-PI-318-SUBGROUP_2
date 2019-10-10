@@ -10,7 +10,7 @@ namespace App.Deposits
     {
         public void Initialize(IWindsorContainer container)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
