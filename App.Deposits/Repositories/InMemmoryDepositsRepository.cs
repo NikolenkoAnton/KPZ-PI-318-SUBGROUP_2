@@ -16,7 +16,7 @@ namespace App.Deposits.Repositories
         void AddDeposit(Deposit deposit);
     }
 
-    public class InMemmoryDepositsRepository<T> : IDepositsRepository, ITransientDependency
+    public class InMemmoryDepositsRepository : IDepositsRepository, ITransientDependency
     {
         private static readonly List<Deposit> deposits = Init();
 

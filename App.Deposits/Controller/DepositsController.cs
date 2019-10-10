@@ -17,9 +17,16 @@ namespace App.Deposits.Controller
         }
 
         [HttpPost]
-        public ActionResult CreateDeposit([FromBody]CreatedDepositDTO newDepositr)
+        public ActionResult AddDeposit([FromBody]CreatedDepositDTO newDepositr)
         {
+            depositsManager.AddDeposit(newDepositr);
             return Ok();
+        }
+
+        [HttpGet]
+        public ActionResult GetAllDeposits()
+        {
+            return Ok(depositsManager.GetAllDeposits());
         }
 
         [HttpGet("/{id}")]
