@@ -6,7 +6,7 @@ namespace App.UserSupport.Repositories
 {
     public interface IUsersRepository
     {
-        IEnumerable<string> GetActiveValues();
+        IEnumerable<string> GetStringListActiveValues();
         Handling Get(int id);
     }
     public class InMemoryUsersRepository : IUsersRepository, ITransientDependency
@@ -23,10 +23,9 @@ namespace App.UserSupport.Repositories
             handlings[4] = new Handling(new Client("Anton"), "Some times i have troubles", 2);
             handlings[1].WriteAnswer("What happend?");
             handlings[2].WriteAnswer("Give me pls more information");
-
         }
 
-        public IEnumerable<string> GetActiveValues()
+        public IEnumerable<string> GetStringListActiveValues()
         {
             handling[0] = handlings[0].ToString();
             handling[1] = handlings[1].ToString();

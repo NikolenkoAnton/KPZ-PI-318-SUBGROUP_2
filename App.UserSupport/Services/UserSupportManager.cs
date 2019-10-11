@@ -7,7 +7,7 @@ namespace App.UserSupport
     public interface IUserSupportManager
     {
         void SetHandlingStatusCompleted(int id);
-        IEnumerable<string> GetActiveValues();
+        IEnumerable<string> GetListActiveValues();
         IEnumerable<string> GetHandling10LastMessages(int id);
     }
     public class UserSupportManager : IUserSupportManager, ITransientDependency
@@ -29,9 +29,9 @@ namespace App.UserSupport
             return new string[] { repository.Get(id).GetHandling10LastMessages() };
         }
 
-        public IEnumerable<string> GetActiveValues()
+        public IEnumerable<string> GetListActiveValues()
         {
-            return repository.GetActiveValues();
+            return repository.GetStringListActiveValues();
         }
     }
 }
