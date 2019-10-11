@@ -7,7 +7,7 @@ using App.News.Interfaces;
 
 namespace App.News.Controllers
 {
-    [Route("api/news/values")]
+    [Route("api/news")]
     [ApiController]
     public class NewsController:Controller
     {
@@ -27,14 +27,15 @@ namespace App.News.Controllers
             }
             return new OkResult();
         }
-
+        [Route("api/news/allNews")]
         [HttpGet]
         public ActionResult<IEnumerable<NewsDTO>> GetNews() {
             var news =  newsManager.GetAllNews().ToList();
             return new OkObjectResult(news);
         }
+        [Route("api/news/{id}/newsComments/")]
         [HttpGet]
-        public ActionResult<IEnumerable<CommentDTO>> GetNewsComments([FromBody]int newsId)
+        public ActionResult<IEnumerable<CommentDTO>> GetNewsComments(int newsId)
         {
             var comments = newsManager.GetNewsComments(newsId).ToList();
             return new OkObjectResult(comments);
