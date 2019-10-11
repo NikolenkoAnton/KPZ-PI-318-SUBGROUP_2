@@ -4,9 +4,8 @@ using System.Text;
 
 namespace App.Deposits.Models
 {
-    public class Deposit
+    public class CreatedDepositDTO
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public decimal InterastRate { get; set; }
     }

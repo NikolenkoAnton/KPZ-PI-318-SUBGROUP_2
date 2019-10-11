@@ -24,10 +24,10 @@ namespace App.Deposits.Controller
         }
 
         [HttpGet]
-        public ActionResult GetAllDeposits()
-        {
-            return Ok(depositsManager.GetAllDeposits());
-        }
+        public ActionResult GetAllDeposits() => Ok(depositsManager.GetAllDeposits());
+
+        [HttpPost]
+        public ActionResult AccrualCalculation(int depositId, decimal startSum, DateTime finishDate) => Ok(depositsManager.AccrualСalculation(depositId, startSum, finishDate));
 
         [HttpGet("/{id}")]
         public ActionResult<Deposit> GetDepositById(int id) => Ok(depositsManager.GetDepositById(id));

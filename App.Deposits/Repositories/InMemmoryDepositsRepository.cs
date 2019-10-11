@@ -23,8 +23,7 @@ namespace App.Deposits.Repositories
 
         private static List<Deposit> Init()
         {
-            var deposits = new List<Deposit>();
-            return null;
+            return new List<Deposit>();
         }
         public void AddDeposit(Deposit deposit)
         {
