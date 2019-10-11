@@ -9,5 +9,6 @@ namespace App.News.Interfaces
     {
         string AddComment(CommentDTO comment);
         IEnumerable<CommentDTO> GetNewsComments(int newsId);
+        IEnumerable<NewsDTO> GetAllNews();
     }
 }

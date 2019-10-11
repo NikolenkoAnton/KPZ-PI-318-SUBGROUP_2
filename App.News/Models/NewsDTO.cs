@@ -13,7 +13,7 @@ namespace App.News.Models
 
         public string Text { get; set; }
 
-        public List<CommentDTO> Comments { get; set; }
+        public IEnumerable<CommentDTO> Comments { get; set; }
 
     }
 }

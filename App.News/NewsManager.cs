@@ -1,5 +1,6 @@
 ﻿using System;
 using App.News.Repositories;
+using System.Linq;
 using App.News.Models;
 using App.Configuration;
 using App.News.Interfaces;
@@ -14,26 +15,27 @@ namespace App.News
         {
             this.newsRepository = newsRepository;
         }
-        public void AddComment(int newsId, string owner, string text)
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public string AddComment(CommentDTO comment)
         {
-            var news = newsRepository.GetNewsById(comment.NewsId);
+            NewsDTO news = newsRepository.GetNewsById(comment.NewsId);
             if (news == null)
             {
                 return "news not found";
             }
-            news.Comments.Add(comment);
+            news.Comments.ToList().Add(comment);
             return "ok";
         }
-
 
         public IEnumerable<CommentDTO> GetNewsComments(int newsId)
         {
             return newsRepository.GetNewsById(newsId).Comments;
         }
+
+        public IEnumerable<NewsDTO> GetAllNews()
+        {
+            return newsRepository.GetAllNews().ToList();
+        }
+
     }
 }

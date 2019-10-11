@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using App.News.Repositories;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using App.News.Models;
 using App.News.Interfaces;
@@ -29,7 +28,17 @@ namespace App.News.Controllers
             return new OkResult();
         }
 
-
+        [HttpGet]
+        public ActionResult<IEnumerable<NewsDTO>> GetNews() {
+            var news =  newsManager.GetAllNews().ToList();
+            return new JsonResult(news);
+        }
+        [HttpGet]
+        public ActionResult<IEnumerable<CommentDTO>> GetNewsComments([FromBody]int newsId)
+        {
+            var comments = newsManager.GetNewsComments(newsId).ToList();
+            return new JsonResult(comments);
+        }
 
 
     }
