@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using App.Configuration;
 using App.Goods.Common;
@@ -25,7 +26,7 @@ namespace App.Goods.Services
             
             if (!orderedProducts.Any())
             {
-                return null;
+                throw new Exception("Product list is empty");
             }
             
             var lastOrder = GetAllOrders().LastOrDefault();

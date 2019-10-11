@@ -2,7 +2,7 @@
 
 namespace App.Goods.Services
 {
-    public interface IValidateService
+    public interface INormalizeService
     {
        void CleanIds(List<int> ids);
     }

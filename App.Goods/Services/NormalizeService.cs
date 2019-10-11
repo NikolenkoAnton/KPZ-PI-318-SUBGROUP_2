@@ -5,11 +5,11 @@ using App.Goods.Common;
 
 namespace App.Goods.Services
 {
-    public class ValidateService : IValidateService, ITransientDependency
+    public class NormalizeService : INormalizeService, ITransientDependency
     {
         private readonly IProductsManager _productsManager;
 
-        public ValidateService(IProductsManager productsManager)
+        public NormalizeService(IProductsManager productsManager)
         {
             _productsManager = productsManager;
         }

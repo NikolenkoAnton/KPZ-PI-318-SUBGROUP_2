@@ -11,12 +11,12 @@ namespace App.Goods.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly IOrdersManager _ordersManager;
-        private readonly IValidateService _validateService;
+        private readonly INormalizeService _normalizeService;
 
-        public OrdersController(IOrdersManager ordersManager, IValidateService validateService)
+        public OrdersController(IOrdersManager ordersManager, INormalizeService normalizeService)
         {
             _ordersManager = ordersManager;
-            _validateService = validateService;
+            _normalizeService = normalizeService;
         }
 
         [HttpGet]
@@ -28,7 +28,7 @@ namespace App.Goods.Controllers
         [HttpPost]
         public Order MakeOrder([FromBody] List<int> productsIds)
         {
-            _validateService.CleanIds(productsIds);
+            _normalizeService.CleanIds(productsIds);
 
             return _ordersManager.MakeOrder(productsIds);
         }
