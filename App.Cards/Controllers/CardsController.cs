@@ -32,7 +32,7 @@ namespace App.Cards.Controllers
         }
 
         [HttpPut("{id}/limit/set")]
-        public ActionResult SetCardLimit(int id, [FromQuery]decimal limit)
+        public ActionResult SetCardLimit(int id, [FromBody]decimal limit)
         {
             var actionStatus = cardsManager.SetCardLimit(id, limit);
 
