@@ -23,7 +23,13 @@ namespace App.Deposits.Repositories
 
         private static List<Deposit> Init()
         {
-            return new List<Deposit>();
+            var deposits = new List<Deposit>();
+
+            deposits.Add(new Deposit { Id = 1, Name = "Defoult", InterastRate = 0.15m });
+            deposits.Add(new Deposit { Id = 2, Name = "Students", InterastRate = 0.20m });
+            deposits.Add(new Deposit { Id = 3, Name = "Retirement", InterastRate = 0.25m });
+
+            return deposits;
         }
         public void AddDeposit(Deposit deposit)
         {
