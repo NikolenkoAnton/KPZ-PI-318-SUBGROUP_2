@@ -31,13 +31,13 @@ namespace App.News.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<NewsDTO>> GetNews() {
             var news =  newsManager.GetAllNews().ToList();
-            return new JsonResult(news);
+            return new OkObjectResult(news);
         }
         [HttpGet]
         public ActionResult<IEnumerable<CommentDTO>> GetNewsComments([FromBody]int newsId)
         {
             var comments = newsManager.GetNewsComments(newsId).ToList();
-            return new JsonResult(comments);
+            return new OkObjectResult(comments);
         }
 
 
