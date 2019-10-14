@@ -18,7 +18,7 @@ namespace App.News
        
         public string AddComment(CommentDTO comment)
         {
-            NewsDTO news = newsRepository.GetNewsById(comment.NewsId);
+            var news = newsRepository.GetNewsById(comment.NewsId);
             if (news == null)
             {
                 return "news not found";
