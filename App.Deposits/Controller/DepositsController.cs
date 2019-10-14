@@ -26,13 +26,10 @@ namespace App.Deposits.Controller
         [HttpGet("all")]
         public ActionResult<IEnumerable<Deposit>> GetAllDeposits() => Ok(depositsManager.GetAllDeposits());
 
-        [HttpGet("calculate")]
-        public ActionResult AccrualCalculation(int depositId, decimal startSum, DateTime finishDate) => Ok(depositsManager.AccrualСalculation(depositId, startSum, finishDate));
-
         [HttpGet("/{id}")]
         public ActionResult<Deposit> GetDepositById(int id) => Ok(depositsManager.GetDepositById(id));
-      
-        
 
+        [HttpGet("/{id}/calculate")]
+        public ActionResult AccrualCalculation([FromRoute]int id, [FromQuery]CalculateDTO calculateDTO) => Ok(depositsManager.AccrualСalculation(id, calculateDTO));
     }
 }

@@ -20,28 +20,31 @@ namespace App.Deposits.Repositories
     {
         private static readonly List<Deposit> deposits = Init();
 
-
         private static List<Deposit> Init()
         {
             var deposits = new List<Deposit>();
 
-            deposits.Add(new Deposit { Id = 1, Name = "Defoult", InterastRate = 0.15m });
-            deposits.Add(new Deposit { Id = 2, Name = "Students", InterastRate = 0.20m });
-            deposits.Add(new Deposit { Id = 3, Name = "Retirement", InterastRate = 0.25m });
+            deposits.Add(new Deposit { Id = 1, Name = "Defoult", InterestRate = 0.15m });
+            deposits.Add(new Deposit { Id = 2, Name = "Students", InterestRate = 0.20m });
+            deposits.Add(new Deposit { Id = 3, Name = "Retirement", InterestRate = 0.25m });
 
             return deposits;
         }
-        public void AddDeposit(Deposit deposit)
-        {
-            deposits.Add(deposit);
-        }
+        public void AddDeposit(Deposit deposit) => deposits.Add(deposit);
 
-        public IEnumerable<Deposit> GetAllDeposit()
-        {
-            return deposits;
-        }
+        public IEnumerable<Deposit> GetAllDeposit() => deposits;
 
-        public Deposit GetDepositById(int id) => deposits.Where(x => x.Id == id).FirstOrDefault();
+        public Deposit GetDepositById(int id)
+        {
+            var deposit = deposits.Where(x => x.Id == id).FirstOrDefault();
+
+            if (deposit == null)
+            {
+                throw new Exception("Deposit doesn't exist");
+            }
+
+            return deposit;
+        }
         
 
     }
