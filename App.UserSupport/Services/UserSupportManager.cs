@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using App.Configuration;
 using App.UserSupport.Repositories;
-
+using App.UserSupport.Models;
 namespace App.UserSupport
 {
     public interface IUserSupportManager
@@ -41,14 +41,14 @@ namespace App.UserSupport
         private string Handling10LastMessages(int id)
         {
             string temp = "";
-            List<string> somelist = repository.Get(id).context;
+            List<Message> somelist = repository.Get(id).context;
             somelist.Reverse();
             int i = repository.Get(id).context.Count - 1;
             int j = 0;
             while (i >= 0)
             {
                 if (j < 10)
-                    temp += somelist.ToArray()[i];
+                    temp += somelist[i].mess;
                 i--;
                 j++;
             }

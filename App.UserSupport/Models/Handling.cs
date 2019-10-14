@@ -6,7 +6,7 @@ namespace App.UserSupport.Models
     {//unique id for Handling
         public int Id { get; set; }
         //context of Handling
-        public List<string> context { get; set; } = new List<string>();
+        public List<Message> context { get; set; } = new List<Message>();
         //Status 
         public bool status { get; set; }
         //Client who write Handling
@@ -22,13 +22,13 @@ namespace App.UserSupport.Models
         public void WriteMessage(string mess)
         {
             if (status == false)
-                context.Add(clientHandling.Name + " :  " + mess + "   ");
+                context.Add(new Message(clientHandling,mess));
         }
 
         public void WriteAnswer(string answer)
         {
             if (status == false)
-                context.Add("   Moderator :  " + answer);
+                context.Add(new Message(answer));
         }
         //If closed handling, no display in active handlings
         public override string ToString()
@@ -36,8 +36,8 @@ namespace App.UserSupport.Models
             string temp = "";
             if (status == false)
             {
-                foreach (string a in context)
-                    temp += a;
+                foreach (Message a in context)
+                    temp += a.mess;
             }
             return temp;
         }
