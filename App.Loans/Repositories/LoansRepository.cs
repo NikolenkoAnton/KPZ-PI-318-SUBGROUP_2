@@ -9,10 +9,9 @@ namespace App.Loans.Repositories
 {
     public interface ILoansRepository
     {
-        IEnumerable<Loan> GetAll();
-        IEnumerable<string> GetValues();
+        IEnumerable<string> GetActiveLoansList();
 
-        Loan Get(int id);
+        Loan GetLoanById(int id);
     }
     public class LoansRepository : ILoansRepository, ITransientDependency
     {
@@ -31,17 +30,12 @@ namespace App.Loans.Repositories
             str[2] = loans[2].ToString();
         }
 
-        public IEnumerable<Loan> GetAll()
-        {
-            return loans;
-        }
-
-        public IEnumerable<string> GetValues()
+        public IEnumerable<string> GetActiveLoansList()
         {
             return str;
         }
 
-        public Loan Get(int id)
+        public Loan GetLoanById(int id)
         {
             return loans[id];
         }

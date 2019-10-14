@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
 using App.Loans.Services;
 
 namespace App.Loans.Controllers
@@ -21,11 +19,10 @@ namespace App.Loans.Controllers
             _valuesManager = valuesManager;
         }
 
-        // GET api/loans/All
         [HttpGet("All")]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<string>> GetActiveLoansList()
         {
-            return _valuesManager.GetValues().ToList();
+            return _valuesManager.GetListActiveLoans().ToList();
         }
         
         [HttpGet("{id}")]

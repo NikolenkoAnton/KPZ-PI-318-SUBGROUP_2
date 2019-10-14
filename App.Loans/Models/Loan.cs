@@ -20,7 +20,7 @@ namespace App.Loans.Models
             this.moneyBack = 0;
             money = moneyTaked + (moneyTaked * (time / 12) * percent) - moneyBack;
         }
-        public void get_money_back(int money)
+        public void GetMoneyBack(int money)
         {
             if(money>=moneyLeft/time)
             moneyBack += money;

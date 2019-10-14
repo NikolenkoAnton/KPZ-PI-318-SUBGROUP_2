@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using App.Configuration;
 using App.Repositories;
-using AutoMapper;
 using App.Loans.Models;
 using App.Loans.Repositories;
 
@@ -9,9 +8,8 @@ namespace App.Loans.Services
 {
     public interface ILoansManager
     {
-        List<Loan> GetList();
         Loan GetItem(int id);
-        IEnumerable<string> GetValues();
+        IEnumerable<string> GetListActiveLoans();
         double GetMoneyLeft(int id);
     }
 
@@ -19,11 +17,7 @@ namespace App.Loans.Services
     {
         readonly LoansRepository _repository;
 
-        IMapper MLoan = new MapperConfiguration(cfg => cfg.CreateMap<Loan, Loan>()).CreateMapper();
-
-        public List<Loan> GetList() => MLoan.Map<IEnumerable<Loan>, List<Loan>>(_repository.GetAll());
-
-        public Loan GetItem(int id) => _repository.Get(id);
+        public Loan GetItem(int id) => _repository.GetLoanById(id);
 
         public LoansManager(LoansRepository repository)
         {
@@ -32,12 +26,12 @@ namespace App.Loans.Services
 
         public double GetMoneyLeft(int id)
         {
-            return _repository.Get(id).moneyLeft;
+            return _repository.GetLoanById(id).moneyLeft;
         }
 
-        public IEnumerable<string> GetValues()
+        public IEnumerable<string> GetListActiveLoans()
         {
-            return _repository.GetValues();
+            return _repository.GetActiveLoansList();
         }
     }
 }
