@@ -29,7 +29,7 @@ namespace App.News
 
         public IEnumerable<CommentDTO> GetNewsComments(int newsId)
         {
-            return newsRepository.GetNewsById(newsId).Comments;
+            return newsRepository.GetNewsComments(newsId);
         }
 
         public IEnumerable<NewsDTO> GetAllNews()

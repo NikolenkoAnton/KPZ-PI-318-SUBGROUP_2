@@ -9,10 +9,9 @@ namespace App.News.Controllers
 {
     [Route("api/news")]
     [ApiController]
-    public class NewsController:Controller
+    public class NewsController: ControllerBase
     {
-        INewsManager newsManager;
-
+        private INewsManager newsManager;
         public NewsController(INewsManager newsManager)
         {
             this.newsManager = newsManager;
@@ -23,24 +22,22 @@ namespace App.News.Controllers
             var actionResult = newsManager.AddComment(commentDTO);
             if (actionResult != "ok")
             {
-                return new BadRequestResult();
+                return BadRequest("Something went wrong");
             }
-            return new OkResult();
+            return Ok();
         }
         [Route("api/news/allNews")]
         [HttpGet]
         public ActionResult<IEnumerable<NewsDTO>> GetNews() {
             var news =  newsManager.GetAllNews().ToList();
-            return new OkObjectResult(news);
+            return Ok(news);
         }
         [Route("api/news/{id}/newsComments/")]
         [HttpGet]
         public ActionResult<IEnumerable<CommentDTO>> GetNewsComments(int newsId)
         {
             var comments = newsManager.GetNewsComments(newsId).ToList();
-            return new OkObjectResult(comments);
+            return Ok(comments);
         }
-
-
     }
 }

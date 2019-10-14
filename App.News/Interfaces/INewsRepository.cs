@@ -9,6 +9,6 @@ namespace App.News.Interfaces
     {
         IEnumerable<NewsDTO> GetAllNews();
         NewsDTO GetNewsById(int id);
-      
+        IEnumerable<CommentDTO> GetNewsComments(int id);
     }
 }
