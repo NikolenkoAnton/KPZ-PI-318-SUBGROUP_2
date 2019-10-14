@@ -16,9 +16,9 @@ namespace App.UserSupport.Controllers
         }
 
         [HttpGet("active")]
-        public ActionResult<IEnumerable<string>> GetListActiveValues()
+        public ActionResult<IEnumerable<string>> GetListActiveHandlings()
         {
-            var serviceCallResult = _userSupportManager.GetListActiveValues().ToList();
+            var serviceCallResult = _userSupportManager.GetListActiveHandlings().ToList();
             return serviceCallResult;
         }
 
@@ -30,11 +30,10 @@ namespace App.UserSupport.Controllers
         }
 
         [HttpPost]
-        public ActionResult<IEnumerable<string>> SetHandlingStatusCompletedAndReturnListActiveHandlings(int id)
+        public void SetHandlingStatusCompletedById(int id)
         {
             _userSupportManager.SetHandlingStatusCompleted(id);
-            var serviceCallResult = _userSupportManager.GetListActiveValues().ToList();
-            return serviceCallResult;
+
         }
     }
 }

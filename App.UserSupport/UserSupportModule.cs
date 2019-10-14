@@ -7,8 +7,7 @@ namespace App.UserSupport
     public class UserSupportModule : IModule
     {
         public void Initialize(IWindsorContainer container)
-        {
-            container.Register(Component.For<IAnotherService>().ImplementedBy<AnotherService>().LifestyleTransient());
+        {     
         }
     }
 }

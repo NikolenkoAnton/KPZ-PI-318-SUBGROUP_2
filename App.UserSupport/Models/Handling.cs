@@ -17,11 +17,8 @@ namespace App.UserSupport.Models
             Id = id;
             status = false;
             clientHandling = client;
-            WriteMessage(clientHandling.Name, firstmessage);
+            WriteMessage(firstmessage);
         }
-
-        public void SetHandlingStatusCompleted() => status = true;
-
         public void WriteMessage(string mess)
         {
             if (status == false)
@@ -33,24 +30,6 @@ namespace App.UserSupport.Models
             if (status == false)
                 context.Add("   Moderator :  " + answer);
         }
-
-        public string GetHandling10LastMessages()
-        {
-            string temp = "";
-            List<string> somelist = context;
-            somelist.Reverse();
-            int i = context.Count - 1;
-            int j = 0;
-            while (i >= 0)
-            {
-                if (j < 10)
-                    temp += somelist.ToArray()[i];
-                i--;
-                j++;
-            }
-            return temp;
-        }
-
         //If closed handling, no display in active handlings
         public override string ToString()
         {
@@ -61,12 +40,6 @@ namespace App.UserSupport.Models
                     temp += a;
             }
             return temp;
-        }
-
-        public void WriteMessage(string Name, string mess)
-        {
-            if (status == false)
-                context.Add(Name + " :  " + mess + "   ");
         }
     }
 }

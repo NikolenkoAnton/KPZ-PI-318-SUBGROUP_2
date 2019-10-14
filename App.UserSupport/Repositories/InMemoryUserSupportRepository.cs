@@ -4,12 +4,12 @@ using App.UserSupport.Models;
 
 namespace App.UserSupport.Repositories
 {
-    public interface IUsersRepository
+    public interface IHandlingsRepository
     {
-        IEnumerable<string> GetStringListActiveValues();
+        IEnumerable<string> GetStringListActiveHandlings();
         Handling Get(int id);
     }
-    public class InMemoryUsersRepository : IUsersRepository, ITransientDependency
+    public class InMemoryUsersRepository : IHandlingsRepository, ITransientDependency
     {
         Handling[] handlings = new Handling[5];
         string[] handling = new string[5];
@@ -25,7 +25,7 @@ namespace App.UserSupport.Repositories
             handlings[2].WriteAnswer("Give me pls more information");
         }
 
-        public IEnumerable<string> GetStringListActiveValues()
+        public IEnumerable<string> GetStringListActiveHandlings()
         {
             handling[0] = handlings[0].ToString();
             handling[1] = handlings[1].ToString();

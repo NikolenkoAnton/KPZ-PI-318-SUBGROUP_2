@@ -5,7 +5,5 @@ namespace App.Repositories
     public interface IUserSupportMessagesRepository
     {
 
-        IEnumerable<string> GetValues();
-
     }
 }
