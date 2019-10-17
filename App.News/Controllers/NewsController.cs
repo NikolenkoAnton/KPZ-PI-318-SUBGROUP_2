@@ -16,6 +16,8 @@ namespace App.News.Controllers
         {
             this.newsManager = newsManager;
         }
+
+        [Route("api/news/addComment/")]
         [HttpPost]
         public ActionResult AddComment([FromBody]CommentDTO commentDTO)
         {
@@ -26,17 +28,19 @@ namespace App.News.Controllers
             }
             return Ok();
         }
+
         [Route("api/news/allNews")]
         [HttpGet]
         public ActionResult<IEnumerable<NewsDTO>> GetNews() {
             var news =  newsManager.GetAllNews().ToList();
             return Ok(news);
         }
+
         [Route("api/news/{id}/newsComments/")]
         [HttpGet]
-        public ActionResult<IEnumerable<CommentDTO>> GetNewsComments(int newsId)
+        public ActionResult<IEnumerable<CommentDTO>> GetNewsComments(int Id)
         {
-            var comments = newsManager.GetNewsComments(newsId).ToList();
+            var comments = newsManager.GetNewsComments(Id).ToList();
             return Ok(comments);
         }
     }

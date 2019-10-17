@@ -9,8 +9,6 @@ namespace App.News
     {
         public void Initialize(IWindsorContainer container)
         {
-            // example of manually registered components
-            //container.Register(Component.For<INewsManager>().ImplementedBy<NewsManager>().LifestyleTransient());
         }
     }
 }
