@@ -24,7 +24,9 @@ namespace App.Web
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // ## ASP NET Core template code
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
             // ##
 
             // ## Code added to the template

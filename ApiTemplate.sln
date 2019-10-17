@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Common", "App.Common\Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Example", "App.TestModule\App.Example.csproj", "{25F59F96-D5C0-4036-8DF3-2A4568E48602}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.UserSupport", "App.UserSupport\App.UserSupport.csproj", "{6ADD396B-D98B-4E6F-9163-F74280E6F13B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.UserSupport", "App.UserSupport\App.UserSupport.csproj", "{6ADD396B-D98B-4E6F-9163-F74280E6F13B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Goods", "App.Goods\App.Goods.csproj", "{77837CCB-38E1-448E-92D8-5F5201382CF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Goods", "App.Goods\App.Goods.csproj", "{77837CCB-38E1-448E-92D8-5F5201382CF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,7 +35,7 @@ Global
 		{6ADD396B-D98B-4E6F-9163-F74280E6F13B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ADD396B-D98B-4E6F-9163-F74280E6F13B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6ADD396B-D98B-4E6F-9163-F74280E6F13B}.Release|Any CPU.Build.0 = Release|Any CPU
-    		{77837CCB-38E1-448E-92D8-5F5201382CF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77837CCB-38E1-448E-92D8-5F5201382CF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{77837CCB-38E1-448E-92D8-5F5201382CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77837CCB-38E1-448E-92D8-5F5201382CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77837CCB-38E1-448E-92D8-5F5201382CF6}.Release|Any CPU.Build.0 = Release|Any CPU
