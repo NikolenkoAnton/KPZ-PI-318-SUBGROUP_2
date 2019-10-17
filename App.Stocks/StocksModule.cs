@@ -4,7 +4,7 @@ using App.Stocks.Services;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 
-namespace App.Example
+namespace App.Stocks
 {
     public class StocksModule : IModule
     {

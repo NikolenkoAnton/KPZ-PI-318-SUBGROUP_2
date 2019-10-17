@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.UserSupport", "App.User
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Goods", "App.Goods\App.Goods.csproj", "{77837CCB-38E1-448E-92D8-5F5201382CF6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Stocks", "App.Stocks\App.Stocks.csproj", "{1FD2CCFB-BFC6-4BC0-82B7-682AC174B225}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{77837CCB-38E1-448E-92D8-5F5201382CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77837CCB-38E1-448E-92D8-5F5201382CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77837CCB-38E1-448E-92D8-5F5201382CF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FD2CCFB-BFC6-4BC0-82B7-682AC174B225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FD2CCFB-BFC6-4BC0-82B7-682AC174B225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FD2CCFB-BFC6-4BC0-82B7-682AC174B225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FD2CCFB-BFC6-4BC0-82B7-682AC174B225}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
