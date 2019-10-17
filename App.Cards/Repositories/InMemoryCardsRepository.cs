@@ -12,6 +12,7 @@ namespace App.Cards.Repositories
         IEnumerable<Card> GetAllCards();
 
         Card GetCardById(int id);
+
     }
     public class InMemoryCardsRepository : ICardsRepository, ITransientDependency
     {

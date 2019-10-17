@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\App.Cards\App.Cards.csproj" />
     <ProjectReference Include="..\App.Common\App.Common.csproj" />
   </ItemGroup>
 

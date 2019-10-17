@@ -9,11 +9,11 @@ namespace App.Cards
     {
         Card GetCardById(int id);
 
-        string SetCardLimit(int id, decimal limit);
+        void SetCardLimit(int id, decimal limit);
 
-        string UnsetCardLimit(int id);
+        void UnsetCardLimit(int id);
 
-        string BlockCard(int id);
+        void BlockCard(int id);
     }
     public class CardsManager : ICardsManager, ITransientDependency
     {
@@ -24,23 +24,22 @@ namespace App.Cards
             this.cardsRepository = cardsRepository;
         }
 
-        public string BlockCard(int id)
+        public void BlockCard(int id)
         {
             var card = cardsRepository.GetCardById(id);
 
-            if(card == null)
+            if (card == null)
             {
-                return "Card doesn't exist!";
+                throw new Exception("Card doesn't exist!");
             }
 
-            if(card.IsBlocked)
+            if (card.IsBlocked)
             {
-                return "Card blocked!";
+                throw new Exception("Card blocked!");
+
             }
 
             card.IsBlocked = true;
-
-            return "Successfull";
         }
 
         public Card GetCardById(int id)
@@ -48,42 +47,39 @@ namespace App.Cards
             return cardsRepository.GetCardById(id);
         }
 
-        public string SetCardLimit(int id, decimal limit)
+        public void SetCardLimit(int id, decimal limit)
         {
             var card = cardsRepository.GetCardById(id);
 
             if (card == null)
             {
-                return "Card doesn't exist!";
+                throw new Exception("Card doesn't exist!");
             }
 
             if (card.IsBlocked)
             {
-                return "Card blocked!";
+                throw new Exception("Card blocked!");
+
             }
             card.Limit = limit;
 
-            return "Successfull";
-
         }
 
-        public string UnsetCardLimit(int id)
+        public void UnsetCardLimit(int id)
         {
             var card = cardsRepository.GetCardById(id);
 
             if (card == null)
             {
-                return "Card doesn't exist!";
+                throw new Exception("Card doesn't exist!");
             }
 
             if (card.IsBlocked)
             {
-                return "Card blocked!";
+                throw new Exception("Card blocked!");
             }
 
             card.Limit = 0;
-
-            return "Successfull";
 
         }
     }

@@ -17,7 +17,6 @@ namespace App.Cards.Controllers
             this.cardsManager = cardsManager;
         }
 
-        // GET api/example/values
         [HttpGet("{id}")]
         public ActionResult<Card> GetCardById(int id)
         {
@@ -34,41 +33,26 @@ namespace App.Cards.Controllers
         [HttpPut("{id}/limit/set")]
         public ActionResult SetCardLimit(int id, [FromQuery]decimal limit)
         {
-            var actionStatus = cardsManager.SetCardLimit(id, limit);
+            cardsManager.SetCardLimit(id, limit);
 
-            if(actionStatus != "Successfull")
-            {
-                return BadRequest(actionStatus);
-            }
-
-            return Ok(actionStatus);
+            return Ok();
         }
 
         [HttpPut("{id}/limit/unset")]
         public ActionResult UnsetCardLimit(int id)
         {
-            var actionStatus = cardsManager.UnsetCardLimit(id);
+            cardsManager.UnsetCardLimit(id);
 
-            if (actionStatus != "Successfull")
-            {
-                return BadRequest(actionStatus);
-            }
-
-            return Ok(actionStatus);
+            return Ok();
         }
 
 
         [HttpPut("{id}/block")]
         public ActionResult BlockCardById(int id)
         {
-            var actionStatus = cardsManager.BlockCard(id);
+            cardsManager.BlockCard(id);
 
-            if (actionStatus != "Successfull")
-            {
-                return BadRequest(actionStatus);
-            }
-
-            return Ok(actionStatus);
+            return Ok();
         }
 
     }
