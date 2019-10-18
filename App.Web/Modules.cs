@@ -9,6 +9,7 @@ namespace App.Web
     [ModuleUsing(typeof(UserSupport.UserSupportModule))]
     [ModuleUsing(typeof(Goods.GoodsModule))]
     [ModuleUsing(typeof(Stocks.StocksModule))]
+    [ModuleUsing(typeof(Loans.LoansModule))]
     public class Modules
     {
         
