@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using App.Configuration;
 using App.Repositories;
-
 namespace App.Example
 {
     /// <summary>
