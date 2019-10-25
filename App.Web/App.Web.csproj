@@ -31,9 +31,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\App.Common\App.Common.csproj" />
+
     <ProjectReference Include="..\App.Loans\App.Loans.csproj" />
     <ProjectReference Include="..\App.Stocks\App.Stocks.csproj" />
     <ProjectReference Include="..\App.Goods\App.Goods.csproj" />
+    <ProjectReference Include="..\App.RegualrPayments\App.RegualrPayments.csproj" />
+
     <ProjectReference Include="..\App.TestModule\App.Example.csproj" />
     <ProjectReference Include="..\App.UserSupport\App.UserSupport.csproj" />
   </ItemGroup>
