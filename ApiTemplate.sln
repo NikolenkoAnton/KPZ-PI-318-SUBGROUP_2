@@ -9,10 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Common", "App.Common\Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Example", "App.TestModule\App.Example.csproj", "{25F59F96-D5C0-4036-8DF3-2A4568E48602}"
 EndProject
-
-
-=======
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Loans", "App.Loans\App.Loans.csproj", "{066DCB5E-9C5B-4E00-B1BA-48330D604A4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Deposits", "App.Deposits\App.Deposits.csproj", "{07474E0F-9D59-49C3-8418-817B80BFC41F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Loans", "App.Loans\App.Loans.csproj", "{066DCB5E-9C5B-4E00-B1BA-48330D604A4D}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.UserSupport", "App.UserSupport\App.UserSupport.csproj", "{6ADD396B-D98B-4E6F-9163-F74280E6F13B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Goods", "App.Goods\App.Goods.csproj", "{77837CCB-38E1-448E-92D8-5F5201382CF6}"
@@ -39,11 +39,14 @@ Global
 		{25F59F96-D5C0-4036-8DF3-2A4568E48602}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25F59F96-D5C0-4036-8DF3-2A4568E48602}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25F59F96-D5C0-4036-8DF3-2A4568E48602}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07474E0F-9D59-49C3-8418-817B80BFC41F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07474E0F-9D59-49C3-8418-817B80BFC41F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07474E0F-9D59-49C3-8418-817B80BFC41F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07474E0F-9D59-49C3-8418-817B80BFC41F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{066DCB5E-9C5B-4E00-B1BA-48330D604A4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{066DCB5E-9C5B-4E00-B1BA-48330D604A4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{066DCB5E-9C5B-4E00-B1BA-48330D604A4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{066DCB5E-9C5B-4E00-B1BA-48330D604A4D}.Release|Any CPU.Build.0 = Release|Any CPU
-
 		{6ADD396B-D98B-4E6F-9163-F74280E6F13B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6ADD396B-D98B-4E6F-9163-F74280E6F13B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ADD396B-D98B-4E6F-9163-F74280E6F13B}.Release|Any CPU.ActiveCfg = Release|Any CPU

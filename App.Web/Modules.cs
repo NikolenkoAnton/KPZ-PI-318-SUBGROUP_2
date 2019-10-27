@@ -1,4 +1,5 @@
 ﻿using App.Configuration;
+using App.Deposits;
 
 namespace App.Web
 {
@@ -11,8 +12,8 @@ namespace App.Web
     [ModuleUsing(typeof(Goods.GoodsModule))]
     [ModuleUsing(typeof(Stocks.StocksModule))]
     [ModuleUsing(typeof(Loans.LoansModule))]
+    [ModuleUsing(typeof(DepositsModule))]
     [ModuleUsing(typeof(RegularPayments.RegularPaymentsModule))] 
-
     public class Modules
     {
         
