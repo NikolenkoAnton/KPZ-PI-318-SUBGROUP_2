@@ -1,5 +1,4 @@
-﻿using App.Cards;
-using App.Configuration;
+﻿using App.Configuration;
 
 namespace App.Web
 {
@@ -11,7 +10,7 @@ namespace App.Web
     [ModuleUsing(typeof(Goods.GoodsModule))]
     [ModuleUsing(typeof(Stocks.StocksModule))]
     [ModuleUsing(typeof(Loans.LoansModule))]
-    [ModuleUsing(typeof(CardsModule))]
+    [ModuleUsing(typeof(Cards.CardsModule))]
     public class Modules
     {
         
