@@ -2,13 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <RootNamespace>App</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Castle.Windsor" Version="5.0.0" />
+    <ProjectReference Include="..\App.Common\App.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Castle.Core" Version="4.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
 </Project>
