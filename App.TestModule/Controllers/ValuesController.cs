@@ -4,6 +4,7 @@ using System.Linq;
 using App.Example.Dto;
 using App.Example.Filters;
 using App.Example.Services;
+using App.Models.Example;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -21,10 +22,10 @@ namespace App.Example.Controllers
     {
         // depedencies will be automatically resolved with used DI system
         readonly ILogger<ValuesController> _logger;
-        readonly IValuesManager _valuesManager;
+        readonly IValuesManager2 _valuesManager;
         public ValuesController(
             ILogger<ValuesController> logger,
-            IValuesManager valuesManager)
+            IValuesManager2 valuesManager)
         {
             _logger = logger;
             _valuesManager = valuesManager;

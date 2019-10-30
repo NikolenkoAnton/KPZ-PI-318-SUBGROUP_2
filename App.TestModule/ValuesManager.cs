@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using App.Configuration;
+using App.Models.Example;
 using App.Repositories;
 namespace App.Example
 {
@@ -11,7 +12,7 @@ namespace App.Example
         IEnumerable<string> GetValues();
     }
 
-    public class ValuesManager : IValuesManager, ITransientDependency
+    public class ValuesManager : ITransientDependency
     {
         // propoerty should be readonly, so it could not be changed after initialization
         readonly IValuesRepository _repository;
@@ -21,7 +22,7 @@ namespace App.Example
             _repository = repository;
         }
 
-        public IEnumerable<string> GetValues()
+        public IEnumerable<SimpleValue> GetValues()
         {
             return _repository.GetValues();
         }
