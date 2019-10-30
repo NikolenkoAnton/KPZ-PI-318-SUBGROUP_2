@@ -8,10 +8,10 @@ namespace App.Cards.Controllers
 {
     [Route("api/cards")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class CardsController : ControllerBase
     {
         readonly ICardsManager cardsManager;
-        public ValuesController(
+        public CardsController(
           ICardsManager cardsManager)
         {
             this.cardsManager = cardsManager;
