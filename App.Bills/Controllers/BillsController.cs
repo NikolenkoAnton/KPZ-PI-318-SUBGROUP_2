@@ -21,42 +21,31 @@ namespace App.Bills.Controllers
         }
 
         [HttpGet("avaliableBills")]
-        public ActionResult<string> GetAvaliableBillsList()
+        public ActionResult<IEnumerable<Bill>> GetAvaliableBillsList()
         {
-            string res = "";
-            foreach(string s in _valuesManager.GetUnblockedBillsList().ToList())
-            {
-                res += s.ToString();
-            }
-            return res;
+            return _valuesManager.GetUnblockedBillsList().ToList();
         }
         [HttpGet("allBills")]
-        public ActionResult<string> GetAllBillsList()
+        public ActionResult<IEnumerable<Bill>> GetAllBillsList()
         {
-            string res = "";
-            for (int i = 0; i <  _valuesManager.GetAllBillsList().ToList().Count(); i++)
-            {
-                res += _valuesManager.GetAllBillsList().ToList().ElementAt(i);
-            }
-            return res;
-            
+            return _valuesManager.GetAllBillsList().ToList();
         }
 
         [HttpGet("{id}")]
-        public ActionResult<string> GetBillById(int id)
+        public ActionResult<Bill> GetBillById(int id)
         {
             
             return _valuesManager.GetBillById(id);
         }
 
         [HttpPost("blockBill")]
-        public string BlockBill(int id)
+        public Bill BlockBill(int id)
         {
             return _valuesManager.BlockBill(id);
         }
 
         [HttpPost("unblockBill")]
-        public string UnlockBill(int id)
+        public Bill UnlockBill(int id)
         {
             return _valuesManager.UnblockBill(id);
         }

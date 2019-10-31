@@ -9,62 +9,56 @@ namespace App.Bills.Repositories
 {
     public interface IBillsRepository
     {
-        IEnumerable<String> GetActiveBillsList();
-        IEnumerable<String> GetAllBillsList();
-        string GetBillById(int id);
+        IEnumerable<Bill> GetActiveBillsList();
+        IEnumerable<Bill> GetAllBillsList();
+        Bill GetBillById(int id);
     }
     public class BillRepository : IBillsRepository, ITransientDependency
     {
-        //костыль в виде статика чтобы сохранялись изменения после пост запроса
+       
         private static Bill[] bills = {
             new Bill(34000, "Vasya", "Pupkin"),
             new Bill(17000, "Petro", "Poroshenko"),
             new Bill(7000, "Maria", "Ivanovna"),
-            new Bill(-7, "Anna", "Ivanovna")};
+            new Bill(-15000, "Anna", "Ivanovna")};
 
-        public BillRepository() {
-
-            
-        }
-
-        public IEnumerable<string> GetActiveBillsList()
+        public IEnumerable<Bill> GetActiveBillsList()
         {
-            List<string> ActiveBillsList = new List<string>();
+            List<Bill> ActiveBillsList = new List<Bill>();
             for (int i = 0; i < bills.Length; i++)
             {
-                if (!bills[i].GetIsBlocked())
-                    ActiveBillsList.Add(bills[i].ToString());
+                if (!bills[i].IsBlocked)
+                    ActiveBillsList.Add(bills[i]);
             }
             return ActiveBillsList;
         }
 
-        public IEnumerable<string> GetAllBillsList()
+        public IEnumerable<Bill> GetAllBillsList()
         {
-            string[] billsStr = new string[4];
-            billsStr[0] = bills[0].ToString();
-            billsStr[1] = bills[1].ToString();
-            billsStr[2] = bills[2].ToString();
-            billsStr[3] = bills[3].ToString();
-            return billsStr;
+            List<Bill> AllBillsList = new List<Bill>();
+            for (int i = 0; i < bills.Length; i++)
+            {
+                 AllBillsList.Add(bills[i]);
+            }
+
+            return AllBillsList;
         }
 
-        public string GetBillById(int id)
+        public Bill GetBillById(int id)
         {
-            //TODO out of boundary exception
-            bills[id].GetIsBlocked();
-            return bills[id].ToString();
+            return bills[id];
         }
 
-        public string BlockBill(int id)
+        public Bill BlockBill(int id)
         {
-            bills[id].SetIsBlocked(true);
-            return bills[id].ToString();
+            bills[id].IsBlocked = true;
+            return bills[id];
         }
 
-        public string UnblockBill(int id)
+        public Bill UnblockBill(int id)
         {
-            bills[id].SetIsBlocked(false);
-            return bills[id].ToString();
+            bills[id].IsBlocked = false;
+            return bills[id];
         }
     }
 }

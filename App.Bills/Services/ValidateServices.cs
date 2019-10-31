@@ -9,8 +9,8 @@ namespace App.Bills
     {
         public void ValidateBill(Bill bill)
         {
-            if (bill.GetIsBlocked())
-                throw new Exception("Bill is blocked");
+            if (bill.Name == null || bill.Name == "" || bill.Surname == null || bill.Surname == "")
+                throw new Exception("Bill owner doesn't exist!");
         }
     }
 

@@ -8,45 +8,58 @@ namespace App.Bills.Services
 {
     public interface IBillsManager
     {
-        string GetBillById(int id);
-        IEnumerable<string> GetUnblockedBillsList();
-        IEnumerable<string> GetAllBillsList();
-        string BlockBill(int id);
+        Bill GetBillById(int id);
+        IEnumerable<Bill> GetUnblockedBillsList();
+        IEnumerable<Bill> GetAllBillsList();
+        Bill BlockBill(int id);
     }
 
     public class BillsManager : IBillsManager, ITransientDependency
     {
         readonly BillRepository _repository;
+        private IValidateServices validateServices;
 
-        public string GetBillById(int id) =>   _repository.GetBillById(id);
+        public Bill GetBillById(int id) =>   _repository.GetBillById(id);
             
 
-        public BillsManager(BillRepository repository)
+        public BillsManager(BillRepository repository,  IValidateServices validateServices)
         {
+            this.validateServices = validateServices;
             _repository = repository;
         }
 
         
-        public IEnumerable<string> GetUnblockedBillsList()
+        public IEnumerable<Bill> GetUnblockedBillsList()
         {
+            CheckIsBlocked();
             return _repository.GetActiveBillsList();
         }
 
-        public IEnumerable<string> GetAllBillsList()
+        public IEnumerable<Bill> GetAllBillsList()
         {
             return _repository.GetAllBillsList();
         }
 
-        public string BlockBill(int id)
+        public Bill BlockBill(int id)
         {
+            validateServices.ValidateBill(_repository.GetBillById(id));
             return _repository.BlockBill(id);
             
         }
 
-        public string UnblockBill(int id)
+        public Bill UnblockBill(int id)
         {
+            validateServices.ValidateBill(_repository.GetBillById(id));
             return _repository.UnblockBill(id);
+        }
 
+        private void CheckIsBlocked()
+        {
+            foreach(Bill bill in _repository.GetAllBillsList())
+            if (bill.money < -10000)
+            {
+                bill.IsBlocked = true;
+            }
         }
     }
 }

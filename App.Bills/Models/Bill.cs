@@ -20,24 +20,6 @@ namespace App.Bills.Models
             IsBlocked = false;
         }
 
-        public bool GetIsBlocked()
-        {
-            if (money < -10000)
-            {
-                IsBlocked = true;
-                return IsBlocked;
-            }
-            return IsBlocked;
-           
-        }
-
-        public void SetIsBlocked(bool Block)
-        {
-             IsBlocked = Block;
-            
-
-        }
-
         public override string ToString()
         {
             return "Bill info. \nBill owner:" + Name + " " + Surname + ".\n" + "Fmount of money: " + money + ".\n"+"Bill is blocked:"+ IsBlocked + "\n \n";
