@@ -10,7 +10,7 @@ namespace App.Example.Services
     /// <summary>
     /// Example manager class. Which should process business logic, and call required repository
     /// </summary>
-    public interface IValuesManager2
+    public interface IValuesManager
     {
         /// <summary>
         /// Simple method
@@ -24,7 +24,7 @@ namespace App.Example.Services
         void PerformBusinessOperation();
     }
 
-    public class ValuesManager : IValuesManager2, ITransientDependency
+    public class ValuesManager : IValuesManager, ITransientDependency
     {
         // propoerty should be readonly, so it could not be changed after initialization
         readonly IValuesRepository _repository;

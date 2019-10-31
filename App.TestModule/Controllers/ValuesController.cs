@@ -22,10 +22,10 @@ namespace App.Example.Controllers
     {
         // depedencies will be automatically resolved with used DI system
         readonly ILogger<ValuesController> _logger;
-        readonly IValuesManager2 _valuesManager;
+        readonly IValuesManager _valuesManager;
         public ValuesController(
             ILogger<ValuesController> logger,
-            IValuesManager2 valuesManager)
+            IValuesManager valuesManager)
         {
             _logger = logger;
             _valuesManager = valuesManager;
