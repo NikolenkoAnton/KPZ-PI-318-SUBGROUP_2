@@ -1,4 +1,5 @@
-﻿using App.Stocks.Models;
+﻿using App.Stocks.Exceptions;
+using App.Stocks.Models;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -9,15 +10,15 @@ namespace App.Stocks.Services
     public class ValidateServices : IValidateServices
     {
 
-        public void ValidateCompany(Company company, bool IsOpenStocks = true)
+        public void ValidateCompany(Company company, int CompanyId, bool IsOpenStocks = true)
         {
             if (company == null)
             {
-                throw new HttpListenerException(400, "Company doesn't exist");
+                throw new EntityNotExist(typeof(Company),$"Company with id :{CompanyId} doesn't exist!");
             }
             if (!IsOpenStocks)
             {
-                throw new HttpListenerException(400, "You can't look to see stocks this company");
+                throw new СompanyStocksIsPrivate(company.Name);
             }
         }
 
@@ -25,33 +26,40 @@ namespace App.Stocks.Services
         {
             if (stock == null)
             {
-                throw new HttpListenerException(400, "Stock info with this date doesn't exist");
+                throw new EntityNotExist(typeof(Stock),"Stock doesn't exist!");
             }
         }
 
-        public void ValidateStocksCompany(Stock stock, Company company)
+        public void ValidateStocksCompany(Stock stock, Company company, int CompanyId)
         {
-            ValidateCompany(company, company?.IsOpenStocks ?? false);
+            ValidateCompany(company, CompanyId, company?.IsOpenStocks ?? false);
 
             ValidateStock(stock);
         }
         public void ValidateDate(string Date)
         {
-            if (DateTime.Parse(Date).CompareTo(DateTime.Now) > 0)
-            {
-                throw new Exception("Incorrect date!");
-            }
+          
+                var parsedDate = DateTime.Parse(Date);
+                if (parsedDate.CompareTo(DateTime.Now) > 0)
+                {
+                    throw new IncorrectStockDate(parsedDate);
+                }
+            
+            //catch(Exception e)
+            //{
+                
+            //}
         }
     }
     public interface IValidateServices
     {
-        void ValidateCompany(Company company, bool IsOpenStocks);
+        void ValidateCompany(Company company, int CompanyId, bool IsOpenStocks);
 
         void ValidateDate(string Date);
 
         void ValidateStock(Stock stock);
 
-        void ValidateStocksCompany(Stock stock, Company company);
+        void ValidateStocksCompany(Stock stock, Company company, int CompanyId);
 
     }
 }

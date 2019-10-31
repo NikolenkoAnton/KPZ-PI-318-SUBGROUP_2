@@ -1,6 +1,7 @@
 ﻿using App.Configuration;
 using App.Stocks.Interfaces;
 using App.Stocks.Models;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +15,22 @@ namespace App.Stocks.Services
 
         private  IValidateServices validateServices;
 
-        public StocksManager(ICompaniesRepository repository,IValidateServices validateServices)
+        private ILogger<StocksManager> logger;
+
+        public StocksManager(ICompaniesRepository repository,IValidateServices validateServices,ILogger<StocksManager> logger)
         {
             this.validateServices = validateServices;
             this.repository = repository;
+            this.logger = logger;
         }
 
         public async Task<IEnumerable<StockView>> CompanyStocks(int companyId)
         {
 
+            logger.LogInformation("Call CompanyStocks method");
             var company = await Task.Run(() => repository.CompanyById(companyId));
 
-            validateServices.ValidateCompany(company, company?.IsOpenStocks??false);
+            validateServices.ValidateCompany(company, companyId, company?.IsOpenStocks??false);
 
             List<StockView> stocksView = new List<StockView>();
             
@@ -39,6 +44,8 @@ namespace App.Stocks.Services
 
         public async Task<StockView> CompanyStockByDate(int id, DateTime date)
         {
+            logger.LogInformation("Call CompanyStockByDate method");
+
             var company = await Task.Run(() => repository.CompanyById(id));
            
             if( company == null)
@@ -48,20 +55,24 @@ namespace App.Stocks.Services
 
             var stock = await Task.Run(()=>company.Stocks.Where(el => el.CompareDate(date)).FirstOrDefault());
 
-            validateServices.ValidateStocksCompany(stock, company);
+            validateServices.ValidateStocksCompany(stock, company, id);
 
             var stockView = MappSingleStock(stock, company);
 
             return stockView;
         }
 
-        private StockView MappSingleStock(Stock stock, Company company) =>
-                new StockView
-                {
-                    Company = company.Name,
-                    Cost = stock.Cost,
-                    Date = stock.DateView
-                };
+        private StockView MappSingleStock(Stock stock, Company company)
+        {
+            logger.LogInformation("Call MappSingleStock method");
+
+            return new StockView
+            {
+                Company = company.Name,
+                Cost = stock.Cost,
+                Date = stock.DateView
+            };
+        }
     }
 }
 

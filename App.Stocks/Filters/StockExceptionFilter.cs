@@ -29,23 +29,28 @@ namespace App.Stocks.Filters
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
                         logger.LogWarning($"Entity with type {entityNotExist.EntityType.AssemblyQualifiedName} not found!");
-                        await context.HttpContext.Response.WriteAsync($"Entity not found!");
+                        await context.HttpContext.Response.WriteAsync($"Entity with type {entityNotExist.EntityType.AssemblyQualifiedName} not found!");
                         break;
                     }
                 case IncorrectStockDate incorrectDate:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                         logger.LogWarning(incorrectDate,"Call method GetStockByDate with inccorect date");
-                        await context.HttpContext.Response.WriteAsync($@"You input inccorect date : {incorrectDate.InccorectDate}.
-                Please, input date which less or equal than {DateTime.Now.ToString()}");
+                        await context.HttpContext.Response.WriteAsync($@"You input inccorect date : {incorrectDate.InccorectDate}.Please, input date which less or equal than {DateTime.Now.ToString()}");
+                        break;
+                    }
+                case IncorrectParamsFormat incorrectParamsFormat:
+                    {
+                        context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                       // logger.LogWarning(incorrectDate, "Call method GetStockByDate with inccorect date");
+                        await context.HttpContext.Response.WriteAsync($@"You send request with incorrect {incorrectParamsFormat.ParamName} format");
                         break;
                     }
                 case СompanyStocksIsPrivate сompanyStocksIsPrivate:
                     {
-                        context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
                         logger.LogWarning(сompanyStocksIsPrivate, "Call method GetCompanyStock with id company which has private stock");
-                        await context.HttpContext.Response.WriteAsync($@"You cannot view information about these stocks.
-                            Company {сompanyStocksIsPrivate.CompanyName} has restricted access to stock information.");
+                        await context.HttpContext.Response.WriteAsync($"You cannot view information about these stocks.Company {сompanyStocksIsPrivate.CompanyName} has restricted access to stock information.");
                         break;
                     }
                 default:
