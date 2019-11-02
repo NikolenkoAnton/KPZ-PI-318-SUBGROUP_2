@@ -1,4 +1,5 @@
 ﻿using App.Configuration;
+using App.Stocks.Exceptions;
 using App.Stocks.Interfaces;
 using App.Stocks.Models;
 using Microsoft.Extensions.Logging;
@@ -26,11 +27,18 @@ namespace App.Stocks.Services
 
         public async Task<IEnumerable<StockView>> CompanyStocks(int companyId)
         {
-
             logger.LogInformation("Call CompanyStocks method");
             var company = await Task.Run(() => repository.CompanyById(companyId));
 
-            validateServices.ValidateCompany(company, companyId, company?.IsOpenStocks??false);
+            if (company == null)
+            {
+                throw new EntityNotExist(typeof(Company), $"Company with id :{companyId} doesn't exist!");
+            }
+
+            if (!company.IsOpenStocks)
+            {
+                throw new СompanyStocksIsPrivate(company.Name);
+            }
 
             List<StockView> stocksView = new List<StockView>();
             

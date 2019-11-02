@@ -14,7 +14,7 @@ namespace App.Stocks.Services
         {
             if (company == null)
             {
-                throw new EntityNotExist(typeof(Company),$"Company with id :{CompanyId} doesn't exist!");
+                throw new EntityNotExist(typeof(Company), $"Company with id :{CompanyId} doesn't exist!");
             }
             if (!IsOpenStocks)
             {
@@ -26,7 +26,7 @@ namespace App.Stocks.Services
         {
             if (stock == null)
             {
-                throw new EntityNotExist(typeof(Stock),"Stock doesn't exist!");
+                throw new EntityNotExist(typeof(Stock), "Stock doesn't exist!");
             }
         }
 
@@ -38,17 +38,16 @@ namespace App.Stocks.Services
         }
         public void ValidateDate(string Date)
         {
-          
-                var parsedDate = DateTime.Parse(Date);
-                if (parsedDate.CompareTo(DateTime.Now) > 0)
-                {
-                    throw new IncorrectStockDate(parsedDate);
-                }
-            
-            //catch(Exception e)
-            //{
-                
-            //}
+            if (!DateTime.TryParse(Date, out var date))
+            {
+                throw new IncorrectParamsFormat("Date");
+            }
+            var parsedDate = DateTime.Parse(Date);
+            if (parsedDate.CompareTo(DateTime.Now) > 0)
+            {
+                throw new IncorrectStockDate(parsedDate);
+            }
+
         }
     }
     public interface IValidateServices
