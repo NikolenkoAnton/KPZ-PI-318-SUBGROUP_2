@@ -1,86 +1,78 @@
-﻿using App.Configuration;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using App.Configuration;
 using App.Stocks.Exceptions;
 using App.Stocks.Interfaces;
 using App.Stocks.Models;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace App.Stocks.Services
-{
-    public class StocksManager : IStocksManager, ITransientDependency
-    {
-        private  ICompaniesRepository repository;
-
-        private  IValidateServices validateServices;
-
+namespace App.Stocks.Services {
+    public class StocksManager : IStocksManager, ITransientDependency {
+        private ICompaniesRepository repository;
         private ILogger<StocksManager> logger;
 
-        public StocksManager(ICompaniesRepository repository,IValidateServices validateServices,ILogger<StocksManager> logger)
-        {
-            this.validateServices = validateServices;
+        public StocksManager (ICompaniesRepository repository, ILogger<StocksManager> logger) {
             this.repository = repository;
             this.logger = logger;
         }
 
-        public async Task<IEnumerable<StockView>> CompanyStocks(int companyId)
-        {
-            logger.LogInformation("Call CompanyStocks method");
-            var company = await Task.Run(() => repository.CompanyById(companyId));
+        public async Task<IEnumerable<StockView>> CompanyStocks (int companyId) {
 
-            if (company == null)
-            {
-                throw new EntityNotExist(typeof(Company), $"Company with id :{companyId} doesn't exist!");
+            logger.LogInformation ("Call CompanyStocks method");
+            var company = await Task.Run (() => repository.CompanyById (companyId));
+
+            if (company == null) {
+                throw new EntityNotExistException (typeof (Company), companyId);
             }
 
-            if (!company.IsOpenStocks)
-            {
-                throw new СompanyStocksIsPrivate(company.Name);
+            if (!company.IsOpenStocks) {
+                throw new СompanyStocksIsPrivateException (company.Name, companyId);
             }
 
-            List<StockView> stocksView = new List<StockView>();
-            
-            foreach(var s in company.Stocks)
-            {
-                stocksView.Add(MappSingleStock(s, company));
+            List<StockView> stocksView = new List<StockView> ();
+
+            foreach (var s in company.Stocks) {
+                stocksView.Add (MappSingleStock (s, company));
             }
 
             return stocksView;
         }
 
-        public async Task<StockView> CompanyStockByDate(int id, DateTime date)
-        {
-            logger.LogInformation("Call CompanyStockByDate method");
+        public async Task<StockView> CompanyStockByDate (int id, DateTime date) {
 
-            var company = await Task.Run(() => repository.CompanyById(id));
-           
-            if( company == null)
-            {
-                throw new Exception($"Company with id {id} not found!");
+            logger.LogInformation ("Call CompanyStockByDate method");
+
+            var company = await Task.Run (() => repository.CompanyById (id));
+
+            if (company == null) {
+                throw new EntityNotExistException (typeof (Company), id);
             }
 
-            var stock = await Task.Run(()=>company.Stocks.Where(el => el.CompareDate(date)).FirstOrDefault());
+            if (!company.IsOpenStocks) {
+                throw new СompanyStocksIsPrivateException (company.Name, company.Id);
+            }
 
-            validateServices.ValidateStocksCompany(stock, company, id);
+            var stock = await Task.Run (() => company.Stocks.Where (el => el.CompareDate (date)).FirstOrDefault ());
 
-            var stockView = MappSingleStock(stock, company);
+            if (stock == null) {
+                throw new IncorrectParamsFormatException ("Date");
+            }
+
+            var stockView = MappSingleStock (stock, company);
 
             return stockView;
         }
 
-        private StockView MappSingleStock(Stock stock, Company company)
-        {
-            logger.LogInformation("Call MappSingleStock method");
+        private StockView MappSingleStock (Stock stock, Company company) {
+            logger.LogInformation ("Call MappSingleStock method");
 
-            return new StockView
-            {
+            return new StockView {
                 Company = company.Name,
-                Cost = stock.Cost,
-                Date = stock.DateView
+                    Cost = stock.Cost,
+                    Date = stock.DateView
             };
         }
     }
 }
-

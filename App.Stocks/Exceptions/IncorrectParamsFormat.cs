@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace App.Stocks.Exceptions
-{
-    public class IncorrectParamsFormat : Exception
-    {
+namespace App.Stocks.Exceptions {
+    public class IncorrectParamsFormatException : Exception {
         public string ParamName { get; private set; }
-        public IncorrectParamsFormat(string ParamName) 
-        {
+        public IncorrectParamsFormatException (string ParamName) {
             this.ParamName = ParamName;
         }
     }
