@@ -20,7 +20,7 @@ namespace App.RegularPayments.Controllers
             var actionResult = manager.GetPayment(id);
             return actionResult;
         }
-        [HttpGet("next")]
+        [HttpGet]
         public ActionResult<RegularPayment> GetNext()
         {
             var actionResult = manager.GetNext();

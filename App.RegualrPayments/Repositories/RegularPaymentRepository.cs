@@ -16,7 +16,7 @@ namespace App.RegularPayments.Repositories
         {
             payments = Init.Initialize();
         }
-        public void Create(RegularPayment payment)
+        public void Add(RegularPayment payment)
         {
             payments.Append(payment);
         }

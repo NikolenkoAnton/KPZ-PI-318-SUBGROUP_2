@@ -16,7 +16,7 @@ namespace App.RegularPayments
 
         public void AddPayment(RegularPayment payment)
         {
-            repository.Create(payment);
+            repository.Add(payment);
         }
 
         public RegularPayment GetPayment(int id)

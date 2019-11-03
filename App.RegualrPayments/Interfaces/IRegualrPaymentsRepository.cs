@@ -6,7 +6,7 @@ namespace App.RegularPayments.Interfaces
 {
     public interface IRegularPaymentsRepository
     {
-        void Create(RegularPayment payment);
+        void Add(RegularPayment payment);
         RegularPayment Get(int id);
         IEnumerable<RegularPayment> GetAll();
     }
