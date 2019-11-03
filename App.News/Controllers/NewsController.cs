@@ -4,11 +4,13 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using App.News.Models;
 using App.News.Interfaces;
+using App.News.Filters;
 
 namespace App.News.Controllers
 {
     [Route("api/news")]
     [ApiController]
+   // [TypeFilter(typeof(NewsExceptionFilter), Arguments = new object[] { nameof(NewsController) })]
     public class NewsController: ControllerBase
     {
         private INewsManager newsManager;
@@ -17,22 +19,21 @@ namespace App.News.Controllers
             this.newsManager = newsManager;
         }
 
-        [Route("api/news/addComment/")]
+        [Route("comments")]
         [HttpPost]
         public ActionResult AddComment([FromBody]CommentDTO commentDTO)
         {
-           newsManager.AddComment(commentDTO);
+            newsManager.AddComment(commentDTO);
             return Ok();
         }
 
-        [Route("api/news/allNews")]
         [HttpGet]
         public ActionResult<IEnumerable<NewsDTO>> GetNews() {
             var news =  newsManager.GetAllNews().ToList();
             return Ok(news);
         }
 
-        [Route("api/news/{id}/newsComments/")]
+        [Route("{id}/comments")]
         [HttpGet]
         public ActionResult<IEnumerable<CommentDTO>> GetNewsComments(int Id)
         {

@@ -22,16 +22,6 @@ namespace App.News.Repositories
             return News.Where(t => t.id == id).FirstOrDefault();
         }
 
-        public IEnumerable<CommentDTO> GetNewsComments(int id)
-        {
-            var news = News.Where(t => t.id == id).FirstOrDefault();
-            if (news == null)
-            {
-                throw new NullReferenceException();
-            }
-            return news.Comments;
-        }
-
         private class Initializer
         {
             public static List<NewsDTO> Init()
@@ -49,6 +39,5 @@ namespace App.News.Repositories
             
         }
     }
-
    
 }
