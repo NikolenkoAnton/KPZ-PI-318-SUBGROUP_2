@@ -21,11 +21,7 @@ namespace App.News.Controllers
         [HttpPost]
         public ActionResult AddComment([FromBody]CommentDTO commentDTO)
         {
-            var actionResult = newsManager.AddComment(commentDTO);
-            if (actionResult != "ok")
-            {
-                return BadRequest("Something went wrong");
-            }
+           newsManager.AddComment(commentDTO);
             return Ok();
         }
 

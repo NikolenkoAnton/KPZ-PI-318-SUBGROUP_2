@@ -16,15 +16,14 @@ namespace App.News
             this.newsRepository = newsRepository;
         }
        
-        public string AddComment(CommentDTO comment)
+        public void AddComment(CommentDTO comment)
         {
             var news = newsRepository.GetNewsById(comment.NewsId);
             if (news == null)
             {
-                return "news not found";
+                throw new NullReferenceException(); 
             }
             news.Comments.ToList().Add(comment);
-            return "ok";
         }
 
         public IEnumerable<CommentDTO> GetNewsComments(int newsId)

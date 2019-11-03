@@ -7,7 +7,7 @@ namespace App.News.Interfaces
 {
     public interface INewsManager
     {
-        string AddComment(CommentDTO comment);
+        void AddComment(CommentDTO comment);
         IEnumerable<CommentDTO> GetNewsComments(int newsId);
         IEnumerable<NewsDTO> GetAllNews();
     }
