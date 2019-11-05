@@ -13,7 +13,7 @@ namespace App.Bills.Repositories
         IEnumerable<Bill> GetAllBillsList();
         Bill GetBillById(int id);
     }
-    public class BillRepository : IBillsRepository, ITransientDependency
+    public class InMemoryBillRepository : IBillsRepository, ITransientDependency
     {
        
         private static Bill[] bills = {

@@ -6,7 +6,6 @@ namespace App.Bills.Models
 {
     public class Bill
     {
-        
         public double money { get; set; }//деньги на счету
         public string Name { get; set; }//Имя владельца счета
         public string Surname { get; set; }//Фамилия владельца счета

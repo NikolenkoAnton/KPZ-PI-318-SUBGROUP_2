@@ -16,22 +16,19 @@ namespace App.Bills.Services
 
     public class BillsManager : IBillsManager, ITransientDependency
     {
-        readonly BillRepository _repository;
+        readonly InMemoryBillRepository _repository;
         private IValidateServices validateServices;
 
         public Bill GetBillById(int id) =>   _repository.GetBillById(id);
             
-
-        public BillsManager(BillRepository repository,  IValidateServices validateServices)
+        public BillsManager(InMemoryBillRepository repository,  IValidateServices validateServices)
         {
             this.validateServices = validateServices;
             _repository = repository;
         }
-
         
         public IEnumerable<Bill> GetUnblockedBillsList()
         {
-            CheckIsBlocked();
             return _repository.GetActiveBillsList();
         }
 
@@ -44,22 +41,12 @@ namespace App.Bills.Services
         {
             validateServices.ValidateBill(_repository.GetBillById(id));
             return _repository.BlockBill(id);
-            
         }
 
         public Bill UnblockBill(int id)
         {
             validateServices.ValidateBill(_repository.GetBillById(id));
             return _repository.UnblockBill(id);
-        }
-
-        private void CheckIsBlocked()
-        {
-            foreach(Bill bill in _repository.GetAllBillsList())
-            if (bill.money < -10000)
-            {
-                bill.IsBlocked = true;
-            }
         }
     }
 }
