@@ -15,6 +15,8 @@
     </None>
   </ItemGroup>
 
+  <!--Kate is definetely a Vegan ;)-->
+  
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.4.0" />
     <PackageReference Include="Castle.Facilities.AspNetCore" Version="5.0.0" />
@@ -31,13 +33,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\App.Bills\App.Bills.csproj" />
+    <ProjectReference Include="..\App.Cards\App.Cards.csproj" />
     <ProjectReference Include="..\App.Common\App.Common.csproj" />
     <ProjectReference Include="..\App.Deposits\App.Deposits.csproj" />
     <ProjectReference Include="..\App.Loans\App.Loans.csproj" />
     <ProjectReference Include="..\App.Stocks\App.Stocks.csproj" />
     <ProjectReference Include="..\App.Goods\App.Goods.csproj" />
-    <ProjectReference Include="..\App.RegualrPayments\App.RegualrPayments.csproj" />
-
     <ProjectReference Include="..\App.TestModule\App.Example.csproj" />
     <ProjectReference Include="..\App.UserSupport\App.UserSupport.csproj" />
   </ItemGroup>
