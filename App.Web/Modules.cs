@@ -15,7 +15,8 @@ namespace App.Web
     [ModuleUsing(typeof(Loans.LoansModule))]
     [ModuleUsing(typeof(Cards.CardsModule))]
     [ModuleUsing(typeof(DepositsModule))]
-    [ModuleUsing(typeof(RegularPayments.RegularPaymentsModule))] 
+    [ModuleUsing(typeof(RegularPayments.RegularPaymentsModule))]
+    [ModuleUsing(typeof(Bills.BillsModule))]
 
     public class Modules
     {
