@@ -2,6 +2,7 @@
 using App.Goods.Common;
 using App.Goods.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace App.Goods.Controllers
 {
@@ -10,15 +11,19 @@ namespace App.Goods.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductsManager _productsManager;
+        private readonly ILogger<ProductsController> _logger;
 
-        public ProductsController(IProductsManager productsManager)
+        public ProductsController(IProductsManager productsManager, ILogger<ProductsController> logger)
         {
             _productsManager = productsManager;
+            _logger = logger;
         }
 
         [HttpGet]
         public IEnumerable<Product> GetAllProducts()
         {
+            _logger.LogDebug("Call GetAllProducts method");
+
             return _productsManager.GetAllProducts();
         }
     }
