@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace App.Goods.Exceptions
 {
-    class ProductNotFoundException
+    public class ProductNotFoundException : Exception
     {
         public IEnumerable<int> ProductIds { get; private set; }
 

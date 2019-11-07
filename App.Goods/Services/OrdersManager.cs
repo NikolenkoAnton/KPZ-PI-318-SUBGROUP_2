@@ -23,12 +23,7 @@ namespace App.Goods.Services
         public Order MakeOrder(IEnumerable<int> products)
         {
             var orderedProducts = _productRepository.GetAll().Where(prod => products.Contains(prod.Id)).ToArray();
-            
-            if (!orderedProducts.Any())
-            {
-                throw new Exception("Product list is empty");
-            }
-            
+
             var lastOrder = GetAllOrders().LastOrDefault();
             int lastId = lastOrder?.Id ?? 0;
 
