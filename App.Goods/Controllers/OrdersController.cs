@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using App.Goods.Common;
+using App.Goods.Filters;
 using App.Goods.Models;
 using App.Goods.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ namespace App.Goods.Controllers
 {
     [Route("api/goods/orders")]
     [ApiController]
+    [TypeFilter(typeof(GoodsExceptionFilter), Arguments = new object[] { nameof(OrdersController) })]
     public class OrdersController : ControllerBase
     {
         private readonly IOrdersManager _ordersManager;
