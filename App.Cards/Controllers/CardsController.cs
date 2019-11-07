@@ -1,4 +1,5 @@
-﻿using App.Cards.Models;
+﻿using App.Cards.Exceptions;
+using App.Cards.Models;
 using App.Example.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -33,7 +34,7 @@ namespace App.Cards.Controllers
 
             if (card == null)
             {
-                return BadRequest("Card doesn't exist!");
+                throw new EntityNotFoundException(card.GetType());
             }
 
             return card;

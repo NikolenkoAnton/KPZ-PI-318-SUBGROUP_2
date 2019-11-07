@@ -30,7 +30,6 @@ namespace App.Example.Filters
             {
                 case EntityNotFoundException entityNotFound:
                     {
-                        logger.LogWarning($"ErrorType : {entityNotFound.GetType()}");
 
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
                         await context.HttpContext.Response.WriteAsync($"Not Found: {entityNotFound.EntityType.AssemblyQualifiedName}");

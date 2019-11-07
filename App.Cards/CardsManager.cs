@@ -29,7 +29,7 @@ namespace App.Cards
 
         public void BlockCard(int id)
         {
-            logger.LogDebug($"Method:BlockCard, classType:{this.GetType()}");
+            logger.LogDebug($"Method:BlockCard");
             var card = cardsRepository.GetCardById(id);
 
             if (card == null)
@@ -47,14 +47,15 @@ namespace App.Cards
 
         public Card GetCardById(int id)
         {
-            logger.LogDebug($"Method:GetCardById, classType:{this.GetType()}");
+            logger.LogDebug($"Method:GetCardById");
 
             return cardsRepository.GetCardById(id);
         }
 
         public void SetCardLimit(int id, decimal limit)
         {
-            logger.LogDebug($"Method:SetCardLimit, classType:{this.GetType()}");
+            logger.LogDebug($"Method:SetCardLimit");
+
 
 
             if (limit < 0)
@@ -62,6 +63,7 @@ namespace App.Cards
                 throw new LimitException("SetLimit", "Limit can't be less than 0!");
             }
             var card = cardsRepository.GetCardById(id);
+
 
             if (card == null)
             {
@@ -78,17 +80,18 @@ namespace App.Cards
 
         public void UnsetCardLimit(int id)
         {
-            logger.LogDebug($"Method:UnsetCardLimit, classType:{this.GetType()}");
+            logger.LogDebug($"Method:UnsetCardLimit");
 
             var card = cardsRepository.GetCardById(id);
+
+            if (card == null)
+            {
+                throw new EntityNotFoundException(card.GetType());
+            }
 
             if (card.Limit == 0)
             {
                 throw new LimitException("UnsetLimit", "Card hasn't limit!");
-            }
-            if (card == null)
-            {
-                throw new EntityNotFoundException(card.GetType());
             }
 
             if (card.IsBlocked)
