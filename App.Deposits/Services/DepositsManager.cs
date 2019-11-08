@@ -50,7 +50,14 @@ namespace App.Deposits
 
         private int GetIDForNewDeposit() => GetLastDepositID() + 1;
 
-        public Deposit GetDepositById(int id) => depositsRepository.GetDepositById(id);
+        public Deposit GetDepositById(int id)
+        {
+            var deposit = depositsRepository.GetDepositById(id);
+
+            validateService.ValidIsNull(deposit, id);
+
+            return deposit;
+        }
 
         public IEnumerable<Deposit> GetAllDeposits() => depositsRepository.GetAllDeposit();
 
