@@ -21,10 +21,11 @@ namespace App.News
        
         public void AddComment(CommentDTO comment)
         {
+            logger.LogInformation("AddComment method called");
             var news = newsRepository.GetNewsById(comment.NewsId);
             if (news == null)
             {
-                //logger.LogWarning("")
+                logger.LogError("Entity was not found");
                 throw new EntityNotFoundException(typeof(NewsDTO)); 
             }
             news.Comments.ToList().Add(comment);
@@ -32,9 +33,11 @@ namespace App.News
 
         public IEnumerable<CommentDTO> GetNewsComments(int newsId)
         {
+            logger.LogInformation("GetNewsComments method called");
             var news = newsRepository.GetNewsById(newsId);
             if (news ==null)
             {
+                logger.LogError("Entity was not found");
                 throw new EntityNotFoundException(typeof(NewsDTO));
             }
             return news.Comments;
@@ -42,6 +45,7 @@ namespace App.News
 
         public IEnumerable<NewsDTO> GetAllNews()
         {
+            logger.LogInformation("GetAllNews Method called");
             return newsRepository.GetAllNews().ToList();
         }
 
