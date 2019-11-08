@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29230.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Web", "App.Web\App.Web.csproj", "{D618DD2D-4BDF-434A-9FF3-4493A05E10E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Web", "App.Web\App.Web.csproj", "{D618DD2D-4BDF-434A-9FF3-4493A05E10E6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Common", "App.Common\App.Common.csproj", "{A9ECF830-53EF-444D-A3FB-AD66A17C62BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Common", "App.Common\App.Common.csproj", "{A9ECF830-53EF-444D-A3FB-AD66A17C62BD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Example", "App.TestModule\App.Example.csproj", "{25F59F96-D5C0-4036-8DF3-2A4568E48602}"
 EndProject
@@ -24,7 +24,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Stocks", "App.Stocks\Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Cards", "App.Cards\App.Cards.csproj", "{FEF9EB1C-2253-4ED3-86ED-BCF2E7507C28}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.RegualrPayments", "App.RegualrPayments\App.RegualrPayments.csproj", "{CA4CE485-B26C-4789-94DC-3D5B53D41085}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Example", "App.TestModule\App.Example.csproj", "{25F59F96-D5C0-4036-8DF3-2A4568E48602}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,7 +78,6 @@ Global
 		{CA4CE485-B26C-4789-94DC-3D5B53D41085}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA4CE485-B26C-4789-94DC-3D5B53D41085}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA4CE485-B26C-4789-94DC-3D5B53D41085}.Release|Any CPU.Build.0 = Release|Any CPU
-
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
