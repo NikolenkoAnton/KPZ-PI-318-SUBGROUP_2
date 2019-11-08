@@ -12,8 +12,6 @@ namespace App.Deposits.Services
         void ValidateCalculateDate(CalculateDTO calculateDTO);
 
         void ValidateAddDeposit(CreatedDepositDTO createdDepositDTO);
-
-        void ValidIsNull(object obj, int objId);
     }
 
     public class ValidateService : IValidateService, ITransientDependency
@@ -35,14 +33,6 @@ namespace App.Deposits.Services
             if (!IsValidDate(calculateDTO))
             {
                 throw new InvalidDataDTOException("Invalid date");
-            }
-        }
-
-        public void ValidIsNull(object obj, int objId)
-        {
-            if (obj == null)
-            {
-                throw new EntityNotExistException(obj.GetType(), objId);
             }
         }
     }
