@@ -19,11 +19,13 @@ namespace App.UserSupport.Controllers
             ILogger<UserSupportController> logger)
         {
             _userSupportManager = userSupportManager;
+            _logger = logger;
         }
 
         [HttpGet("active")]
         public ActionResult<IEnumerable<string>> GetListActiveHandlings()
         {
+            _logger.LogInformation("call GetListActiveHandlings method");
             var serviceCallResult = _userSupportManager.GetListActiveHandlings().ToList();
             return serviceCallResult;
         }
@@ -31,6 +33,7 @@ namespace App.UserSupport.Controllers
         [HttpGet("{id}/last10Message")]
         public ActionResult<IEnumerable<string>> GetHandling10LastMessages(int id)
         {
+            _logger.LogInformation("call GetHandling10LastMessages method");
             var serviceCallResult = _userSupportManager.GetHandling10LastMessages(id).ToList();
             return serviceCallResult;
         }
@@ -38,8 +41,8 @@ namespace App.UserSupport.Controllers
         [HttpPost]
         public void SetHandlingStatusCompletedById(int id)
         {
+            _logger.LogInformation("call SetHandlingStatusCompleted method");
             _userSupportManager.SetHandlingStatusCompleted(id);
-
         }
     }
 }
