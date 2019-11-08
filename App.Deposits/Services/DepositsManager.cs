@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using App.Deposits.Services;
+using App.Deposits.Exceptions;
 
 namespace App.Deposits
 {
@@ -54,7 +55,10 @@ namespace App.Deposits
         {
             var deposit = depositsRepository.GetDepositById(id);
 
-            validateService.ValidIsNull(deposit, id);
+            if (deposit == null)
+            {
+                throw new EntityNotExistException(typeof (Deposit), id);
+            }
 
             return deposit;
         }

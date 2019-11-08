@@ -1,4 +1,5 @@
-﻿using App.Deposits.Models;
+﻿using App.Deposits.Filters;
+using App.Deposits.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ namespace App.Deposits.Controller
 {
     [Route("api/deposits")]
     [ApiController]
+    [TypeFilter(typeof(DepositExceptionFilter), Arguments = new object[] { nameof(DepositExceptionFilter) })]
     public class DepositsController : ControllerBase
     {
         private readonly IDepositsManager depositsManager;

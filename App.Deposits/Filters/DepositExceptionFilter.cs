@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace App.Deposits.Filters
 {
-    public class DepositExceptionFilters : IAsyncExceptionFilter
+    public class DepositExceptionFilter : IAsyncExceptionFilter
     {
         private readonly string context;
-        private readonly ILogger<DepositExceptionFilters> logger;
+        private readonly ILogger<DepositExceptionFilter> logger;
 
-        public DepositExceptionFilters(ILogger<DepositExceptionFilters> logger, string context)
+        public DepositExceptionFilter(ILogger<DepositExceptionFilter> logger, string context)
         {
             this.context = context;
             this.logger = logger;
