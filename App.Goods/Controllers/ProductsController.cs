@@ -22,7 +22,7 @@ namespace App.Goods.Controllers
         [HttpGet]
         public IEnumerable<Product> GetAllProducts()
         {
-            _logger.LogDebug("Call GetAllProducts method");
+            _logger.LogInformation("Call GetAllProducts method");
 
             return _productsManager.GetAllProducts();
         }

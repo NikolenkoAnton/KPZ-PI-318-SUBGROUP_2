@@ -27,7 +27,7 @@ namespace App.Goods.Controllers
         [HttpGet]
         public IEnumerable<Order> GetAllOrders()
         {
-            _logger.LogDebug("Call GetAllOrders method");
+            _logger.LogInformation("Call GetAllOrders method");
 
             return _ordersManager.GetAllOrders();
         }
@@ -35,7 +35,7 @@ namespace App.Goods.Controllers
         [HttpPost]
         public Order MakeOrder([FromBody] List<int> productsIds)
         {
-            _logger.LogDebug("Call MakeOrder method");
+            _logger.LogInformation("Call MakeOrder method");
 
             _validateService.ValidateIds(productsIds);
 
