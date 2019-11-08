@@ -18,9 +18,11 @@ namespace App.UserSupport
         readonly IHandlingsRepository repository;
         private readonly ILogger<UserSupportManager> logger;
 
-        public UserSupportManager(IHandlingsRepository repository)
+        public UserSupportManager(IHandlingsRepository repository
+            ,ILogger<UserSupportManager> logger)
         {
             this.repository = repository;
+            this.logger = logger;
         }
 
        public void SetHandlingStatusCompleted(int id)
@@ -40,17 +42,17 @@ namespace App.UserSupport
 
         private void SetupHandlingStatusCompleted(int id)
         {
-            logger.LogDebug($"Method:SetupHandlingStatusCompleted");
+            logger.LogDebug("Method:SetupHandlingStatusCompleted");
             if (repository.Get(id) == null)
                 throw new EntityNotFoundException(typeof(Handling));
-            logger.LogDebug($"Method:SetupHandlingStatusCompleted");
+            logger.LogDebug("Method:SetupHandlingStatusCompleted");
             if (repository.Get(id).status == true)
                 throw new HandlingAlreadyCompeletedException(id);
             repository.Get(id).status = true;
         }
         private string Handling10LastMessages(int id)
         {
-            logger.LogDebug($"Method:Handling10LastMessages");
+            logger.LogDebug("Method:Handling10LastMessages");
             if (repository.Get(id) == null)
                 throw new EntityNotFoundException(typeof(Handling));
             string temp = "";
