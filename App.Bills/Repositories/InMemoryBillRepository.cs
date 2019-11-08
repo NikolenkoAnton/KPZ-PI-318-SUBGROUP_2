@@ -46,17 +46,23 @@ namespace App.Bills.Repositories
 
         public Bill GetBillById(int id)
         {
+            if (id >= bills.Length)
+                return null;
             return bills[id];
         }
 
         public Bill BlockBill(int id)
         {
+            if (id >= bills.Length)
+                return null;
             bills[id].IsBlocked = true;
             return bills[id];
         }
 
         public Bill UnblockBill(int id)
         {
+            if (id >= bills.Length)
+                return null;
             bills[id].IsBlocked = false;
             return bills[id];
         }
