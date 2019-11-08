@@ -25,16 +25,14 @@ namespace App.UserSupport.Filters
                 logger.LogError(context.Exception, $"Error occurred in context of {_context}");
                 switch (context.Exception)
                 {
-                    case ClientAlredyExistException clientAlredyExist:
-                        {
-                            context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                    case HandlingAlreadyCompeletedException handlingAlredyComplete:
+                    {
 
-                            logger.LogWarning($"Type : {clientAlredyExist.EntityType.AssemblyQualifiedName},EntityId {EntityNotExistException.EntityId}. Method: {EntityNotExistException.TargetSite}.");
-
-                            await context.HttpContext.Response.WriteAsync($"Entity with id : {EntityNotExistException.EntityId} and type {EntityNotExistException.EntityType.AssemblyQualifiedName} not found!");
-                            break;
-                        }
-                    case InvalidArgumentException invalidArgument:
+                        context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        await context.HttpContext.Response.WriteAsync($"Handling with id {handlingAlredyComplete.HandlingId} is already complete!");
+                        break;
+                    }
+                    case EntityNotFoundException invalidArgument:
                         {
                             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                             logger.LogWarning(invalidArgument, $"Argument name: {invalidArgument.ParamName}. Method: {invalidArgument.TargetSite}");
