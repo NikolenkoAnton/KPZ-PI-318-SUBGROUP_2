@@ -37,6 +37,8 @@ namespace App.UserSupport.Repositories
 
         public Handling Get(int id)
         {
+            if (id >= handlings.Length)
+                return null;
             return handlings[id];
         }
     }

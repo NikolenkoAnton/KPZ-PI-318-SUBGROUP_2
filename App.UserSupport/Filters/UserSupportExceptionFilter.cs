@@ -27,19 +27,17 @@ namespace App.UserSupport.Filters
                 {
                     case HandlingAlreadyCompeletedException handlingAlredyComplete:
                     {
-
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                         await context.HttpContext.Response.WriteAsync($"Handling with id {handlingAlredyComplete.HandlingId} is already complete!");
                         break;
                     }
-                    case EntityNotFoundException invalidArgument:
-                        {
-                            context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                            logger.LogWarning(invalidArgument, $"Argument name: {invalidArgument.ParamName}. Method: {invalidArgument.TargetSite}");
-                            await context.HttpContext.Response.WriteAsync($@"You send request with incorrect {invalidArgument.ParamName} format");
-                            break;
-                        }
-                    default:
+                case EntityNotFoundException entityNotFound:
+                    {
+                        context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                        await context.HttpContext.Response.WriteAsync($"Not Found: {entityNotFound.EntityType.AssemblyQualifiedName}");
+                        break;
+                    }
+                default:
                         {
                             logger.LogError($"Method: {context.Exception.TargetSite}.");
 
@@ -53,4 +51,4 @@ namespace App.UserSupport.Filters
 
         }
     }
-}
+

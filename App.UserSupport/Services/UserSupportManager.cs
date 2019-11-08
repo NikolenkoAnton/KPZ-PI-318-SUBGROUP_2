@@ -2,6 +2,9 @@
 using App.Configuration;
 using App.UserSupport.Repositories;
 using App.UserSupport.Models;
+using Microsoft.Extensions.Logging;
+using App.UserSupport.Exceptions;
+
 namespace App.UserSupport
 {
     public interface IUserSupportManager
@@ -13,6 +16,7 @@ namespace App.UserSupport
     public class UserSupportManager : IUserSupportManager, ITransientDependency
     {
         readonly IHandlingsRepository repository;
+        private readonly ILogger<UserSupportManager> logger;
 
         public UserSupportManager(IHandlingsRepository repository)
         {
@@ -34,12 +38,21 @@ namespace App.UserSupport
             return repository.GetStringListActiveHandlings();
         }
 
-
-
-        public void SetupHandlingStatusCompleted(int id) => repository.Get(id).status = true;
-
+        private void SetupHandlingStatusCompleted(int id)
+        {
+            logger.LogDebug($"Method:SetupHandlingStatusCompleted");
+            if (repository.Get(id) == null)
+                throw new EntityNotFoundException(typeof(Handling));
+            logger.LogDebug($"Method:SetupHandlingStatusCompleted");
+            if (repository.Get(id).status == true)
+                throw new HandlingAlreadyCompeletedException(id);
+            repository.Get(id).status = true;
+        }
         private string Handling10LastMessages(int id)
         {
+            logger.LogDebug($"Method:Handling10LastMessages");
+            if (repository.Get(id) == null)
+                throw new EntityNotFoundException(typeof(Handling));
             string temp = "";
             List<Message> somelist = repository.Get(id).context;
             somelist.Reverse();

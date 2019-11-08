@@ -1,16 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using App.UserSupport.Filters;
+using Microsoft.Extensions.Logging;
 
 namespace App.UserSupport.Controllers
 {
     [Route("api/UserSupport")]
     [ApiController]
+    [TypeFilter(typeof(UserSupportExceptionFilter), Arguments = new object[] { nameof(UserSupportController) })]
     public class UserSupportController : ControllerBase
     {
         readonly IUserSupportManager _userSupportManager;
+        readonly ILogger<UserSupportController> _logger;
+
         public UserSupportController(
-            IUserSupportManager userSupportManager)
+            IUserSupportManager userSupportManager,
+            ILogger<UserSupportController> logger)
         {
             _userSupportManager = userSupportManager;
         }

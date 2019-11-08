@@ -4,10 +4,12 @@ using System.Text;
 
 namespace App.UserSupport.Exceptions
 {
-    public class EntityNotFoundException : ArgumentException
+    public class EntityNotFoundException : Exception
     {
-        public EntityNotFoundException(string message, string paramName) : base(message, paramName)
+        public Type EntityType { get; private set; }
+        public EntityNotFoundException(Type entityType)
         {
+            EntityType = entityType;
         }
     }
 }
