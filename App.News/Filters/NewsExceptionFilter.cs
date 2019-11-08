@@ -9,8 +9,8 @@ namespace App.News.Filters
 {
     public class NewsExceptionFilter : ExceptionFilterAttribute, IAsyncExceptionFilter
     {
-        readonly string context;
-        readonly ILogger<NewsExceptionFilter> logger;
+        private readonly string context;
+        private readonly ILogger<NewsExceptionFilter> logger;
         public NewsExceptionFilter(ILogger<NewsExceptionFilter> logger, string context)
         {
             this.logger = logger;
@@ -31,13 +31,13 @@ namespace App.News.Filters
                 case ValidationException validationException:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.ExpectationFailed;
-                        await context.HttpContext.Response.WriteAsync("Some necessary fields are not filled!");
+                        await context.HttpContext.Response.WriteAsync(validationException.Message);
                         break;
                     }
                 default:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        await context.HttpContext.Response.WriteAsync("Unhandled exception ! Please, contact support for resolve");
+                        await context.HttpContext.Response.WriteAsync("Unhandled exception! Please, contact support for resolve");
                         break;
                     }
             }
