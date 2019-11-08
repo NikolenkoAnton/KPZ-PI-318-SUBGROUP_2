@@ -49,7 +49,7 @@ namespace App.Deposits.Controller
         [HttpGet("/{id}/calculate")]
         public ActionResult AccrualCalculation([FromRoute]int id, [FromQuery]CalculateDTO calculateDTO)
         {
-            logger.LogInformation($"Call AccrualCalculation with id: {id}, StartSum: {calculateDTO.StartSum}, FinishDate: {calculateDTO.FinishDate}")
+            logger.LogInformation($"Call AccrualCalculation with id: {id}, StartSum: {calculateDTO.StartSum}, FinishDate: {calculateDTO.FinishDate}");
 
             return Ok(depositsManager.AccrualСalculation(id, calculateDTO));
         }
