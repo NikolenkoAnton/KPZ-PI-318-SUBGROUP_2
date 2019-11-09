@@ -42,13 +42,14 @@ namespace App.UserSupport
 
         private void SetupHandlingStatusCompleted(int id)
         {
+            var get = repository.Get(id);
             logger.LogDebug("Method:SetupHandlingStatusCompleted");
-            if (repository.Get(id) == null)
+            if (get == null)
                 throw new EntityNotFoundException(typeof(Handling));
             logger.LogDebug("Method:SetupHandlingStatusCompleted");
-            if (repository.Get(id).status == true)
+            if (get.status == true)
                 throw new HandlingAlreadyCompeletedException(id);
-            repository.Get(id).status = true;
+            get.status = true;
         }
         private string Handling10LastMessages(int id)
         {
