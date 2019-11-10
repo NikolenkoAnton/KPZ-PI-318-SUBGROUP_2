@@ -1,4 +1,5 @@
 ﻿using App.Configuration;
+using App.Deposits.Exceptions;
 using App.Deposits.Models;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace App.Deposits.Services
         {
             if (!IsValidInterestRate(createdDepositDTO))
             {
-                throw new Exception("Invalid interest rate");
+                throw new InvalidDataDTOException("Invalid interest rate");
             }
         }
 
@@ -31,7 +32,7 @@ namespace App.Deposits.Services
         {
             if (!IsValidDate(calculateDTO))
             {
-                throw new Exception("Invalid date");
+                throw new InvalidDataDTOException("Invalid date");
             }
         }
     }

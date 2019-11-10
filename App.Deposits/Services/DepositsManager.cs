@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using App.Deposits.Services;
+using App.Deposits.Exceptions;
+using Microsoft.Extensions.Logging;
 
 namespace App.Deposits
 {
@@ -25,15 +27,19 @@ namespace App.Deposits
     {
         private readonly IDepositsRepository depositsRepository;
         private readonly IValidateService validateService;
+        private readonly ILogger<DepositsManager> logger;
 
-        public DepositsManager(IDepositsRepository depositsRepository, IValidateService validateService)
+        public DepositsManager(IDepositsRepository depositsRepository, IValidateService validateService, ILogger<DepositsManager> logger)
         {
             this.depositsRepository = depositsRepository;
             this.validateService = validateService;
+            this.logger = logger;
         }
 
         public void AddDeposit(CreatedDepositDTO newDeposit)
         {
+            logger.LogInformation($"Call AddDeposit");
+
             validateService.ValidateAddDeposit(newDeposit);
 
             var deposit = new Deposit
@@ -46,16 +52,45 @@ namespace App.Deposits
             depositsRepository.AddDeposit(deposit);
         }
 
-        private int GetLastDepositID() => depositsRepository.GetAllDeposit().OrderByDescending(x => x.Id).Select(x => x.Id).FirstOrDefault();
+        private int GetLastDepositID()
+        {
+            logger.LogInformation($"Call GetLastDepositID");
 
-        private int GetIDForNewDeposit() => GetLastDepositID() + 1;
+            return depositsRepository.GetAllDeposit().OrderByDescending(x => x.Id).Select(x => x.Id).FirstOrDefault();
+        }
 
-        public Deposit GetDepositById(int id) => depositsRepository.GetDepositById(id);
+        private int GetIDForNewDeposit()
+        {
+            logger.LogInformation($"Call GetIDForNewDeposit");
 
-        public IEnumerable<Deposit> GetAllDeposits() => depositsRepository.GetAllDeposit();
+            return GetLastDepositID() + 1;
+        }
+
+        public Deposit GetDepositById(int id)
+        {
+            logger.LogInformation($"Call GetDepositById");
+
+            var deposit = depositsRepository.GetDepositById(id);
+
+            if (deposit == null)
+            {
+                throw new EntityNotExistException(typeof (Deposit), id);
+            }
+
+            return deposit;
+        }
+
+        public IEnumerable<Deposit> GetAllDeposits()
+        {
+            logger.LogInformation($"Call GetAllDeposit");
+
+            return depositsRepository.GetAllDeposit();
+        }
 
         public decimal AccrualСalculation(int depositId, CalculateDTO calculateDTO)
         {
+            logger.LogInformation($"Call AccrualСalculation");
+
             var deposit = depositsRepository.GetDepositById(depositId);
 
             validateService.ValidateCalculateDate(calculateDTO);
