@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace App.Bills.Models
+namespace App.Accounts.Models
 {
-    public class Bill
+    public class Account
     {
         public double money { get; set; }//деньги на счету
         public string Name { get; set; }//Имя владельца счета
         public string Surname { get; set; }//Фамилия владельца счета
         public bool IsBlocked { get; set; }//Заблокирован ли счет
 
-        public Bill(double money, string Name, string Surname)
+        public Account(double money, string Name, string Surname)
         {
             this.money = money;
             this.Name = Name;

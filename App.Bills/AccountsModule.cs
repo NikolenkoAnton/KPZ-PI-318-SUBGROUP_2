@@ -2,9 +2,9 @@
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 
-namespace App.Bills
+namespace App.Accounts
 {
-    public class BillsModule : IModule
+    public class AccountsModule : IModule
     {
         public void Initialize(IWindsorContainer container)
         {
