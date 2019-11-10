@@ -10,7 +10,7 @@ using App.Accounts.Inerfaces;
 
 namespace App.Accounts.Controllers
 {
-    [Route("api/bills")]
+    [Route("api/accounts")]
     [ApiController]
     [TypeFilter(typeof(AccountsExceptionFilter), Arguments = new object[] { nameof(AccountsController) })]
     public class AccountsController : ControllerBase
@@ -20,7 +20,7 @@ namespace App.Accounts.Controllers
         readonly ILogger<AccountsController> logger;
         public AccountsController(
             IValidateServices validateService,
-            AccountsManager valuesManager,
+            IAccountManager valuesManager,
             ILogger<AccountsController> logger)
         {
             _validateService = validateService;
@@ -28,13 +28,13 @@ namespace App.Accounts.Controllers
             this.logger = logger;
         }
 
-        [HttpGet("avaliableBills")]
+        [HttpGet("avaliableAccounts")]
         public ActionResult<IEnumerable<Account>> GetAvaliableBillsList()
         {
             logger.LogInformation("call GetAvaliableBillsList method");
             return _valuesManager.GetUnblockedBillsList().ToList();
         }
-        [HttpGet("allBills")]
+        [HttpGet("allAccounts")]
         public ActionResult<IEnumerable<Account>> GetAllBillsList()
         {
             logger.LogInformation("call GetAllBillsList method");
@@ -48,14 +48,14 @@ namespace App.Accounts.Controllers
             return _valuesManager.GetBillById(id);
         }
 
-        [HttpPost("blockBill")]
+        [HttpPost("blockAccount")]
         public Account BlockBill(int id)
         {
             logger.LogInformation($"call blockBill method with id = {id}");
             return _valuesManager.BlockBill(id);
         }
 
-        [HttpPost("unblockBill")]
+        [HttpPost("unblockAccount")]
         public Account UnlockBill(int id)
         {
             logger.LogInformation($"call UnlockBill method with id = {id}");
