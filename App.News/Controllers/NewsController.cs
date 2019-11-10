@@ -28,9 +28,9 @@ namespace App.News.Controllers
         public ActionResult AddComment([FromBody]CommentDTO commentDTO)
         {
             logger.LogInformation("AddComment method was called.");
-            if (commentDTO.Owner.Length == 0)
+            if (String.IsNullOrEmpty(commentDTO.Owner))
                 throw new ValidationException("Validation error: comment owner field is empty!");
-            else if (commentDTO.Text.Length == 0)
+            else if (String.IsNullOrEmpty(commentDTO.Text))
                 throw new ValidationException("Validation error: comment text is empty!");
             newsManager.AddComment(commentDTO);
             return Ok();
