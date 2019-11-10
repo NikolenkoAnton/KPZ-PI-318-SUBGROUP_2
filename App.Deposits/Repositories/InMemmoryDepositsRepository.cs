@@ -38,11 +38,6 @@ namespace App.Deposits.Repositories
         {
             var deposit = deposits.Where(x => x.Id == id).FirstOrDefault();
 
-            if (deposit == null)
-            {
-                throw new Exception("Deposit doesn't exist");
-            }
-
             return deposit;
         }
         
