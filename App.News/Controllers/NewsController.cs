@@ -27,7 +27,7 @@ namespace App.News.Controllers
         [HttpPost]
         public ActionResult AddComment([FromBody]CommentDTO commentDTO)
         {
-            logger.LogDebug("AddComment method was called.");
+            logger.LogInformation("AddComment method was called.");
             if (commentDTO.Owner.Length == 0)
                 throw new ValidationException("Validation error: comment owner field is empty!");
             else if (commentDTO.Text.Length == 0)
@@ -39,7 +39,7 @@ namespace App.News.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<NewsDTO>> GetNews()
         {
-            logger.LogDebug("GetNews method was called.");
+            logger.LogInformation("GetNews method was called.");
             var news =  newsManager.GetAllNews().ToList();
             return Ok(news);
         }
@@ -48,7 +48,7 @@ namespace App.News.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<CommentDTO>> GetNewsComments(int Id)
         {
-            logger.LogDebug("GetNewsComments method was called.");
+            logger.LogInformation("GetNewsComments method was called.");
             var comments = newsManager.GetNewsComments(Id).ToList();
             return Ok(comments);
         }
