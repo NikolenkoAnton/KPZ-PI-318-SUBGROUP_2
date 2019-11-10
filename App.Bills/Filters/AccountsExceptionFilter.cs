@@ -1,4 +1,4 @@
-﻿using App.Bills.Exceptions;
+﻿using App.Accounts.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
@@ -8,13 +8,13 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Bills.Filters
+namespace App.Accounts.Filters
 {
-    class BillsExceptionFilter : IAsyncExceptionFilter
+    class AccountsExceptionFilter : IAsyncExceptionFilter
     {
         readonly string _context;
-        readonly ILogger<BillsExceptionFilter> logger;
-        public BillsExceptionFilter(ILogger<BillsExceptionFilter> logger, string context)
+        readonly ILogger<AccountsExceptionFilter> logger;
+        public AccountsExceptionFilter(ILogger<AccountsExceptionFilter> logger, string context)
         {
             this.logger = logger;
             _context = context;

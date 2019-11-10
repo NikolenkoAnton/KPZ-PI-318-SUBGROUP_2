@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\App.Bills\App.Bills.csproj" />
+    <ProjectReference Include="..\App.Bills\App.Accounts.csproj" />
     <ProjectReference Include="..\App.Cards\App.Cards.csproj" />
     <ProjectReference Include="..\App.Common\App.Common.csproj" />
 

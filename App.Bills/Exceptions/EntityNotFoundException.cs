@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace App.Bills.Exceptions
+namespace App.Accounts.Exceptions
 {
     class EntityNotFoundException : Exception
     {

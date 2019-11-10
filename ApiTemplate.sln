@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Stocks", "App.Stocks\Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.RegualrPayments", "App.RegualrPayments\App.RegualrPayments.csproj", "{CA4CE485-B26C-4789-94DC-3D5B53D41085}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Bills", "App.Bills\App.Bills.csproj", "{ABEE2369-9A25-46F2-B362-EC95F2D0C76E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Accounts", "App.Bills\App.Accounts.csproj", "{ABEE2369-9A25-46F2-B362-EC95F2D0C76E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Cards", "App.Cards\App.Cards.csproj", "{006B5EB9-EB65-443D-8108-6F6139059438}"
 EndProject
