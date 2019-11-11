@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Common", "App.Common\Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Example", "App.TestModule\App.Example.csproj", "{25F59F96-D5C0-4036-8DF3-2A4568E48602}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Users", "App.Users\App.Users.csproj", "{599E0F4A-DFEA-4B64-9C0A-401D7C0DEA10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Users", "App.Users\App.Users.csproj", "{599E0F4A-DFEA-4B64-9C0A-401D7C0DEA10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
