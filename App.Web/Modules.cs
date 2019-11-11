@@ -16,9 +16,10 @@ namespace App.Web
     [ModuleUsing(typeof(Cards.CardsModule))]
     [ModuleUsing(typeof(DepositsModule))]
     [ModuleUsing(typeof(Accounts.AccountsModule))]
+    [ModuleUsing(typeof(Users.UsersModule))]
 
     public class Modules
     {
-        
+
     }
 }
