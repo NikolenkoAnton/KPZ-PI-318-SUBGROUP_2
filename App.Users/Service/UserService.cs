@@ -26,35 +26,6 @@ namespace App.Users.Service
             this.userRepository = userRepository;
         }
 
-        public void BlockUser(string login)
-        {
-            User user = userRepository.GetByLogin(login);
-            if (user.IsAvailable)
-            {
-                user.IsAvailable = false;
-            } else
-            {
-                throw new ServiceException("Unable to block user by id {0}, user already blocked", user.Id);
-            }
-            userRepository.Update(user);
-        }
-
-        public void ChangePassword(string login, string oldPassword, string newPassword, string confirmPassword)
-        {
-            User user = userRepository.GetByLogin(login);
-            if (!user.Password.Equals(oldPassword))
-            {
-                throw new ServiceException("Unable to change password for user by id {0}, the old password is incorect", user.Id);
-            } else if (!newPassword.Equals(confirmPassword))
-            {
-                throw new ServiceException("Unable to change password for user by id {0}, passwords do not match", user.Id);
-            } else
-            {
-                user.Password = newPassword;
-            }
-            userRepository.Update(user);
-        }
-
         public List<User> GetAllActive()
         {
             List<User> users = userRepository.GetAll();
@@ -69,6 +40,35 @@ namespace App.Users.Service
             return availableUsers;
         }
 
+        public void ChangePassword(string login, string oldPassword, string newPassword, string confirmPassword)
+        {
+            User user = userRepository.GetByLogin(login);
+            if (!user.Password.Equals(oldPassword))
+            {
+                throw new PasswordVerificationException("Unable to change password for user by id {0}, the old password is incorect", user.Id);
+            } else if (!newPassword.Equals(confirmPassword))
+            {
+                throw new PasswordVerificationException("Unable to change password for user by id {0}, passwords do not match", user.Id);
+            } else
+            {
+                user.Password = newPassword;
+            }
+            userRepository.Update(user);
+        }
+
+        public void BlockUser(string login)
+        {
+            User user = userRepository.GetByLogin(login);
+            if (user.IsAvailable)
+            {
+                user.IsAvailable = false;
+            } else
+            {
+                throw new UserAvailabilityException("Unable to block user by id {0}, user already blocked", user.Id, user.IsAvailable);
+            }
+            userRepository.Update(user);
+        }
+
         public void UnblockUser(string login)
         {
             User user = userRepository.GetByLogin(login);
@@ -78,7 +78,7 @@ namespace App.Users.Service
             }
             else
             {
-                throw new ServiceException("Unable to unblock user by id {0}, user already unblocked", user.Id);
+                throw new UserAvailabilityException("Unable to unblock user by id {0}, user already unblocked", user.Id, user.IsAvailable);
             }
             userRepository.Update(user);
         }

@@ -1,15 +1,14 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace App.Users.Exceptions
 {
-    public class ServiceException : Exception
+    class EntityUniqueViolatedException : Exception
     {
         public int Id { get; }
 
-        public ServiceException(string message, int id)
-        : base(message)
+        public EntityUniqueViolatedException(string message, int id) : base(message)
         {
             Id = id;
         }

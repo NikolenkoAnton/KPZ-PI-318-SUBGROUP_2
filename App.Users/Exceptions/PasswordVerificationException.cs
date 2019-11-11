@@ -4,12 +4,11 @@ using System.Text;
 
 namespace App.Users.Exceptions
 {
-    class RepositoryException : Exception
+    public class PasswordVerificationException : Exception
     {
         public int Id { get; }
 
-        public RepositoryException(string message, int id)
-        : base(message)
+        public PasswordVerificationException(string message, int id) : base(message)
         {
             Id = id;
         }

@@ -1,15 +1,14 @@
 using App.Users.Domain;
+using App.Users.Filters;
 using App.Users.Service;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Text;
-
 
 namespace App.Users.Controller
 {
     [Route("api/users")]
     [ApiController]
+    [TypeFilter(typeof(UsersExceptionFilter), Arguments = new object[] { nameof(UsersController) })]
     public class UsersController : ControllerBase
     {
         private readonly IUserService userService;
