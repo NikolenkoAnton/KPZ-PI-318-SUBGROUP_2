@@ -19,8 +19,14 @@ namespace App.Loans.Services
         readonly ILoansRepository _repository;
         private readonly ILogger<LoansManager> logger;
 
-        public Loan GetItem(int id) => _repository.GetLoanById(id);
-
+        public Loan GetItem(int id)
+        {
+            var get = _repository.GetLoanById(id);
+            logger.LogDebug("Method:GetItem");
+            if (get == null)
+                throw new EntityNotFoundException(typeof(Loan));
+            return get;
+        }
         public LoansManager(ILoansRepository repository,
             ILogger<LoansManager> _logger)
         {
