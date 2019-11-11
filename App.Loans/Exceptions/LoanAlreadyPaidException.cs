@@ -4,10 +4,10 @@ namespace App.Loans.Exceptions
 {
     public class LoanAlreadyPaidException : Exception
     {
-        public int HandlingId { get; private set; }
-        public LoanAlreadyPaidException(int HandlingId)
+        public int LoanId { get; private set; }
+        public LoanAlreadyPaidException(int LoanId)
         {
-            this.HandlingId = HandlingId;
+            this.LoanId = LoanId;
         }
     }
 }

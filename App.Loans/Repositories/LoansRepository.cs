@@ -37,6 +37,8 @@ namespace App.Loans.Repositories
 
         public Loan GetLoanById(int id)
         {
+            if (id >= loans.Length || id < 0)
+                return null;
             return loans[id];
         }
     }

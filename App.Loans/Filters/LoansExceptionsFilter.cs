@@ -25,7 +25,7 @@ namespace App.Loans.Filters
                 case LoanAlreadyPaidException LoanAlreadyPaid:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        await context.HttpContext.Response.WriteAsync($"Loan with id {handlingAlredyComplete.HandlingId} is already paid!");
+                        await context.HttpContext.Response.WriteAsync($"Loan with id {LoanAlreadyPaid.LoanId} is already paid!");
                         break;
                     }
                 case EntityNotFoundException entityNotFound:
