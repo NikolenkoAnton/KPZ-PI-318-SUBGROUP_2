@@ -13,7 +13,7 @@ namespace App.Users.Repositories
     {
         List<User> GetAll();
 
-        User GetByLogin(string login);
+        User GetById(int id);
 
         void Create(User user);
 
@@ -44,7 +44,8 @@ namespace App.Users.Repositories
 
         public void Create(User user)
         {
-            if (users.Contains(user))
+            int userIndex = users.FindIndex(instance => instance.Id.Equals(user.Id));
+            if (users.Contains(user) && userIndex > -1)
             {
                 throw new EntityUniqueViolatedException("Unable to write user by id {0}, user already exist", user.Id);
             }
@@ -68,7 +69,17 @@ namespace App.Users.Repositories
 
         public List<User> GetAll() => users;
 
-        public User GetByLogin(string login) => users.Find(user => user.Login.Equals(login));
+        public User GetById(int id)
+        {
+            var instance = users.Find(user => user.Id.Equals(id));
+            if (instance == null)
+            {
+                throw new EntityNotFoundException("Unable to find user by id {0}, user does not exist", id);
+            } else
+            {
+                return instance;
+            }
+        }
 
         public void Update(User user)
         {

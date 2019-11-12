@@ -2,6 +2,7 @@ using App.Configuration;
 using App.Users.Domain;
 using App.Users.Exceptions;
 using App.Users.Repositories;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
 namespace App.Users.Service
@@ -10,24 +11,27 @@ namespace App.Users.Service
     {
         List<User> GetAllActive();
 
-        void ChangePassword(string login, string oldPassword, string newPassword, string confirmPassword);
+        void ChangePassword(int userId, string oldPassword, string newPassword, string confirmPassword);
 
-        void BlockUser(string login);
+        void BlockUser(int userId);
 
-        void UnblockUser(string login);
+        void UnblockUser(int userId);
     }
 
     public class UserService : IUserService, ITransientDependency
     {
         private readonly IUserRepository userRepository;
+        private readonly ILogger<UserService> logger;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, ILogger<UserService> logger)
         {
             this.userRepository = userRepository;
+            this.logger = logger;
         }
 
         public List<User> GetAllActive()
         {
+            logger.LogDebug($"Method:GetAllActive");
             List<User> users = userRepository.GetAll();
             List<User> availableUsers = new List<User>();
             for (int i = 0; i < users.Count; i++)
@@ -40,9 +44,10 @@ namespace App.Users.Service
             return availableUsers;
         }
 
-        public void ChangePassword(string login, string oldPassword, string newPassword, string confirmPassword)
+        public void ChangePassword(int userId, string oldPassword, string newPassword, string confirmPassword)
         {
-            User user = userRepository.GetByLogin(login);
+            logger.LogDebug($"Method:ChangePassword");
+            User user = userRepository.GetById(userId);
             if (!user.Password.Equals(oldPassword))
             {
                 throw new PasswordVerificationException("Unable to change password for user by id {0}, the old password is incorect", user.Id);
@@ -56,9 +61,10 @@ namespace App.Users.Service
             userRepository.Update(user);
         }
 
-        public void BlockUser(string login)
+        public void BlockUser(int userId)
         {
-            User user = userRepository.GetByLogin(login);
+            logger.LogDebug($"Method:BlockUser");
+            User user = userRepository.GetById(userId);
             if (user.IsAvailable)
             {
                 user.IsAvailable = false;
@@ -69,9 +75,10 @@ namespace App.Users.Service
             userRepository.Update(user);
         }
 
-        public void UnblockUser(string login)
+        public void UnblockUser(int userId)
         {
-            User user = userRepository.GetByLogin(login);
+            logger.LogDebug($"Method:UnblockUser");
+            User user = userRepository.GetById(userId);
             if (!user.IsAvailable)
             {
                 user.IsAvailable = true;

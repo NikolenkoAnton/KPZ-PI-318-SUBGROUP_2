@@ -4,7 +4,7 @@ using System.Text;
 
 namespace App.Users.Exceptions
 {
-    public class PasswordVerificationException : Exception
+    class PasswordVerificationException : Exception
     {
         public int Id { get; }
 

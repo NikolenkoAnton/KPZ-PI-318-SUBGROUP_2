@@ -25,30 +25,35 @@ namespace App.Users.Filters
             {
                 case EntityNotFoundException entityNotFound:
                     {
+                        logger.LogWarning(entityNotFound, $"Method: {entityNotFound.TargetSite}");
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
                         await context.HttpContext.Response.WriteAsync($"User with id {entityNotFound.Id} not found");
                         break;
                     }
                 case EntityUniqueViolatedException entityUniqueViolated:
                     {
+                        logger.LogWarning(entityUniqueViolated, $"Method: {entityUniqueViolated.TargetSite}");
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                         await context.HttpContext.Response.WriteAsync($"User with id {entityUniqueViolated.Id} already exist");
                         break;
                     }
                 case PasswordVerificationException passwordVerification:
                     {
+                        logger.LogWarning(passwordVerification, $"Method: {passwordVerification.TargetSite}");
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                         await context.HttpContext.Response.WriteAsync($"Password verification for user with id {passwordVerification.Id} failed");
                         break;
                     }
                 case UserAvailabilityException userAvailability:
                     {
+                        logger.LogWarning(userAvailability, $"Method: {userAvailability.TargetSite}");
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        await context.HttpContext.Response.WriteAsync($"Availability of user with id {userAvailability.Id} already changed to {userAvailability.Availability}");
+                        await context.HttpContext.Response.WriteAsync($"Availability of user with id {userAvailability.Id} is already {userAvailability.Availability}");
                         break;
                     }
                 default:
                     {
+                        logger.LogError($"Method: {context.Exception.TargetSite}.");
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         await context.HttpContext.Response.WriteAsync("Unhandled exception ! Please, contact support for resolve");
                         break;

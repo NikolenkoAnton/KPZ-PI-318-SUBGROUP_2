@@ -2,6 +2,7 @@ using App.Users.Domain;
 using App.Users.Filters;
 using App.Users.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
 namespace App.Users.Controller
@@ -12,33 +13,43 @@ namespace App.Users.Controller
     public class UsersController : ControllerBase
     {
         private readonly IUserService userService;
+        private readonly ILogger<UsersController> logger;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, ILogger<UsersController> logger)
         {
             this.userService = userService;
+            this.logger = logger;
         }
 
         [HttpGet("allAvailable")]
-        public ActionResult<List<User>> GetAllActive() => Ok(userService.GetAllActive());
+        public ActionResult<List<User>> GetAllActive()
+        {
+            logger.LogInformation("Call GetAllActive method");
+            return userService.GetAllActive();
+        }
 
         [HttpPost("changePassword")]
-        public ActionResult ChangePassword(string login, string oldPassword, string newPassword, string confirmPassword)
+        public ActionResult ChangePassword(int userId, string oldPassword, string newPassword, string confirmPassword)
         {
-            userService.ChangePassword(login, oldPassword, newPassword, confirmPassword);
+            logger.LogDebug($"Call ChangePassword method with login={userId}, oldPassword={oldPassword}, newPassword={newPassword}, confirmPassword={confirmPassword}");
+            logger.LogInformation($"Call ChangePassword method with login={userId}");
+            userService.ChangePassword(userId, oldPassword, newPassword, confirmPassword);
             return Ok();
         }
 
         [HttpPost("block")]
-        public ActionResult BlockUser(string login)
+        public ActionResult BlockUser(int userId)
         {
-            userService.BlockUser(login);
+            logger.LogInformation($"Call BlockUser method with login={userId}");
+            userService.BlockUser(userId);
             return Ok();
         }
 
         [HttpPost("unblock")]
-        public ActionResult UnblockUser(string login)
+        public ActionResult UnblockUser(int userId)
         {
-            userService.UnblockUser(login);
+            logger.LogInformation($"Call UnblockUser method with login={userId}");
+            userService.UnblockUser(userId);
             return Ok();
         }
     }

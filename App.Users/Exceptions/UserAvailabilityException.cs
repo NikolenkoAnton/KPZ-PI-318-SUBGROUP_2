@@ -2,7 +2,7 @@
 
 namespace App.Users.Exceptions
 {
-    public class UserAvailabilityException : Exception
+    class UserAvailabilityException : Exception
     {
         public int Id { get; }
 
