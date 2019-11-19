@@ -1,32 +1,19 @@
 using App.Configuration;
-using App.Users.Domain;
+using App.Models.Users;
 using App.Users.Exceptions;
 using System;
 using System.Collections.Generic;
+using App.Repositories;
 using System.Linq;
 using System.Text;
 
 namespace App.Users.Repositories
 {
-
-    public interface IUserRepository
-    {
-        List<User> GetAll();
-
-        User GetById(int id);
-
-        void Create(User user);
-
-        void Update(User user);
-
-        void Delete(int Id);
-    }
-
-    public class UserRepository : IUserRepository, ISingletoneDependency
+    public class InMemoryUserRepository : IUsersRepository
     {
         private readonly List<User> users;
 
-        public UserRepository()
+        public InMemoryUserRepository()
         {
             users = InitUsers();
         }
@@ -55,15 +42,17 @@ namespace App.Users.Repositories
             }
         }
 
-        public void Delete(int Id)
+        public void Delete(User user)
         {
-            User instance = users.Find(user => user.Id.Equals(Id));
-            if (instance != null)
+            int userIndex = users.FindIndex(instance => instance.Id.Equals(user.Id));
+
+            if (userIndex < 0)
             {
-                users.Remove(instance);
-            } else
+                throw new EntityNotFoundException("Unable to delete user by id {0}, user does not exist", user.Id);
+            }
+            else
             {
-                throw new EntityNotFoundException("Unable to delete user by id {0}, user does not exist", Id);
+                users.Remove(user);
             }
         }
 
