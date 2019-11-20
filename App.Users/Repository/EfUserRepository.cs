@@ -2,6 +2,7 @@ using App.Configuration;
 using App.Models.Users;
 using App.Repositories;
 using App.Users.Database;
+using App.Users.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,22 +25,51 @@ namespace App.Users.Repository
 
         public User GetById(int id)
         {
-            return dbContext.SimpleValues.Where(sv => sv.Id == id).FirstOrDefault();
+            var instance = dbContext.SimpleValues.Where(sv => sv.Id == id).FirstOrDefault();
+            if (instance == null)
+            {
+                throw new EntityNotFoundException("Unable to find user by id {0}, user does not exist", id);
+            }
+            else
+            {
+                return instance;
+            }
         }
 
         public void Create(User user)
         {
-            dbContext.SimpleValues.Add(user);
+            if (dbContext.SimpleValues.Contains(user))
+            {
+                throw new EntityUniqueViolatedException("Unable to write user by id {0}, user already exist", user.Id);
+            }
+            else
+            {
+                dbContext.SimpleValues.Add(user);
+            }
         }
 
         public void Update(User user)
         {
-            dbContext.SimpleValues.Update(user);
+            if (dbContext.SimpleValues.Contains(user))
+            {
+                dbContext.SimpleValues.Update(user);
+            }
+            else
+            {
+                throw new EntityNotFoundException("Unable to update user by id {0}, user does not exist", user.Id);
+            }
         }
 
         public void Delete(User user)
         {
-            dbContext.SimpleValues.Remove(user);
+            if (dbContext.SimpleValues.Contains(user))
+            {
+                dbContext.SimpleValues.Remove(user);
+            }
+            else
+            {
+                throw new EntityNotFoundException("Unable to update user by id {0}, user does not exist", user.Id);
+            }
         }
 
         public void Dispose()
