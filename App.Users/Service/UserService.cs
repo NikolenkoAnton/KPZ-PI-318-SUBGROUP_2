@@ -2,7 +2,6 @@ using App.Configuration;
 using App.Models.Users;
 using App.Repositories;
 using App.Users.Exceptions;
-using App.Users.Repositories;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 

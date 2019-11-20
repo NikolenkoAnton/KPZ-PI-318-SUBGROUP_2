@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace App.Users.Repository
 {
-    public class EfUserRepository : IUsersRepository, IDisposable, ISingletoneDependency
+    public class EfUserRepository : IUsersRepository, IDisposable, ITransientDependency
     {
         private readonly UsersDbContext dbContext;
 
