@@ -13,7 +13,7 @@ namespace App.Users.Repositories
     {
         List<User> GetAll();
 
-        User GetByLogin(string login);
+        User GetById(int id);
 
         void Create(User user);
 
@@ -33,18 +33,21 @@ namespace App.Users.Repositories
 
         private static List<User> InitUsers()
         {
-            var users = new List<User>();
-            users.Add(new User { Id = 1, IsAvailable = true, Login = "Chuck01", Name = "Chuck Norris", Password = "qwerty" });
-            users.Add(new User { Id = 2, IsAvailable = false, Login = "john_qw", Name = "John Smith", Password = "password" });
-            users.Add(new User { Id = 3, IsAvailable = true, Login = "GeRaLT", Name = "Thomas Nelson", Password = "12345" });
+            var users = new List<User>
+            {
+                new User { Id = 1, IsAvailable = true, Login = "Chuck01", Name = "Chuck Norris", Password = "qwerty" },
+                new User { Id = 2, IsAvailable = false, Login = "john_qw", Name = "John Smith", Password = "password" },
+                new User { Id = 3, IsAvailable = true, Login = "GeRaLT", Name = "Thomas Nelson", Password = "12345" }
+            };
             return users;
         }
 
         public void Create(User user)
         {
-            if (users.Contains(user))
+            int userIndex = users.FindIndex(instance => instance.Id.Equals(user.Id));
+            if (users.Contains(user) && userIndex > -1)
             {
-                throw new RepositoryException("Unable to write user by id {0}, user already exist", user.Id);
+                throw new EntityUniqueViolatedException("Unable to write user by id {0}, user already exist", user.Id);
             }
             else
             {
@@ -60,13 +63,23 @@ namespace App.Users.Repositories
                 users.Remove(instance);
             } else
             {
-                throw new RepositoryException("Unable to delete user by id {0}, user does not exist", Id);
+                throw new EntityNotFoundException("Unable to delete user by id {0}, user does not exist", Id);
             }
         }
 
         public List<User> GetAll() => users;
 
-        public User GetByLogin(string login) => users.Find(user => user.Login.Equals(login));
+        public User GetById(int id)
+        {
+            var instance = users.Find(user => user.Id.Equals(id));
+            if (instance == null)
+            {
+                throw new EntityNotFoundException("Unable to find user by id {0}, user does not exist", id);
+            } else
+            {
+                return instance;
+            }
+        }
 
         public void Update(User user)
         {
@@ -74,7 +87,7 @@ namespace App.Users.Repositories
 
             if (userIndex < 0)
             {
-                throw new RepositoryException("Unable to update user by id {0}, user does not exist", user.Id);
+                throw new EntityNotFoundException("Unable to update user by id {0}, user does not exist", user.Id);
             }
             else
             {
