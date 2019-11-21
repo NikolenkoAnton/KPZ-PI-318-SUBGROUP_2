@@ -1,7 +1,7 @@
 using App.Configuration;
-using App.Users.Domain;
+using App.Models.Users;
+using App.Repositories;
 using App.Users.Exceptions;
-using App.Users.Repositories;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
@@ -20,10 +20,10 @@ namespace App.Users.Service
 
     public class UserService : IUserService, ITransientDependency
     {
-        private readonly IUserRepository userRepository;
+        private readonly IUsersRepository userRepository;
         private readonly ILogger<UserService> logger;
 
-        public UserService(IUserRepository userRepository, ILogger<UserService> logger)
+        public UserService(IUsersRepository userRepository, ILogger<UserService> logger)
         {
             this.userRepository = userRepository;
             this.logger = logger;
