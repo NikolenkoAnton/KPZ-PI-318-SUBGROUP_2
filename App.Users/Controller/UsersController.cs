@@ -1,4 +1,4 @@
-using App.Users.Domain;
+using App.Models.Users;
 using App.Users.Filters;
 using App.Users.Service;
 using Microsoft.AspNetCore.Mvc;
