@@ -3,11 +3,10 @@ using App.Deposits.Models;
 using App.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace App.Deposits.Repositories
 {
-    public class EfDepositsRepository : IDepositsRepository, ITransientDependency
+    public class EfDepositsRepository : IDepositsRepository, IDisposable, ITransientDependency
     {
         public void AddDeposit(Deposit deposit)
         {
@@ -20,6 +19,11 @@ namespace App.Deposits.Repositories
         }
 
         public Deposit GetDepositById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
         {
             throw new NotImplementedException();
         }

@@ -1,12 +1,8 @@
-﻿using App.Configuration;
-using App.Deposits.Exceptions;
+﻿using App.Deposits.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace App.Deposits.Filters
