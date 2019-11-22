@@ -9,6 +9,7 @@ using System.Linq;
 using App.Deposits.Services;
 using App.Deposits.Exceptions;
 using Microsoft.Extensions.Logging;
+using App.Repositories;
 
 namespace App.Deposits
 {
