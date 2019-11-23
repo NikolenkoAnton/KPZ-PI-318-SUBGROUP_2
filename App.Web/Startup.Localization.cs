@@ -6,12 +6,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace App.Web
 {
-    // TODO documentation
+    // part of startup class for configuring request localization
     public partial class Startup
     {
         private const string EnglishCultureCode = "en-US";
         private const string GermanCultureCode = "de-de";
 
+        // configuring reading request culture from "culture" query parameter and disabling all others
+        // English is treated as default
         private void ConfigureLocalization(IServiceCollection services)
         {
             services.Configure<RequestLocalizationOptions>(options =>

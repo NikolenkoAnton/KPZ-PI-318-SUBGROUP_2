@@ -16,7 +16,6 @@ namespace App.Example.Controllers
     /// </summary>
     [Route("api/example/values")]
     [ApiController]
-    // TypeFilter attribute allows user to reference filters, which have additional constructor dependencies, which will be resolved with DI system
     [ServiceFilter(typeof(ExampleAsyncExceptionFilter))]
     public class ValuesController : ControllerBase
     {
