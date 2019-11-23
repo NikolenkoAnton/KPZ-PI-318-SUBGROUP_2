@@ -1,31 +1,41 @@
 ﻿using App.Configuration;
+using App.Deposits.DataBase;
 using App.Deposits.Models;
 using App.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace App.Deposits.Repositories
 {
     public class EfDepositsRepository : IDepositsRepository, IDisposable, ITransientDependency
     {
-        public void AddDeposit(Deposit deposit)
+        private readonly DepositsDbContext dbContext;
+
+        public EfDepositsRepository(DepositsDbContext dbContext)
         {
-            throw new NotImplementedException();
+            this.dbContext = dbContext;
         }
 
-        public IEnumerable<Deposit> GetAllDeposit()
+        public void AddDeposit(Deposit deposit)
         {
-            throw new NotImplementedException();
+            dbContext.Deposits.Add(deposit);
+
+            dbContext.SaveChangesAsync();
         }
+
+        public IEnumerable<Deposit> GetAllDeposit() => dbContext.Deposits;
 
         public Deposit GetDepositById(int id)
         {
-            throw new NotImplementedException();
+            var deposit = dbContext.Deposits.Where(x => x.Id == id).FirstOrDefault();
+
+            return deposit;
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            dbContext?.Dispose();
         }
     }
 }
