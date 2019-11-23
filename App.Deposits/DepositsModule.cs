@@ -1,6 +1,7 @@
 ﻿using App.Configuration;
 using App.Deposits.DataBase;
 using App.Deposits.Models;
+using App.Deposits.Services;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,7 @@ namespace App.Deposits
     {
         public void Initialize(IWindsorContainer container)
         {
-            container.Register(Component.For<IDepositsManager>().ImplementedBy<DepositsManager>().LifestyleTransient());
+            container.Register(Component.For<IAnotherService>().ImplementedBy<AnotherService>().LifestyleTransient());
 
             RegisterDbContext(container);
         }
@@ -25,6 +26,8 @@ namespace App.Deposits
                 builder.UseInMemoryDatabase("DepositsDb");
                 return builder.Options;
             }).LifestyleTransient());
+
+            container.Register(Component.For<DepositsDbContext>().LifestyleTransient());
 
             InitializeDbContext(container);
         }
