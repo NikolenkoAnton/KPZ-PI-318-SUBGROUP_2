@@ -9,11 +9,13 @@ using Newtonsoft.Json.Linq;
 
 namespace App.Example.Localization
 {
-    // TODO description
+    /// <summary>
+    /// Localization provider which uses embedded resources as localization sources
+    /// </summary>
     public class ResourceFileLocalizationManager : ILocalizationManager, ITransientDependency
     {
         private const string DefaultCulture = "en-US"; // English
-        private const string ResourceFileFormat = "Resource.{0}.json";
+        private const string ResourceFileFormat = "{0}.Resource.json";
         private const string ResourceFilePath = "Resources";
 
         private readonly ILogger<ResourceFileLocalizationManager> _logger;
@@ -113,10 +115,16 @@ namespace App.Example.Localization
 
         private string GetAbsolutePath(string resourcePath)
         {
-            var path = resourcePath.Replace('/', '.');
-            var currentAssembly = System.Reflection.Assembly.GetExecutingAssembly();
-            return currentAssembly.GetManifestResourceNames()
+            // normalize path to correspond to resource files path rules
+            var path = resourcePath
+                .Replace('\\', '.')
+                .Replace('/', '.');
+
+            // get the embedded resource name from the current assembly
+            var absoluteResourcePath = typeof(ResourceFileLocalizationManager).Assembly
+                .GetManifestResourceNames()
                 .FirstOrDefault(r => r.EndsWith(path));
+            return absoluteResourcePath;
         }
     }
 }
