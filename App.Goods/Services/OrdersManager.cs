@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using App.Configuration;
 using App.Goods.Common;
@@ -35,15 +34,18 @@ namespace App.Goods.Services
             var orderedProducts = _productRepository.GetAll().Where(prod => products.Contains(prod.Id)).ToArray();
 
             var lastOrder = GetAllOrders().LastOrDefault();
-            int lastId = lastOrder?.Id ?? 0;
+            int id = (lastOrder?.Id ?? 0) + 1;
+
+            var ordersProducts = orderedProducts.Select(product => new OrderProduct {OrderId = id, ProductId = product.Id}).ToList();
 
             var newOrder = new Order
             {
-                Id = lastId + 1,
-                Products = orderedProducts
+                Id = id,
+                OrderProducts = ordersProducts
             };
 
             _ordersRepository.Add(newOrder);
+            _ordersRepository.Save();
 
             return newOrder;
         }
