@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using App.Configuration;
 using App.Goods.Common;
+using App.Goods.DTOs;
 using App.Goods.Models;
 using App.Goods.Repositories;
 using Microsoft.Extensions.Logging;
@@ -18,11 +20,11 @@ namespace App.Goods.Services
             _logger = logger;
         }
 
-        public IEnumerable<Product> GetAllProducts()
+        public IEnumerable<ProductDto> GetAllProducts()
         {
             _logger.LogDebug("Call GetAllProducts method");
 
-            return _productsRepository.GetAll();
+            return _productsRepository.GetAll().Select(p => new ProductDto(p));
         }
     }
 }

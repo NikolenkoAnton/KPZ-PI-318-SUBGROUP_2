@@ -2,6 +2,7 @@
 using System.Linq;
 using App.Configuration;
 using App.Goods.Common;
+using App.Goods.DTOs;
 using App.Goods.Models;
 using Microsoft.Extensions.Logging;
 
@@ -20,14 +21,14 @@ namespace App.Goods.Services
             _logger = logger;
         }
 
-        public IEnumerable<Order> GetAllOrders()
+        public IEnumerable<OrderDto> GetAllOrders()
         {
             _logger.LogDebug("Call GetAllOrders method");
 
-            return _ordersRepository.GetAll();
+            return _ordersRepository.GetAll().Select(o => new OrderDto(o));
         }
 
-        public Order MakeOrder(IEnumerable<int> products)
+        public OrderDto MakeOrder(IEnumerable<int> products)
         {
             _logger.LogDebug("Call MakeOrder method");
 
@@ -47,7 +48,7 @@ namespace App.Goods.Services
             _ordersRepository.Add(newOrder);
             _ordersRepository.Save();
 
-            return newOrder;
+            return new OrderDto(_ordersRepository.Get(id));
         }
     }
 }
