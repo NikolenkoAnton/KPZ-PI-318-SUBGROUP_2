@@ -1,62 +1,46 @@
 ﻿using App.Configuration;
 using App.News.Database;
 using App.News.Interfaces;
-using App.Models.Example;
+using App.News.Models;
+using System.Collections.Generic;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Microsoft.EntityFrameworkCore;
 
 namespace App.News
 {
-    /// <summary>
-    /// Endpoint class for registering the module in the system. This class should be referenced in the main module directly
-    /// </summary>
     public class NewsModule : IModule
     {
-        /// <summary>
-        /// This method initialize additional module dependencies, if it is not possible to use utility interfaces
-        /// </summary>
-        /// <param name="container"></param>
+      
         public void Initialize(IWindsorContainer container)
         {
-            // example of manually registered components
-            container.Register(Component.For<INewsManager>().ImplementedBy<NewsManager>().LifestyleTransient());
-
             RegisterDbContext(container);
         }
 
-        /// <summary>
-        /// Performs registering dependencies for using EntityFramework DbContext
-        /// For more info, please, visit next respurces:
-        /// https://docs.microsoft.com/en-us/ef/core/miscellaneous/configuring-dbcontext
-        /// </summary>
         private void RegisterDbContext(IWindsorContainer container)
         {
-            container.Register(Component.For<DbContextOptions<NewsDbContext>>().UsingFactoryMethod(() =>
+            container.Register(Component.For<DbContextOptions<AppDbContext>>().UsingFactoryMethod(() =>
             {
-                var builder = new DbContextOptionsBuilder<NewsDbContext>();
-                // for test purpose we are using InMemory database
-                builder.UseInMemoryDatabase("ExampleDb");
+                var builder = new DbContextOptionsBuilder<AppDbContext>();
+                builder.UseInMemoryDatabase("NewsDb");
                 return builder.Options;
             }).LifestyleTransient());
 
-            container.Register(Component.For<NewsDbContext>().LifestyleTransient());
+            container.Register(Component.For<AppDbContext>().LifestyleTransient());
 
             InitializeDbContext(container);
         }
 
-        /// <summary>
-        /// Performs initial seed of data for DbContext
-        /// </summary>
+          
         private void InitializeDbContext(IWindsorContainer container)
         {
-            // DbContext object is Disposable, so it is needed to use "using" constraction
-            using (var context = container.Resolve<NewsDbContext>())
+            using (var context = container.Resolve<AppDbContext>())
             {
                 // add values to the context (without saving)
-           
-                );
-               
+                var news = new NewsDto { PhotoUrl = "url", Text = "News", Title = "Title" };
+                var comment = new Comment { Owner = "Someone", Text = "Comment", NewsId = 0, News = news };
+                context.News.Add(news);
+                context.Comments.Add(comment);
 
                 // save changes in the context
                 context.SaveChanges();

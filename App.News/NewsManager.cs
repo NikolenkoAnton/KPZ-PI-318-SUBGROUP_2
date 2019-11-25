@@ -19,34 +19,34 @@ namespace App.News
             this.logger = logger;
         }
        
-        public void AddComment(CommentDTO comment)
+        public void AddComment(Comment comment)
         {
             logger.LogInformation("AddComment method called");
-            var news = newsRepository.GetNewsById(comment.NewsId);
+            var news = newsRepository.GetById(comment.NewsId);
             if (news == null)
             {
                 logger.LogError("Entity was not found");
-                throw new EntityNotFoundException(typeof(NewsDTO)); 
+                throw new EntityNotFoundException(typeof(Models.NewsDto)); 
             }
             news.Comments.ToList().Add(comment);
         }
 
-        public IEnumerable<CommentDTO> GetNewsComments(int newsId)
+        public IEnumerable<Comment> GetNewsComments(int newsId)
         {
             logger.LogInformation("GetNewsComments method called");
-            var news = newsRepository.GetNewsById(newsId);
+            var news = newsRepository.GetById(newsId);
             if (news ==null)
             {
                 logger.LogError("Entity was not found");
-                throw new EntityNotFoundException(typeof(NewsDTO));
+                throw new EntityNotFoundException(typeof(Models.NewsDto));
             }
             return news.Comments;
         }
 
-        public IEnumerable<NewsDTO> GetAllNews()
+        public IEnumerable<Models.NewsDto> GetAllNews()
         {
             logger.LogInformation("GetAllNews Method called");
-            return newsRepository.GetAllNews().ToList();
+            return newsRepository.GetAll();
         }
 
     }
