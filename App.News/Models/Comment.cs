@@ -4,10 +4,12 @@ using System.Text;
 
 namespace App.News.Models
 {
-    public class CommentDTO
+    public class Comment
     {
-        public int NewsId { get; set; }
+        public int Id { get; set; }
         public string Owner { get; set; }
         public string Text { get; set; }
+        public int? NewsId { get; set; }
+        public NewsDto News { get; set; }
     }
 }

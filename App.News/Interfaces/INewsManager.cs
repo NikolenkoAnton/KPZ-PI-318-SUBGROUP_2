@@ -7,8 +7,8 @@ namespace App.News.Interfaces
 {
     public interface INewsManager
     {
-        void AddComment(CommentDTO comment);
-        IEnumerable<CommentDTO> GetNewsComments(int newsId);
-        IEnumerable<NewsDTO> GetAllNews();
+        void AddComment(Comment comment);
+        IEnumerable<Comment> GetNewsComments(int newsId);
+        IEnumerable<Models.NewsDto> GetAllNews();
     }
 }
