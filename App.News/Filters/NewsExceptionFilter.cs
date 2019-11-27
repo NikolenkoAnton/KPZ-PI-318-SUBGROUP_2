@@ -4,6 +4,7 @@ using App.News.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
+using App.News.Localization;
 
 namespace App.News.Filters
 {
@@ -11,10 +12,12 @@ namespace App.News.Filters
     {
         private readonly string context;
         private readonly ILogger<NewsExceptionFilter> logger;
-        public NewsExceptionFilter(ILogger<NewsExceptionFilter> logger, string context)
+        readonly ILocalizationManager localizationManager;
+        public NewsExceptionFilter(ILogger<NewsExceptionFilter> logger, string context,ILocalizationManager localizationManager)
         {
             this.logger = logger;
             this.context = context;
+            this.localizationManager = localizationManager;
         }
 
         public async Task OnExceptionAsync(ExceptionContext context)
@@ -25,19 +28,22 @@ namespace App.News.Filters
                 case EntityNotFoundException entityNotFound:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
-                        await context.HttpContext.Response.WriteAsync($"Not Found: {entityNotFound.EntityType.AssemblyQualifiedName}");
+                        var errorMessage = localizationManager.GetResource("ResourceNotFound");
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
                 case ValidationException validationException:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.ExpectationFailed;
-                        await context.HttpContext.Response.WriteAsync(validationException.Message);
+                        var errorMessage = localizationManager.GetResource(validationException.Message);
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
                 default:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        await context.HttpContext.Response.WriteAsync("Unhandled exception! Please, contact support for resolve");
+                        var message = localizationManager.GetResource("UnhandeledException");
+                        await context.HttpContext.Response.WriteAsync(message);
                         break;
                     }
             }

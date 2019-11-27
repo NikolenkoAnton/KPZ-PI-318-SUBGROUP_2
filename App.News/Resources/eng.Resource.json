@@ -1,0 +1,5 @@
+{
+  "ResourceNotFound": "Resource was not found",
+  "ValidationException": "Invalid business operation",
+  "UnhandeledException": "Unhandled exception occurred !"
+}
