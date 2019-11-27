@@ -9,7 +9,7 @@ namespace App.Cards
 {
     public class CardsModule : IModule
     {
-        public void Initialize(IWindsorContainer container)
+          public void Initialize(IWindsorContainer container)
         {
 
             RegisterDbContext(container);
