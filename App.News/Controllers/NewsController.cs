@@ -25,7 +25,7 @@ namespace App.News.Controllers
 
         [Route("comments")]
         [HttpPost]
-        public ActionResult AddComment([FromBody]Comment commentDTO)
+        public ActionResult AddComment([FromBody] Comment commentDTO)
         {
             logger.LogInformation("AddComment method was called.");
             if (String.IsNullOrEmpty(commentDTO.Owner))
