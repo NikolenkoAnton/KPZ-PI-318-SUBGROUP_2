@@ -12,8 +12,6 @@ namespace App.Deposits
     {
         public void Initialize(IWindsorContainer container)
         {
-            container.Register(Component.For<IAnotherService>().ImplementedBy<AnotherService>().LifestyleTransient());
-
             RegisterDbContext(container);
         }
 
