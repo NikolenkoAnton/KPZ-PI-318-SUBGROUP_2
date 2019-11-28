@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace App.Deposits.Models
+﻿namespace App.Deposits.Models
 {
     public class Deposit
     {

@@ -2,9 +2,7 @@
 using App.Deposits.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace App.Deposits.Controller
 {
