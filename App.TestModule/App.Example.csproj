@@ -17,12 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Resources\**\*.json" />
+    <Content Remove="Resources\**\*.json" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\**\*.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\**\*.json" />
   </ItemGroup>
 
 </Project>
