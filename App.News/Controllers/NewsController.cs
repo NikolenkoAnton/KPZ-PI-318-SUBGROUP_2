@@ -12,7 +12,7 @@ namespace App.News.Controllers
 {
     [Route("api/news")]
     [ApiController]
-    [TypeFilter(typeof(NewsExceptionFilter), Arguments = new object[] { nameof(NewsController) })]
+    [ServiceFilter(typeof(NewsExceptionFilter))]
     public class NewsController: ControllerBase
     {
         private readonly ILogger<NewsController> logger;
@@ -25,7 +25,7 @@ namespace App.News.Controllers
 
         [Route("comments")]
         [HttpPost]
-        public ActionResult AddComment([FromBody]Comment commentDTO)
+        public ActionResult AddComment([FromBody] Comment commentDTO)
         {
             logger.LogInformation("AddComment method was called.");
             if (String.IsNullOrEmpty(commentDTO.Owner))
