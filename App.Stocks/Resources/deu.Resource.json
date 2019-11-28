@@ -1,0 +1,6 @@
+{
+    "EntityNotExists": "Einheit existiert nicht",
+    "IncorrectParamsFormat": "Sie senden eine Anfrage mit falschen Parametern",
+    "СompanyStocksIsPrivate": "Diese Firma hat private Aktien. Sie konnten sie nicht sehen",
+    "Unhandeled": "Unbehandelte Ausnahme ist aufgetreten!"
+}

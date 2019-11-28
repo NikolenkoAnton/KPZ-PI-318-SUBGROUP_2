@@ -1,6 +1,0 @@
-{
-    "EntityNotExistException": "Unity does not exist",
-    "IncorrectParamsFormatException": "You send a request with incorrect parameters",
-    "СompanyStocksIsPrivateException": "This company has private stocks, you could not see them",
-    "UnhandeledException": "Unhandled exception occurred!"
-}

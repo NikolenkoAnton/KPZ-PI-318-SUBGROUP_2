@@ -1,6 +1,0 @@
-{
-    "EntityNotExistException": "Einheit existiert nicht",
-    "IncorrectParamsFormatException": "Sie senden eine Anfrage mit falschen Parametern",
-    "СompanyStocksIsPrivateException": "Diese Firma hat private Aktien. Sie konnten sie nicht sehen",
-    "UnhandeledException": "Unbehandelte Ausnahme ist aufgetreten!"
-}

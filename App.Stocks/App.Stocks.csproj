@@ -2,18 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="Resources\Resource.de-de.json" />
-    <None Remove="Resources\Resource.en-US.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Resource.de-de.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resource.en-US.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
+
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
@@ -22,7 +12,10 @@
   <ItemGroup>
     <ProjectReference Include="..\App.Common\App.Common.csproj" />
   </ItemGroup>
+
+    
   <ItemGroup>
-    <Folder Include="Repositories\" />
+    <EmbeddedResource Include="Resources\**\*.json" />
   </ItemGroup>
+  
 </Project>
