@@ -8,15 +8,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace App.Web
 {
-    // TODO add description
+    // part of startup class, which contains methods for configuring dependency injection in solution
     public partial class Startup
     {
         static readonly WindsorContainer Container = new WindsorContainer();
 
-        // TODO add description
+        // register dependencies and returns custom ServiceProvider based on Castle.Windsor
         IServiceProvider GetServiceProvider(IServiceCollection services)
         {
             var container = Container;
+
+            Container.AddFacility<AspNetCoreFacility>(f => f.CrossWiresInto(services));
 
             RegisterComponents(container);
 
@@ -53,7 +55,8 @@ namespace App.Web
                 .BasedOn<ISingletoneDependency>()
                 .WithService.Self()
                 .WithService.AllInterfaces()
-                .Configure(registration => registration.CrossWired())
+                .LifestyleSingleton()
+                .Configure((registration) => registration.CrossWired())
             );
         }
 
@@ -68,7 +71,6 @@ namespace App.Web
 
         FromAssemblyDescriptor GetFromAssemblyDescriptor() => Classes.FromAssemblyInThisApplication(Assembly.GetEntryAssembly());
 
-        // TODO add logging
         void InitializeModules(WindsorContainer container)
         {
             var modules = container.ResolveAll<IModule>();
