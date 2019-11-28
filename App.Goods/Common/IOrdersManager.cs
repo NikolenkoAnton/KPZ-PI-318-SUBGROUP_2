@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using App.Goods.DTOs;
 using App.Goods.Models;
 
 namespace App.Goods.Common
 {
     public interface IOrdersManager
     {
-        Order MakeOrder(IEnumerable<int> products);
-        IEnumerable<Order> GetAllOrders();
+        OrderDto MakeOrder(IEnumerable<int> products);
+        IEnumerable<OrderDto> GetAllOrders();
     }
 }

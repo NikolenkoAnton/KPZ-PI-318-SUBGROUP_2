@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using App.Goods.Common;
+using App.Goods.DTOs;
 using App.Goods.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -20,7 +21,7 @@ namespace App.Goods.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Product> GetAllProducts()
+        public IEnumerable<ProductDto> GetAllProducts()
         {
             _logger.LogInformation("Call GetAllProducts method");
 
