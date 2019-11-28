@@ -39,73 +39,80 @@ namespace App.Goods
 
                 context.Products.AddRange(new[]
                 {
-                    new Product() {Id = 1, Name = "Банан", Cost = random.Next(10, 100)},
-                    new Product() {Id = 2, Name = "Молоко", Cost = random.Next(10, 100)},
-                    new Product() {Id = 3, Name = "Апельсин", Cost = random.Next(10, 100)},
-                    new Product() {Id = 4, Name = "Цукор", Cost = random.Next(10, 100)},
-                    new Product() {Id = 5, Name = "Кава", Cost = random.Next(10, 100)},
-                    new Product() {Id = 6, Name = "Печиво", Cost = random.Next(10, 100)},
-                    new Product() {Id = 7, Name = "Телефон", Cost = random.Next(10, 100)},
-                    new Product() {Id = 8, Name = "Телевізор", Cost = random.Next(10, 100)},
-                    new Product() {Id = 9, Name = "Вікно", Cost = random.Next(10, 100)}
+                    new Product() {Name = "Банан", Cost = random.Next(10, 100)},
+                    new Product() {Name = "Молоко", Cost = random.Next(10, 100)},
+                    new Product() {Name = "Апельсин", Cost = random.Next(10, 100)},
+                    new Product() {Name = "Цукор", Cost = random.Next(10, 100)},
+                    new Product() {Name = "Кава", Cost = random.Next(10, 100)},
+                    new Product() {Name = "Печиво", Cost = random.Next(10, 100)},
+                    new Product() {Name = "Телефон", Cost = random.Next(10, 100)},
+                    new Product() {Name = "Телевізор", Cost = random.Next(10, 100)},
+                    new Product() {Name = "Вікно", Cost = random.Next(10, 100)}
                 });
 
                 context.Orders.AddRange(new[]
                 {
-                    new Order() {Id = 1, OrderProducts = new List<OrderProduct>(new []
-                    {
-                        new OrderProduct
-                        {
-                            OrderId = 1,
-                            ProductId = 5
-                        },
-                        new OrderProduct
-                        {
-                            OrderId = 1,
-                            ProductId = 3
-                        },
-                        new OrderProduct
-                        {
-                            OrderId = 1,
-                            ProductId = 4
-                        }
-                    })},
-                    new Order() {Id = 2, OrderProducts = new List<OrderProduct>(new []
-                    {
-                        new OrderProduct
-                        {
-                            OrderId = 2,
-                            ProductId = 6
-                        },
-                        new OrderProduct
-                        {
-                            OrderId = 2,
-                            ProductId = 2
-                        }
-                    })},
-                    new Order() {Id = 3, OrderProducts = new List<OrderProduct>(new []
-                    {
-                        new OrderProduct
-                        {
-                            OrderId = 3,
-                            ProductId = 1
-                        },
-                        new OrderProduct
-                        {
-                            OrderId = 3,
-                            ProductId = 3
-                        },
-                        new OrderProduct
-                        {
-                            OrderId = 3,
-                            ProductId = 9
-                        }
-                    })}
+                    new Order(),
+                    new Order(),
+                    new Order()
                 });
 
                 context.SaveChanges();
 
-                
+                context.Orders.Find(1).OrderProducts = new List<OrderProduct>(new[]
+                {
+                    new OrderProduct
+                    {
+                        OrderId = 1,
+                        ProductId = 5
+                    },
+                    new OrderProduct
+                    {
+                        OrderId = 1,
+                        ProductId = 3
+                    },
+                    new OrderProduct
+                    {
+                        OrderId = 1,
+                        ProductId = 4
+                    }
+                });
+
+                context.Orders.Find(2).OrderProducts = new List<OrderProduct>(new[]
+                {
+                    new OrderProduct
+                    {
+                        OrderId = 2,
+                        ProductId = 6
+                    },
+                    new OrderProduct
+                    {
+                        OrderId = 2,
+                        ProductId = 2
+                    }
+                });
+
+                context.Orders.Find(3).OrderProducts = new List<OrderProduct>(new[]
+                {
+                    new OrderProduct
+                    {
+                        OrderId = 3,
+                        ProductId = 1
+                    },
+                    new OrderProduct
+                    {
+                        OrderId = 3,
+                        ProductId = 3
+                    },
+                    new OrderProduct
+                    {
+                        OrderId = 3,
+                        ProductId = 9
+                    }
+                });
+
+                context.SaveChanges();
+
             }
         }
     }

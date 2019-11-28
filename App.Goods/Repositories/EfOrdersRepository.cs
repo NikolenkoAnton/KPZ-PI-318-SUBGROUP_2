@@ -30,7 +30,14 @@ namespace App.Goods.Repositories
 
         public void Add(Order item)
         {
+            var products = item.OrderProducts;
+            item.OrderProducts = null;
+
             _context.Orders.Add(item);
+            _context.SaveChanges();
+
+            products.ForEach(i => i.OrderId = item.Id);
+            item.OrderProducts = products;
             _context.SaveChanges();
         }
 

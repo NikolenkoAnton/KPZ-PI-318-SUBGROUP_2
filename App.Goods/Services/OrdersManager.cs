@@ -34,20 +34,16 @@ namespace App.Goods.Services
 
             var orderedProducts = _productRepository.GetAll().Where(prod => products.Contains(prod.Id)).ToArray();
 
-            var lastOrder = GetAllOrders().LastOrDefault();
-            int id = (lastOrder?.Id ?? 0) + 1;
-
-            var ordersProducts = orderedProducts.Select(product => new OrderProduct {OrderId = id, ProductId = product.Id}).ToList();
+            var ordersProducts = orderedProducts.Select(product => new OrderProduct { ProductId = product.Id }).ToList();
 
             var newOrder = new Order
             {
-                Id = id,
                 OrderProducts = ordersProducts
             };
 
             _ordersRepository.Add(newOrder);
 
-            return new OrderDto(_ordersRepository.Get(id));
+            return new OrderDto(_ordersRepository.GetAll().LastOrDefault());
         }
     }
 }
