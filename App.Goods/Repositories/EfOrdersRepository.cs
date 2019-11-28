@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace App.Goods.Repositories
 {
-    public class EfOrdersRepository : IAddOnRepository<Order>, IDisposable, ISingletoneDependency
+    public class EfOrdersRepository : IAddOnRepository<Order>, IDisposable, ITransientDependency
     {
         private readonly GoodsDbContext _context;
 
@@ -31,16 +31,12 @@ namespace App.Goods.Repositories
         public void Add(Order item)
         {
             _context.Orders.Add(item);
+            _context.SaveChanges();
         }
 
         public void Dispose()
         {
             _context?.Dispose();
-        }
-
-        public void Save()
-        {
-            _context.SaveChanges();
         }
     }
 }

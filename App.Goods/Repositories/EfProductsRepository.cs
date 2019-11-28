@@ -8,7 +8,7 @@ using App.Goods.Models;
 
 namespace App.Goods.Repositories
 {
-    public class EfProductsRepository : IRepository<Product>, IDisposable, ISingletoneDependency
+    public class EfProductsRepository : IRepository<Product>, IDisposable, ITransientDependency
     {
         private readonly GoodsDbContext _context;
 

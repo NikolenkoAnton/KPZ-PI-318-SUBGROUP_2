@@ -46,7 +46,6 @@ namespace App.Goods.Services
             };
 
             _ordersRepository.Add(newOrder);
-            _ordersRepository.Save();
 
             return new OrderDto(_ordersRepository.Get(id));
         }
