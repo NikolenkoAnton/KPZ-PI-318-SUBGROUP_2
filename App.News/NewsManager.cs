@@ -26,7 +26,7 @@ namespace App.News
             if (news == null)
             {
                 logger.LogError("Entity was not found");
-                throw new EntityNotFoundException(typeof(NewsDto)); 
+                throw new EntityNotFoundException(typeof(Models.NewsDto)); 
             }
             news.Comments.ToList().Add(comment);
         }
