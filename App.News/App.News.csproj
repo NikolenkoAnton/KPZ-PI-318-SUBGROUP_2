@@ -14,4 +14,10 @@
     <ProjectReference Include="..\App.TestModule\App.Example.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="Resources\**\*.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\**\*.json" />
+  </ItemGroup>
 </Project>
