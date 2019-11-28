@@ -85,4 +85,5 @@ publish/
 # log files
 **/AppData/*
 /.vscode
+
 /App.News

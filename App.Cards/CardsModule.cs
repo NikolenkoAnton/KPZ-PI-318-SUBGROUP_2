@@ -17,21 +17,21 @@ namespace App.Cards
 
         private void RegisterDbContext(IWindsorContainer container)
         {
-            container.Register(Component.For<DbContextOptions<AppCardsDbContext>>().UsingFactoryMethod(() =>
+            container.Register(Component.For<DbContextOptions<CardsDbContext>>().UsingFactoryMethod(() =>
             {
-                var builder = new DbContextOptionsBuilder<AppCardsDbContext>();
-                builder.UseInMemoryDatabase("ExampleDb");
+                var builder = new DbContextOptionsBuilder<CardsDbContext>();
+                builder.UseInMemoryDatabase("CardsDb");
                 return builder.Options;
             }).LifestyleTransient());
 
-            container.Register(Component.For<AppCardsDbContext>().LifestyleTransient());
+            container.Register(Component.For<CardsDbContext>().LifestyleTransient());
 
             InitializeDbContext(container);
         }
 
         private void InitializeDbContext(IWindsorContainer container)
         {
-            using (var context = container.Resolve<AppCardsDbContext>())
+            using (var context = container.Resolve<CardsDbContext>())
             {
                 context.Cards.AddRange(new[]
                 {

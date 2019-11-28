@@ -15,11 +15,11 @@ namespace App.Cards.Repositories
         Card GetCardById(int id);
 
     }
-    public class InMemoryCardsRepository : ICardsRepository, ITransientDependency
+    public class EFCardsRepository : ICardsRepository, ITransientDependency
     {
-        private AppCardsDbContext context;
+        private CardsDbContext context;
 
-        public InMemoryCardsRepository(AppCardsDbContext context)
+        public EFCardsRepository(CardsDbContext context)
         {
             this.context = context;
         }

@@ -6,10 +6,10 @@ using App.Cards.Models;
 
 namespace App.Cards.Database
 {
-    public class AppCardsDbContext : DbContext
+    public class CardsDbContext : DbContext
     {
         public DbSet<Card> Cards { get; set; }
-        public AppCardsDbContext(DbContextOptions<AppCardsDbContext> options) : base(options)
+        public CardsDbContext(DbContextOptions<CardsDbContext> options) : base(options)
         {
 
         }
