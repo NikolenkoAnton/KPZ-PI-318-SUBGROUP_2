@@ -12,7 +12,7 @@ namespace App.News.Controllers
 {
     [Route("api/news")]
     [ApiController]
-    [TypeFilter(typeof(NewsExceptionFilter), Arguments = new object[] { nameof(NewsController) })]
+    [ServiceFilter(typeof(NewsExceptionFilter))]
     public class NewsController: ControllerBase
     {
         private readonly ILogger<NewsController> logger;
