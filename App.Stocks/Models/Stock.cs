@@ -10,6 +10,7 @@ namespace App.Stocks.Models
         public decimal Cost { get; set; }
         public DateTime Date { get; set; }
 
+        public int CompanyId { get; set; }
         public virtual Company Company { get; set; }
         public string DateView
         {

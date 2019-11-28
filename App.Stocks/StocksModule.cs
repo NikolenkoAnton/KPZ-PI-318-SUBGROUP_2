@@ -14,41 +14,48 @@ namespace App.Stocks
     public class StocksModule : IModule
     {
         readonly static string[] companiesName = new string[] { "Amazon", "McDonald’s", "GE", "Samsung", "Apple", "Huawei", "LG", "KFC", "Coca-Cola" };
-        public static IEnumerable<Company> InitCompanies()
+        public static void InitCompanies(StocksDBContext context)
         {
             var companies = new Company[9];
 
             for (int i = 0; i < companies.Length; i++)
             {
-                var stocks = GenerateStocks();
+                
 
                 var comp = new Company
                 {
                     Id = i + 1,
                     Name = companiesName[i],
-                    Stocks = stocks.ToArray(),
                     Description = "BlaBla",
                     IsOpenStocks = i % 2 == 0
                 };
 
-                companies[i] = comp;
+                context.Add(comp);
+                context.SaveChanges();
+
+
+                GenerateStocks(i + 1,context);
             }
 
-            return companies;
+             
         }
-        private static IEnumerable<Stock> GenerateStocks()
+        private static void GenerateStocks(int companyId,StocksDBContext context)
         {
             Stock[] stocks = new Stock[7];
 
             for (int i = 0; i < 7; i++)
             {
+                var isEven = i % 2 == 1;
                 stocks[i] = new Stock
                 {
+                    CompanyId = companyId,
                     Date = DateTime.Now.AddDays(i * -1),
                     Cost = new Random().Next(200 * i, 400 * i) + 470 * (i + 1)
                 };
             }
-            return stocks;
+
+            context.Stocks.AddRange(stocks);
+            context.SaveChanges();
         }
         public void Initialize(IWindsorContainer container)
         {
@@ -68,11 +75,11 @@ namespace App.Stocks
 
             InitializeDbContext(container);
         }
-        private void InitializeDbContext(IWindsorContainer container)
+        private  static void InitializeDbContext(IWindsorContainer container)
         {
             using (var context = container.Resolve<StocksDBContext>())
             {
-                context.Companies.AddRange(InitCompanies());
+                InitCompanies(context);
 
                 context.SaveChanges();
             }
