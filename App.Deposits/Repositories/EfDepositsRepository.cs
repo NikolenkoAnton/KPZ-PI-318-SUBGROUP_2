@@ -21,7 +21,7 @@ namespace App.Deposits.Repositories
         {
             dbContext.Deposits.Add(deposit);
 
-            dbContext.SaveChangesAsync();
+            dbContext.SaveChanges();
         }
 
         public IEnumerable<Deposit> GetAllDeposit() => dbContext.Deposits;
