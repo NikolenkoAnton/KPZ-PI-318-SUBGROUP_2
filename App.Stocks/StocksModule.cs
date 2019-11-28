@@ -14,13 +14,13 @@ namespace App.Stocks
     public class StocksModule : IModule
     {
         readonly static string[] companiesName = new string[] { "Amazon", "McDonald’s", "GE", "Samsung", "Apple", "Huawei", "LG", "KFC", "Coca-Cola" };
-        public static void InitCompanies(StocksDBContext context)
+        public void InitCompanies(StocksDBContext context)
         {
             var companies = new Company[9];
 
             for (int i = 0; i < companies.Length; i++)
             {
-                
+
 
                 var comp = new Company
                 {
@@ -34,12 +34,12 @@ namespace App.Stocks
                 context.SaveChanges();
 
 
-                GenerateStocks(i + 1,context);
+                GenerateStocks(i + 1, context);
             }
 
-             
+
         }
-        private static void GenerateStocks(int companyId,StocksDBContext context)
+        private void GenerateStocks(int companyId, StocksDBContext context)
         {
             Stock[] stocks = new Stock[7];
 
@@ -75,7 +75,7 @@ namespace App.Stocks
 
             InitializeDbContext(container);
         }
-        private  static void InitializeDbContext(IWindsorContainer container)
+        private void InitializeDbContext(IWindsorContainer container)
         {
             using (var context = container.Resolve<StocksDBContext>())
             {

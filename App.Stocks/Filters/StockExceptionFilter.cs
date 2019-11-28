@@ -35,17 +35,17 @@ namespace App.Stocks.Filters
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
 
                         logger.LogWarning($"Type : {EntityNotExistException.EntityType.AssemblyQualifiedName},EntityId {EntityNotExistException.EntityId}. Method: {EntityNotExistException.TargetSite}.");
-                        var errorMessage = _localizationManager.GetResource("EntityNotExists");
+                        var errorMessageage = _localizationManager.GetResource("EntityNotExists");
 
-                        await context.HttpContext.Response.WriteAsync(errorMessage);
+                        await context.HttpContext.Response.WriteAsync(errorMessageage);
                         break;
                     }
                 case IncorrectParamsFormatException incorrectParamsFormat:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                         logger.LogWarning(incorrectParamsFormat, $"Param name: {incorrectParamsFormat.ParamName}. Method: {incorrectParamsFormat.TargetSite}");
-                        var errorMessage = _localizationManager.GetResource("IncorrectParamsFormat");
-                        await context.HttpContext.Response.WriteAsync(errorMessage);
+                        var errorMessageage = _localizationManager.GetResource("IncorrectParamsFormat");
+                        await context.HttpContext.Response.WriteAsync(errorMessageage);
                         break;
 
                     }
@@ -53,18 +53,18 @@ namespace App.Stocks.Filters
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
                         logger.LogWarning(сompanyStocksIsPrivate, $"CompanyId: {сompanyStocksIsPrivate.CompanyId}. Method: {сompanyStocksIsPrivate.TargetSite}");
-                        var errorMess = _localizationManager.GetResource("СompanyStocksIsPrivate");
+                        var errorMessage = _localizationManager.GetResource("СompanyStocksIsPrivate");
 
-                        await context.HttpContext.Response.WriteAsync(errorMess);
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
                 default:
                     {
                         logger.LogError($"Method: {context.Exception.TargetSite}.");
-                        var errorMessage = _localizationManager.GetResource("Unhandeled");
+                        var errorMessageage = _localizationManager.GetResource("Unhandeled");
 
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        await context.HttpContext.Response.WriteAsync(errorMessage);
+                        await context.HttpContext.Response.WriteAsync(errorMessageage);
                         break;
                     }
             }
