@@ -3,9 +3,11 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using App.Loans.Services;
 using Microsoft.Extensions.Logging;
+using App.Loans.Filters;
 
 namespace App.Loans.Controllers
 {
+    [TypeFilter(typeof(LoansExceptionsFilter), Arguments = new object[] { nameof(LoansController) })]
     [Route("api/loans")]
     [ApiController]
     public class LoansController : ControllerBase
