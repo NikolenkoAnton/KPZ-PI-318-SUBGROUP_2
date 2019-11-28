@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 
 namespace App.Stocks.Localization
 {
-    public class ResourceFileLocalizationManager : ILocalizationManagerStocks, ITransientDependency
+    public class ResourceFileLocalizationManager : ILocalizationManager, ITransientDependency
     {
         private const string DefaultCulture = "en-US";
         private const string ResourceFileFormat = "Resource.{0}.json";

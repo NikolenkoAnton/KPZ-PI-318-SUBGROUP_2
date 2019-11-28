@@ -15,9 +15,10 @@ namespace App.Stocks.Filters
 {
     public class StockExceptionFilter : IAsyncExceptionFilter, ITransientDependency
     {
-        readonly ILocalizationManagerStocks _localizationManager;
         readonly ILogger<StockExceptionFilter> logger;
-        public StockExceptionFilter(ILogger<StockExceptionFilter> logger, ILocalizationManagerStocks localizationManager)
+        readonly ILocalizationManager _localizationManager;
+
+        public StockExceptionFilter(ILocalizationManager localizationManager, ILogger<StockExceptionFilter> logger)
         {
             this.logger = logger;
             _localizationManager = localizationManager;
@@ -33,30 +34,36 @@ namespace App.Stocks.Filters
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
 
                         logger.LogWarning($"Type : {EntityNotExistException.EntityType.AssemblyQualifiedName},EntityId {EntityNotExistException.EntityId}. Method: {EntityNotExistException.TargetSite}.");
+                        var errorMessage = _localizationManager.GetResource("EntityNotExistException");
 
-                        await context.HttpContext.Response.WriteAsync($"Entity with id : {EntityNotExistException.EntityId} and type {EntityNotExistException.EntityType.AssemblyQualifiedName} not found!");
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
                 case IncorrectParamsFormatException incorrectParamsFormat:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                         logger.LogWarning(incorrectParamsFormat, $"Param name: {incorrectParamsFormat.ParamName}. Method: {incorrectParamsFormat.TargetSite}");
-                        await context.HttpContext.Response.WriteAsync($@"You send request with incorrect {incorrectParamsFormat.ParamName} format");
+                        var errorMessage = _localizationManager.GetResource("IncorrectParamsFormatException");
+
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
                 case СompanyStocksIsPrivateException сompanyStocksIsPrivate:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
                         logger.LogWarning(сompanyStocksIsPrivate, $"CompanyId: {сompanyStocksIsPrivate.CompanyId}. Method: {сompanyStocksIsPrivate.TargetSite}");
-                        await context.HttpContext.Response.WriteAsync($"You cannot view information about these stocks.Company {сompanyStocksIsPrivate.CompanyName} has restricted access to stock information.");
+                        var errorMessage = _localizationManager.GetResource("СompanyStocksIsPrivateException");
+
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
                 default:
                     {
                         logger.LogError($"Method: {context.Exception.TargetSite}.");
+                        var errorMessage = _localizationManager.GetResource("Unhun");
 
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        await context.HttpContext.Response.WriteAsync("Unhandled exception ! Please, contact support for resolve");
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
             }

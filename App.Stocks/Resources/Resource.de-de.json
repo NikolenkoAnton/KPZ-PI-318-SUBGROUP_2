@@ -1,5 +1,6 @@
 {
-    "ResourceNotFound": "Ressource wurde nicht gefunden",
-    "InvalidBusinessOperation": "Hände hoch, alles kaputt",
-    "UnhandeledException": "Eine nicht behandelte Ausnahme ist aufgetreten!"
+    "EntityNotExistException": "Einheit existiert nicht",
+    "IncorrectParamsFormatException": "Sie senden eine Anfrage mit falschen Parametern",
+    "СompanyStocksIsPrivateException": "Diese Firma hat private Aktien. Sie konnten sie nicht sehen",
+    "UnhandeledException": "Unbehandelte Ausnahme ist aufgetreten!"
 }
