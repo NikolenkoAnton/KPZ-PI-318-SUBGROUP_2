@@ -9,13 +9,14 @@ using Newtonsoft.Json.Linq;
 
 namespace App.Stocks.Localization
 {
-    public class ResourceFileLocalizationManager : ILocalizationManager, ITransientDependency
+    public class ResourceFileLocalizationManager : ILocalizationManagerStocks, ITransientDependency
     {
-        private const string DefaultCulture = "en-US"; 
+        private const string DefaultCulture = "en-US";
         private const string ResourceFileFormat = "Resource.{0}.json";
         private const string ResourceFilePath = "Resources";
 
         private readonly ILogger<ResourceFileLocalizationManager> _logger;
+
         public ResourceFileLocalizationManager(ILogger<ResourceFileLocalizationManager> logger)
         {
             _logger = logger;
@@ -63,8 +64,8 @@ namespace App.Stocks.Localization
                 return null;
             try
             {
-                using(var fileStream = new StreamReader(GetFile(filePath)))
-                using(JsonTextReader reader = new JsonTextReader(fileStream))
+                using (var fileStream = new StreamReader(GetFile(filePath)))
+                using (JsonTextReader reader = new JsonTextReader(fileStream))
                 {
                     JObject resourceObject = (JObject)JToken.ReadFrom(reader);
                     if (resourceObject == null)

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
+﻿using System.Globalization;
 
 namespace App.Stocks.Localization
 {
-    public interface ILocalizationManager
+    public interface ILocalizationManagerStocks
     {
         string GetResource(string key);
         string GetResource(string key, CultureInfo culture);

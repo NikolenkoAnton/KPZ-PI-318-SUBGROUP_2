@@ -42,7 +42,9 @@ namespace App.Web
                 .BasedOn<ITransientDependency>()
                 .WithService.Self()
                 .WithService.AllInterfaces()
-                .LifestyleTransient());
+                .LifestyleTransient()
+                .Configure((registration) => registration.CrossWired())
+            );
         }
 
         void RegisterSingletoneServices(WindsorContainer container)
@@ -51,7 +53,8 @@ namespace App.Web
                 .BasedOn<ISingletoneDependency>()
                 .WithService.Self()
                 .WithService.AllInterfaces()
-                .LifestyleSingleton());
+                .Configure(registration => registration.CrossWired())
+            );
         }
 
         void RegisterModules(WindsorContainer container)
@@ -70,7 +73,7 @@ namespace App.Web
         {
             var modules = container.ResolveAll<IModule>();
 
-            foreach(var module in modules)
+            foreach (var module in modules)
             {
                 module.Initialize(container);
             }
