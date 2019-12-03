@@ -1,0 +1,5 @@
+{
+  "ProductNotFound": "Following product ids was not found: ",
+  "OrderIsEmpty": "Order product list is empty",
+  "UnhandledException": "Unhandled exception occurred !"
+}
