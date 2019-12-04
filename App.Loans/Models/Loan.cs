@@ -6,6 +6,7 @@ namespace App.Loans.Models
 {
     public class Loan
     {
+        public int Id { get; set; }
         private double money;//денежки
         public int time { get; set; }//кол-во платежей (ежемесячных)
         public double moneyTaked { get; set; }//скок взял

@@ -9,7 +9,7 @@ namespace App.Loans.Repositories
 {
     public interface ILoansRepository
     {
-        IEnumerable<string> GetActiveLoansList();
+        IEnumerable<Loan> GetActiveLoansList();
 
         Loan GetLoanById(int id);
     }
@@ -30,9 +30,9 @@ namespace App.Loans.Repositories
             str[2] = loans[2].ToString();
         }
 
-        public IEnumerable<string> GetActiveLoansList()
+        public IEnumerable<Loan> GetActiveLoansList()
         {
-            return str;
+            return loans;
         }
 
         public Loan GetLoanById(int id)

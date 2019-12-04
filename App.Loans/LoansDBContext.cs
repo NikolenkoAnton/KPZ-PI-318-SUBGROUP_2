@@ -7,7 +7,7 @@ using App.Loans.Models;
 
 namespace App.Loans
 {
-    class LoansDBContext : DbContext
+    public class LoansDBContext : DbContext
     {
         public DbSet<Loan> Loans { get; set; }
 
