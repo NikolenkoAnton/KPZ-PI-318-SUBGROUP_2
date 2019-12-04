@@ -12,24 +12,24 @@ namespace App.UserSupport.Models
         //Client who write Handling
         private Client clientHandling;
 
-        public Handling(Client client, string firstmessage, int id)
+        public Handling(Client client, string firstmessage, int id,int idmess)
         {
             Id = id;
             status = false;
             clientHandling = client;
-            WriteMessage(firstmessage);
+            WriteMessage(firstmessage,idmess);
         }
         public Handling() { }
-        public void WriteMessage(string mess)
+        public void WriteMessage(string mess,int id)
         {
             if (status == false)
-                context.Add(new Message(clientHandling,mess));
+                context.Add(new Message(clientHandling,mess,id));
         }
 
-        public void WriteAnswer(string answer)
+        public void WriteAnswer(string answer,int id)
         {
             if (status == false)
-                context.Add(new Message(answer));
+                context.Add(new Message(answer,id));
         }
         //If closed handling, no display in active handlings
         public override string ToString()
