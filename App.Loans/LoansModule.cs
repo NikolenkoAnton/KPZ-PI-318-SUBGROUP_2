@@ -12,6 +12,7 @@ namespace App.Loans
     {
         public void Initialize(IWindsorContainer container)
         {
+            container.Register(Component.For<IValidateServices>().ImplementedBy<ValidateServices>().LifestyleSingleton());
             RegisterDbContext(container);
         }
         
