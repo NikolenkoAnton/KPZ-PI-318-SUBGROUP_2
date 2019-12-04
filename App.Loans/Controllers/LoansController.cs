@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using App.Loans.Services;
 using Microsoft.Extensions.Logging;
 using App.Loans.Filters;
+using App.Loans.Models;
 
 namespace App.Loans.Controllers
 {
@@ -27,7 +28,7 @@ namespace App.Loans.Controllers
         }
 
         [HttpGet("All")]
-        public ActionResult<IEnumerable<string>> GetActiveLoansList()
+        public ActionResult<IEnumerable<Loan>> GetActiveLoansList()
         {
             _logger.LogInformation("call GetActiveLoansList method");
             return _valuesManager.GetListActiveLoans().ToList();
