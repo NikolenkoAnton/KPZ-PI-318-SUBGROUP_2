@@ -7,14 +7,14 @@ using App.Loans.Models;
 
 namespace App.Loans
 {
-    public class LoansEFRepository : ILoansRepository,ISingletoneDependency
+    public class LoansEFRepository : ILoansRepository,ITransientDependency
     {
         private readonly LoansDBContext _loanDbContext;
         public LoansEFRepository(LoansDBContext loansDBContext)
         {
             _loanDbContext = loansDBContext;
         }
-        public IEnumerable<Loan> GetActiveLoansList() => _loanDbContext.Loans;
+        public IQueryable<Loan> GetActiveLoansList() => _loanDbContext.Loans;
         public Loan GetLoanById(int id) => _loanDbContext.Loans.Where(f => f.Id == id).FirstOrDefault();
     }
 }
