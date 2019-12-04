@@ -19,6 +19,7 @@ namespace App.UserSupport.Models
             clientHandling = client;
             WriteMessage(firstmessage);
         }
+        public Handling() { }
         public void WriteMessage(string mess)
         {
             if (status == false)

@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using App.Configuration;
 using App.UserSupport.Models;
+using System.Linq;
 
 namespace App.UserSupport.Repositories
 {
     public interface IHandlingsRepository
     {
-        IEnumerable<string> GetStringListActiveHandlings();
+        IQueryable<Handling> GetHandlings();
         Handling Get(int id);
     }
-    public class InMemoryUsersRepository : IHandlingsRepository, ITransientDependency
+   /* public class InMemoryUsersRepository : IHandlingsRepository, ITransientDependency
     {
         Handling[] handlings = new Handling[5];
         string[] handling = new string[5];
@@ -42,5 +43,5 @@ namespace App.UserSupport.Repositories
                 return null;
             return handlings[id];
         }
-    }
+    }*/
 }

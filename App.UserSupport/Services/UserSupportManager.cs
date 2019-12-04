@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using App.UserSupport.Exceptions;
 
 namespace App.UserSupport
-{
+{ 
     public interface IUserSupportManager
     {
         void SetHandlingStatusCompleted(int id);
