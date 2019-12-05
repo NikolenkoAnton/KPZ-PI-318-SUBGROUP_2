@@ -12,12 +12,12 @@ namespace App.UserSupport.Models
         //Client who write Handling
         private Client clientHandling;
 
-        public Handling(Client client, string firstmessage, int id,int idmess)
+        public Handling(Client client, string firstmessage, int id,int messageId)
         {
             Id = id;
             status = false;
             clientHandling = client;
-            WriteMessage(firstmessage,idmess);
+            WriteMessage(firstmessage, messageId);
         }
         public Handling() { }
         public void WriteMessage(string mess,int id)
