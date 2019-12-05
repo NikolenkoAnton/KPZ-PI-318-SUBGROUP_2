@@ -1,0 +1,6 @@
+{
+    "EntityNotFound": "Card was not found",
+    "Blocked": "The card is blocked!",
+    "Limit": "Invalid business operation with limit",
+    "UnhandeledException": "Unhandled exception occurred !"
+}

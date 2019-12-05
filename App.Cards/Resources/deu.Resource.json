@@ -1,0 +1,6 @@
+{
+    "EntityNotFound": "Karte wurde nicht gefunden",
+    "Blocked": "Die Karte ist gesperrt!",
+    "Limit": "Ungültiger Geschäftsbetrieb mit Limit",
+    "UnhandeledException": "Eine nicht behandelte Ausnahme ist aufgetreten!"
+}

@@ -4,26 +4,28 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using App.Cards.Exceptions;
+using App.Cards.Localization;
+using App.Configuration;
 
-namespace App.Example.Filters
+namespace App.Cards.Filters
 {
     /// <summary>
     /// Example of async exception filter.
     /// The purpose of this class -> catch unhandeled exceptions and wrap sensitive data into common form
     /// </summary>
-    public class CardsExceptionFilter : IAsyncExceptionFilter
+    public class CardsExceptionFilter : IAsyncExceptionFilter, ITransientDependency
     {
-        readonly string _context;
         readonly ILogger<CardsExceptionFilter> logger;
-        public CardsExceptionFilter(ILogger<CardsExceptionFilter> logger, string context)
+        readonly ILocalizationManager _localizationManager;
+
+        public CardsExceptionFilter(ILogger<CardsExceptionFilter> logger, ILocalizationManager localizationManager)
         {
             this.logger = logger;
-            _context = context;
+            _localizationManager = localizationManager;
         }
 
         public async Task OnExceptionAsync(ExceptionContext context)
         {
-            logger.LogError(context.Exception, $"Error occurred in context of {_context}");
             logger.LogWarning($"ErrorType : {context.Exception.GetType()}");
 
             switch (context.Exception)
@@ -32,14 +34,16 @@ namespace App.Example.Filters
                     {
 
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
-                        await context.HttpContext.Response.WriteAsync($"Not Found: {entityNotFound.EntityType.AssemblyQualifiedName}");
+                        var errorMessageage = _localizationManager.GetResource("EntityNotFound");
+                        await context.HttpContext.Response.WriteAsync(errorMessageage);
                         break;
                     }
                 case BlockedException blockedException:
                     {
 
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        await context.HttpContext.Response.WriteAsync($"Card's with id {blockedException.CardId} is blocked!");
+                        var errorMessageage = _localizationManager.GetResource("Blocked");
+                        await context.HttpContext.Response.WriteAsync(errorMessageage);
                         break;
                     }
                 case LimitException limitException:
@@ -47,13 +51,15 @@ namespace App.Example.Filters
                         var message = limitException.Message;
                         var actionName = limitException.LimitAction;
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        await context.HttpContext.Response.WriteAsync($"Invalid {actionName} opertation.Details: {message}");
+                        var errorMessageage = _localizationManager.GetResource("Limit");
+                        await context.HttpContext.Response.WriteAsync(errorMessageage);
                         break;
                     }
                 default:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        await context.HttpContext.Response.WriteAsync("Unhandled exception ! Please, contact support for resolve");
+                        var errorMessageage = _localizationManager.GetResource("Unhandeled");
+                        await context.HttpContext.Response.WriteAsync(errorMessageage);
                         break;
                     }
             }

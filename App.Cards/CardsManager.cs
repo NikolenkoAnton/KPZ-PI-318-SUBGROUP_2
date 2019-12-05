@@ -34,7 +34,7 @@ namespace App.Cards
 
             if (card == null)
             {
-                throw new EntityNotFoundException(card.GetType());
+                throw new EntityNotFoundException("Card");
             }
 
             if (card.IsBlocked)
