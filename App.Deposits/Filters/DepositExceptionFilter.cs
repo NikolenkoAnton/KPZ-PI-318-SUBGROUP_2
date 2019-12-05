@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Threading.Tasks;
+using App.Deposits.Localization;
 
 namespace App.Deposits.Filters
 {
@@ -11,11 +12,13 @@ namespace App.Deposits.Filters
     {
         private readonly string context;
         private readonly ILogger<DepositExceptionFilter> logger;
+        private readonly ILocalizationManager localizationManager;
 
-        public DepositExceptionFilter(ILogger<DepositExceptionFilter> logger, string context)
+        public DepositExceptionFilter(ILogger<DepositExceptionFilter> logger, string context, ILocalizationManager localizationManager)
         {
             this.context = context;
             this.logger = logger;
+            this.localizationManager = localizationManager;
         }
 
         public async Task OnExceptionAsync(ExceptionContext context)
@@ -28,24 +31,29 @@ namespace App.Deposits.Filters
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
-                        logger.LogWarning($"{e.Message}. Method: {e.TargetSite}.");
+                        var errorMessage = localizationManager.GetResource("InvalidDataDTO");
 
-                        await context.HttpContext.Response.WriteAsync(e.Message);
+                        logger.LogWarning($"{e.Message}. Method: {e.TargetSite}.");
+                        
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
                 case EntityNotExistException e:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
 
+                        var errorMessage = localizationManager.GetResource("EntityNotExist");
+
                         logger.LogWarning($"Type : {e.EntityType.AssemblyQualifiedName},EntityId {e.EntityId}. Method: {e.TargetSite}.");
 
-                        await context.HttpContext.Response.WriteAsync($"Entity with id : {e.EntityId} and type {e.EntityType.AssemblyQualifiedName} not found!");
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
                 default:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        await context.HttpContext.Response.WriteAsync("Unhandled exception ! Please, contact support for resolve");
+                        var errorMessage = localizationManager.GetResource("UnhandledException");
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
             }
