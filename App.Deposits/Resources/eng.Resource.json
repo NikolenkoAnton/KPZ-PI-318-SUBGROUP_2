@@ -1,0 +1,5 @@
+{
+  "InvalidDataDTO": "Invalid data",
+  "EntityNotExist": "Resource was not found",
+  "UnhandeledException": "Unhandled exception occurred !"
+}
