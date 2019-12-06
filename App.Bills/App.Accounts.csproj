@@ -14,4 +14,8 @@
     <ProjectReference Include="..\App.Common\App.Common.csproj" />
   </ItemGroup>
 
+ <ItemGroup>
+    <EmbeddedResource Include="Resources\**\*.json" />
+  </ItemGroup>
+  
 </Project>
