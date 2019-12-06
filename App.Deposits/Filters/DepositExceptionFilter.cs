@@ -5,18 +5,17 @@ using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Threading.Tasks;
 using App.Deposits.Localization;
+using App.Configuration;
 
 namespace App.Deposits.Filters
 {
-    public class DepositExceptionFilter : IAsyncExceptionFilter
+    public class DepositExceptionFilter : IAsyncExceptionFilter, ITransientDependency
     {
-        private readonly string context;
         private readonly ILogger<DepositExceptionFilter> logger;
         private readonly ILocalizationManager localizationManager;
 
-        public DepositExceptionFilter(ILogger<DepositExceptionFilter> logger, string context, ILocalizationManager localizationManager)
+        public DepositExceptionFilter(ILocalizationManager localizationManager, ILogger<DepositExceptionFilter> logger)
         {
-            this.context = context;
             this.logger = logger;
             this.localizationManager = localizationManager;
         }

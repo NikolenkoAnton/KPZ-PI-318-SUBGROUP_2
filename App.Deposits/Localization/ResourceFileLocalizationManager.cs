@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using App.Configuration;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -8,7 +9,7 @@ using System.Linq;
 
 namespace App.Deposits.Localization
 {
-    public class ResourceFileLocalizationManager : ILocalizationManager
+    public class ResourceFileLocalizationManager : ILocalizationManager, ITransientDependency
     {
         private const string DefaultCulture = "en-US";
         private const string ResourceFileFormat = "{0}.Resource.json";
