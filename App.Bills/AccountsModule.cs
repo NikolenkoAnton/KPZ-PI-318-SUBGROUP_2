@@ -1,4 +1,5 @@
 ﻿using App.Accounts.Inerfaces;
+using App.Accounts.Localization;
 using App.Accounts.Models;
 using App.Accounts.Services;
 using App.Configuration;

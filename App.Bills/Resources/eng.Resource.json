@@ -1,0 +1,6 @@
+{
+  "ResourceNotFound": "Account does not exist!",
+  "BillIsBlocked": "Account is blocked already!",
+  "BillIsUnblocked": "Account is unblocked already!",
+  "UnhandledException": "Unhandled exception occurred!"
+}
