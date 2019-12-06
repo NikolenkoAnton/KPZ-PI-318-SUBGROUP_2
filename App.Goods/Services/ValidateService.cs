@@ -19,7 +19,7 @@ namespace App.Goods.Services
         {
             if (!ids.Any())
             {
-                throw new EmptyOrderException("Order product list is empty");
+                throw new EmptyOrderException("OrderIsEmpty");
             }
 
             var goods = _productsManager.GetAllProducts().Select(good => good.Id);
