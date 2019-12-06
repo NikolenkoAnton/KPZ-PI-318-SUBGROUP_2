@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using App.Accounts.Inerfaces;
 using App.Accounts.Models;
 
 namespace App.Accounts
@@ -12,10 +13,5 @@ namespace App.Accounts
             if (bill.Name == null || bill.Name == "" || bill.Surname == null || bill.Surname == "")
                 throw new Exception("Bill owner doesn't exist!");
         }
-    }
-
-    public interface IValidateServices
-    {
-        void ValidateBill(Account bill);
     }
 }
