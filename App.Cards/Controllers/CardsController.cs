@@ -34,7 +34,7 @@ namespace App.Cards.Controllers
 
             if (card == null)
             {
-                throw new EntityNotFoundException("Card");
+                throw new EntityNotFoundException(typeof(Card));
             }
 
             return card;
