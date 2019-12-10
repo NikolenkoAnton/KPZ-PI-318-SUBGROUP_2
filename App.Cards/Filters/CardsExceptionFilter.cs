@@ -42,7 +42,7 @@ namespace App.Cards.Filters
                     {
 
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        var errorMessageage = _localizationManager.GetResource("Blocked");
+                        var errorMessageage = _localizationManager.GetResource("CardBlocked");
                         await context.HttpContext.Response.WriteAsync(errorMessageage);
                         break;
                     }
@@ -51,14 +51,14 @@ namespace App.Cards.Filters
                         var message = limitException.Message;
                         var actionName = limitException.LimitAction;
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        var errorMessageage = _localizationManager.GetResource("Limit");
+                        var errorMessageage = _localizationManager.GetResource("CardLimit");
                         await context.HttpContext.Response.WriteAsync(errorMessageage);
                         break;
                     }
                 default:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        var errorMessageage = _localizationManager.GetResource("Unhandeled");
+                        var errorMessageage = _localizationManager.GetResource("UnhandeletedErrorOccurred");
                         await context.HttpContext.Response.WriteAsync(errorMessageage);
                         break;
                     }
