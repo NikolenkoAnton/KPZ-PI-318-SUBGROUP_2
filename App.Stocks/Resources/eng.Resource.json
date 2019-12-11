@@ -1,0 +1,6 @@
+{
+    "EntityNotExist": "Unity does not exist",
+    "IncorrectParamsFormat": "You send a request with incorrect parameters",
+    "СompanyStocksIsPrivate": "This company has private stocks, you could not see them",
+    "Unhandeled": "Unhandled exception occurred!"
+}

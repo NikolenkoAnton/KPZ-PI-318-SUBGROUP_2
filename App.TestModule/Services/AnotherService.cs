@@ -1,4 +1,4 @@
-﻿namespace App.Example
+﻿namespace App.Example.Services
 {
     public interface IAnotherService
     {
@@ -9,7 +9,7 @@
     {
         public void DoAnything()
         {
-            // TODO do nothing
+            // do nothing
         }
     }
 }
