@@ -30,12 +30,14 @@ namespace App.Loans.Filters
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                         var errorMessage = _localizationManager.GetResource("Loanpaid");
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
                 case EntityNotFoundException entityNotFound:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
                         var errorMessage = _localizationManager.GetResource("ResourceNotFound");
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
                 default:
@@ -43,6 +45,7 @@ namespace App.Loans.Filters
                         logger.LogError($"Method: {context.Exception.TargetSite}.");
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         var errorMessage = _localizationManager.GetResource("UnhandeledException");
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
             }
