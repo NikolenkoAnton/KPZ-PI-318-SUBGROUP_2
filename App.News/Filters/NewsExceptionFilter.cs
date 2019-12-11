@@ -15,6 +15,7 @@ namespace App.News.Filters
         readonly ILocalizationManager localizationManager;
         public NewsExceptionFilter(ILogger<NewsExceptionFilter> logger,ILocalizationManager localizationManager)
         {
+            this.localizationManager = localizationManager;
             this.logger = logger;
             this.localizationManager = localizationManager;
         }
