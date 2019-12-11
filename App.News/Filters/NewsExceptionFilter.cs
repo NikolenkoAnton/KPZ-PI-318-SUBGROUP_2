@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using App.News.Exceptions;
+using App.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
@@ -8,15 +9,13 @@ using App.News.Localization;
 
 namespace App.News.Filters
 {
-    public class NewsExceptionFilter : ExceptionFilterAttribute, IAsyncExceptionFilter
+    public class NewsExceptionFilter : IAsyncExceptionFilter, ITransientDependency
     {
-        private readonly string context;
         private readonly ILogger<NewsExceptionFilter> logger;
         readonly ILocalizationManager localizationManager;
-        public NewsExceptionFilter(ILogger<NewsExceptionFilter> logger, string context,ILocalizationManager localizationManager)
+        public NewsExceptionFilter(ILogger<NewsExceptionFilter> logger,ILocalizationManager localizationManager)
         {
             this.logger = logger;
-            this.context = context;
             this.localizationManager = localizationManager;
         }
 
