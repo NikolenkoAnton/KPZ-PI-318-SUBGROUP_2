@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace App.Accounts.Localization
+namespace App.Loans.Localization
 {
     public class ResourceFileLocalizationManager : ILocalizationManager, ITransientDependency
     {

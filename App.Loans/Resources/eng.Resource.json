@@ -1,6 +1,5 @@
 {
   "ResourceNotFound": "Account does not exist!",
-  "BillIsBlocked": "Account is blocked already!",
-  "BillIsUnblocked": "Account is unblocked already!",
+  "Loanpaid": "Das Darlehen ist bereits bezahlt!",
   "UnhandledException": "Unhandled exception occurred!"
 }

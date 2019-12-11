@@ -2,7 +2,7 @@
 using System.Globalization;
 
 
-namespace App.Accounts.Localization
+namespace App.Loans.Localization
 {
     public interface ILocalizationManager
     {
