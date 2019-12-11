@@ -14,13 +14,16 @@ namespace App.UserSupport.Filters
     {
             readonly string _context;
             readonly ILogger<UserSupportExceptionFilter> logger;
-            public UserSupportExceptionFilter(ILogger<UserSupportExceptionFilter> logger, string context)
+        readonly ILocalizationManager _localizationManager;
+
+        public UserSupportExceptionFilter(ILogger<UserSupportExceptionFilter> logger, string context, ILocalizationManager localizationManager)
             {
                 this.logger = logger;
                 _context = context;
-            }
+            _localizationManager = localizationManager;
+        }
 
-            public async Task OnExceptionAsync(ExceptionContext context)
+        public async Task OnExceptionAsync(ExceptionContext context)
             {
                 logger.LogError(context.Exception, $"Error occurred in context of {_context}");
                 switch (context.Exception)
