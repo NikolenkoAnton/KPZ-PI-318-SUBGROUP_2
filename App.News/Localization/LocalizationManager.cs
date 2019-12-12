@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace App.News.Localization
 {
-    public class LocalizationManager : ILocalizationManager
+    public class LocalizationManager : ILocalizationManager, ITransientDependency
     {
         private const string DefaultCulture = "en-US"; // English
         private const string ResourceFileFormat = "{0}.Resource.json";
