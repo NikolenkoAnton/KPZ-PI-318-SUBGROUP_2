@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using App.UserSupport.Exceptions;
 using Microsoft.AspNetCore.Http;
+using App.UserSupport.Localization;
 
 namespace App.UserSupport.Filters
 {
@@ -14,13 +15,16 @@ namespace App.UserSupport.Filters
     {
             readonly string _context;
             readonly ILogger<UserSupportExceptionFilter> logger;
-            public UserSupportExceptionFilter(ILogger<UserSupportExceptionFilter> logger, string context)
+        readonly ILocalizationManager _localizationManager;
+
+        public UserSupportExceptionFilter(ILogger<UserSupportExceptionFilter> logger, string context, ILocalizationManager localizationManager)
             {
                 this.logger = logger;
                 _context = context;
-            }
+            _localizationManager = localizationManager;
+        }
 
-            public async Task OnExceptionAsync(ExceptionContext context)
+        public async Task OnExceptionAsync(ExceptionContext context)
             {
                 logger.LogError(context.Exception, $"Error occurred in context of {_context}");
                 switch (context.Exception)
@@ -28,13 +32,15 @@ namespace App.UserSupport.Filters
                     case HandlingAlreadyCompeletedException handlingAlredyComplete:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        await context.HttpContext.Response.WriteAsync($"Handling with id {handlingAlredyComplete.HandlingId} is already complete!");
+                        var errorMessage = _localizationManager.GetResource("Handling");
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
                 case EntityNotFoundException entityNotFound:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
-                        await context.HttpContext.Response.WriteAsync($"Not Found: {entityNotFound.EntityType.AssemblyQualifiedName}");
+                        var errorMessage = _localizationManager.GetResource("ResourceNotFound");
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
                 default:
@@ -42,8 +48,9 @@ namespace App.UserSupport.Filters
                             logger.LogError($"Method: {context.Exception.TargetSite}.");
 
                             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                            await context.HttpContext.Response.WriteAsync("Unhandled exception ! Please, contact support for resolve");
-                            break;
+                        var errorMessage = _localizationManager.GetResource("UnhandeledException");
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
+                        break;
                         }
                 }
                 context.ExceptionHandled = true;

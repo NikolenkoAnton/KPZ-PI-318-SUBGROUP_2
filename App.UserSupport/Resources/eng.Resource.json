@@ -1,0 +1,5 @@
+{
+  "ResourceNotFound": "Handling does not exist!",
+  "Handling": "Handling is already complete!",
+  "UnhandledException": "Unhandled exception occurred!"
+}
