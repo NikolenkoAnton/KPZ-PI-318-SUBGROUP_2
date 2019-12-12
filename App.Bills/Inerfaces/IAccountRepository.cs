@@ -12,6 +12,5 @@ namespace App.Accounts.Inerfaces
         Account GetBillById(int id);
         Account BlockBill(int id);
         Account UnblockBill(int id);
-
     }
 }

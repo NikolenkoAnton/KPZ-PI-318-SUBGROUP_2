@@ -1,6 +1,6 @@
 ﻿using App.Cards.Exceptions;
+using App.Cards.Filters;
 using App.Cards.Models;
-using App.Example.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,8 +11,8 @@ namespace App.Cards.Controllers
 {
     [Route("api/cards")]
     [ApiController]
-    [TypeFilter(typeof(CardsExceptionFilter), Arguments = new object[] { nameof(CardsController) })]
 
+    [ServiceFilter(typeof(CardsExceptionFilter))]
     public class CardsController : ControllerBase
     {
         readonly ICardsManager cardsManager;
@@ -34,7 +34,7 @@ namespace App.Cards.Controllers
 
             if (card == null)
             {
-                throw new EntityNotFoundException(card.GetType());
+                throw new EntityNotFoundException(typeof(Card));
             }
 
             return card;

@@ -9,5 +9,6 @@ namespace App.Cards.Exceptions
         {
             EntityType = entityType;
         }
+        public EntityNotFoundException(string Type) { }
     }
 }

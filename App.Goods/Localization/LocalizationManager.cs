@@ -7,12 +7,11 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-
-namespace App.News.Localization
+namespace App.Goods.Localization
 {
-    public class LocalizationManager : ILocalizationManager
+    public class LocalizationManager : ILocalizationManager, ITransientDependency
     {
-        private const string DefaultCulture = "en-US"; // English
+        private const string DefaultCulture = "en-US";
         private const string ResourceFileFormat = "{0}.Resource.json";
         private const string ResourceFilePath = "Resources";
 
@@ -87,7 +86,7 @@ namespace App.News.Localization
             catch (Exception ex)
             {
                 _logger.LogError("Cannot read localization file", ex);
-                throw ex;
+                throw;
             }
         }
 
@@ -113,12 +112,10 @@ namespace App.News.Localization
 
         private string GetAbsolutePath(string resourcePath)
         {
-            // normalize path to correspond to resource files path rules
             var path = resourcePath
                 .Replace('\\', '.')
                 .Replace('/', '.');
 
-            // get the embedded resource name from the current assembly
             var absoluteResourcePath = typeof(LocalizationManager).Assembly
                 .GetManifestResourceNames()
                 .FirstOrDefault(r => r.EndsWith(path));

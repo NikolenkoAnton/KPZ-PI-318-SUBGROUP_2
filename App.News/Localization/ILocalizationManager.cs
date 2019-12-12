@@ -4,10 +4,10 @@ using System.Text;
 using System.Globalization;
 namespace App.News.Localization
 {
-    public interface ILocalizationManager
+     public interface ILocalizationManager
     {
         string GetResource(string key);
-
+       
         string GetResource(string key, CultureInfo culture);
     }
 }
