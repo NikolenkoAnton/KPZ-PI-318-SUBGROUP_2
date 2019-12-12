@@ -12,12 +12,11 @@ namespace App.News.Filters
     public class NewsExceptionFilter : IAsyncExceptionFilter, ITransientDependency
     {
         private readonly ILogger<NewsExceptionFilter> logger;
-        readonly ILocalizationManager localizationManager;
+        private readonly ILocalizationManager localizationManager;
         public NewsExceptionFilter(ILogger<NewsExceptionFilter> logger,ILocalizationManager localizationManager)
         {
             this.localizationManager = localizationManager;
             this.logger = logger;
-            this.localizationManager = localizationManager;
         }
 
         public async Task OnExceptionAsync(ExceptionContext context)
