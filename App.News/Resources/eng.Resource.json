@@ -1,5 +1,5 @@
 {
   "ResourceNotFound": "Resource was not found",
-  "ValidationException": "Hoppla! Falsche Eingabe",
+  "ValidationException": "Ooops! Incorrect input",
   "UnhandeledException": "Unhandled exception occurred !"
 }

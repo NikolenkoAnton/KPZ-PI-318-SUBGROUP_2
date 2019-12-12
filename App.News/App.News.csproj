@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\App.Common\App.Common.csproj" />
-    <ProjectReference Include="..\App.TestModule\App.Example.csproj" />
   </ItemGroup>
 
   <ItemGroup>
