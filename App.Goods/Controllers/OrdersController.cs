@@ -11,7 +11,7 @@ namespace App.Goods.Controllers
 {
     [Route("api/goods/orders")]
     [ApiController]
-    [TypeFilter(typeof(GoodsExceptionFilter), Arguments = new object[] { nameof(OrdersController) })]
+    [ServiceFilter(typeof(GoodsExceptionFilter))]
     public class OrdersController : ControllerBase
     {
         private readonly IOrdersManager _ordersManager;

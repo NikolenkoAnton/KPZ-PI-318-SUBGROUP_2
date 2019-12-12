@@ -1,4 +1,5 @@
 ﻿using App.Accounts.Exceptions;
+using App.Accounts.Localization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
@@ -14,10 +15,13 @@ namespace App.Accounts.Filters
     {
         readonly string _context;
         readonly ILogger<AccountsExceptionFilter> logger;
-        public AccountsExceptionFilter(ILogger<AccountsExceptionFilter> logger, string context)
+        readonly ILocalizationManager _localizationManager;
+
+        public AccountsExceptionFilter(ILogger<AccountsExceptionFilter> logger, string context, ILocalizationManager localizationManager)
         {
             this.logger = logger;
             _context = context;
+            _localizationManager = localizationManager;
         }
 
         public async Task OnExceptionAsync(ExceptionContext context)
@@ -30,27 +34,31 @@ namespace App.Accounts.Filters
                     {
 
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
-                        await context.HttpContext.Response.WriteAsync($"Not Found: {entityNotFound.EntityType.AssemblyQualifiedName}");
+                        var errorMessage = _localizationManager.GetResource("ResourceNotFound");
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
                 case BillAlreadyBlockedException blockedException:
                     {
 
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        await context.HttpContext.Response.WriteAsync($"Bill with id {blockedException.BillId} is blocked!");
+                        var errorMessage = _localizationManager.GetResource("BillIsBlocked");
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
                 case BillAlreadyUnlockedException unlockedException:
                     {
 
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        await context.HttpContext.Response.WriteAsync($"Bill with id {unlockedException.BillId} is unblocked!");
+                        var errorMessage = _localizationManager.GetResource("BillIsUnblocked");
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
                 default:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        await context.HttpContext.Response.WriteAsync("Unhandled exception ! Please, contact support for resolve");
+                        var errorMessage = _localizationManager.GetResource("UnhandledException");
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
                         break;
                     }
             }

@@ -1,0 +1,5 @@
+{
+  "InvalidDataDTO": "RUngültige Daten",
+  "EntityNotExist": "Ressource wurde nicht gefunden",
+  "UnhandeledException": "Eine nicht behandelte Ausnahme ist aufgetreten!"
+}
