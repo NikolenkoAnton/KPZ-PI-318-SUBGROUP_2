@@ -1,22 +1,23 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using App.News.Exceptions;
+using App.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
-using App.Configuration;
 using App.News.Localization;
 
 namespace App.News.Filters
 {
-    public class NewsExceptionFilter :  IAsyncExceptionFilter, ITransientDependency
+    public class NewsExceptionFilter : IAsyncExceptionFilter, ITransientDependency
     {
         private readonly ILogger<NewsExceptionFilter> logger;
-        private readonly ILocalizationManager localizationManager;
-        public NewsExceptionFilter(ILogger<NewsExceptionFilter> logger, ILocalizationManager localizationManager)
+        readonly ILocalizationManager localizationManager;
+        public NewsExceptionFilter(ILogger<NewsExceptionFilter> logger,ILocalizationManager localizationManager)
         {
             this.localizationManager = localizationManager;
             this.logger = logger;
+            this.localizationManager = localizationManager;
         }
 
         public async Task OnExceptionAsync(ExceptionContext context)
@@ -41,8 +42,8 @@ namespace App.News.Filters
                 default:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        var errorMessage = localizationManager.GetResource("UnhandeledException");
-                        await context.HttpContext.Response.WriteAsync(errorMessage);
+                        var message = localizationManager.GetResource("UnhandeledException");
+                        await context.HttpContext.Response.WriteAsync(message);
                         break;
                     }
             }
