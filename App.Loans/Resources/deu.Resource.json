@@ -1,0 +1,5 @@
+{
+  "ResourceNotFound": "Konto existiert nicht!",
+  "Loanpaid": "Das Darlehen ist bereits bezahlt!",
+  "UnhandledException": "Es ist eine nicht behandelte Ausnahme aufgetreten!"
+}
