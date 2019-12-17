@@ -15,7 +15,7 @@ namespace App.Stocks.Models
 
         public string Photo { get; set; }
         public bool IsOpenStocks { get; set; }
-        public Stock[] Stocks { get; set; }
+        public virtual ICollection<Stock> Stocks { get; set; }
 
     }
 }

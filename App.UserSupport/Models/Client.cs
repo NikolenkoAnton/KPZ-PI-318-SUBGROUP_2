@@ -7,5 +7,6 @@
         {
             this.Name = name;
         }
+        public Client() { }
     }
 }

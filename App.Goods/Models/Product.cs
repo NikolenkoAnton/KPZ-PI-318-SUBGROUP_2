@@ -1,4 +1,5 @@
-﻿using App.Goods.Common;
+﻿using System.Collections.Generic;
+using App.Goods.Common;
 
 namespace App.Goods.Models
 {
@@ -7,5 +8,6 @@ namespace App.Goods.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public int Cost { get; set; }
+        public List<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
     }
 }

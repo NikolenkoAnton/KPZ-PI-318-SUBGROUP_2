@@ -1,14 +1,11 @@
 ﻿using App.Configuration;
 using App.Deposits.Models;
-using App.Deposits.Repositories;
-using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 using App.Deposits.Services;
 using App.Deposits.Exceptions;
 using Microsoft.Extensions.Logging;
+using App.Repositories;
 
 namespace App.Deposits
 {

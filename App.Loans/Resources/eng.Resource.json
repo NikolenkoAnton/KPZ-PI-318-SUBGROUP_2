@@ -1,0 +1,5 @@
+{
+  "ResourceNotFound": "Account does not exist!",
+  "Loanpaid": "Loan is alredy paid beach!",
+  "UnhandledException": "Unhandled exception occurred!"
+}

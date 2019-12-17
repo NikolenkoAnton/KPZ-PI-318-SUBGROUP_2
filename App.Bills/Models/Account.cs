@@ -6,13 +6,15 @@ namespace App.Accounts.Models
 {
     public class Account
     {
+        public int Id { get; set; }
         public double money { get; set; }//деньги на счету
         public string Name { get; set; }//Имя владельца счета
         public string Surname { get; set; }//Фамилия владельца счета
         public bool IsBlocked { get; set; }//Заблокирован ли счет
 
-        public Account(double money, string Name, string Surname)
+        public Account(int Id, double money, string Name, string Surname)
         {
+            this.Id = Id;
             this.money = money;
             this.Name = Name;
             this.Surname = Surname;

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using App.Goods.Common;
+using App.Goods.DTOs;
 using App.Goods.Filters;
 using App.Goods.Models;
 using App.Goods.Services;
@@ -10,7 +11,7 @@ namespace App.Goods.Controllers
 {
     [Route("api/goods/orders")]
     [ApiController]
-    [TypeFilter(typeof(GoodsExceptionFilter), Arguments = new object[] { nameof(OrdersController) })]
+    [ServiceFilter(typeof(GoodsExceptionFilter))]
     public class OrdersController : ControllerBase
     {
         private readonly IOrdersManager _ordersManager;
@@ -25,7 +26,7 @@ namespace App.Goods.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Order> GetAllOrders()
+        public IEnumerable<OrderDto> GetAllOrders()
         {
             _logger.LogInformation("Call GetAllOrders method");
 
@@ -33,7 +34,7 @@ namespace App.Goods.Controllers
         }
 
         [HttpPost]
-        public Order MakeOrder([FromBody] List<int> productsIds)
+        public OrderDto MakeOrder([FromBody] List<int> productsIds)
         {
             _logger.LogInformation("Call MakeOrder method");
 

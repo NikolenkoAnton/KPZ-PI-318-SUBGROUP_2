@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using App.UserSupport.Filters;
 using Microsoft.Extensions.Logging;
+using App.UserSupport.Models;
 
 namespace App.UserSupport.Controllers
 {
@@ -23,7 +24,7 @@ namespace App.UserSupport.Controllers
         }
 
         [HttpGet("active")]
-        public ActionResult<IEnumerable<string>> GetListActiveHandlings()
+        public ActionResult<IEnumerable<Handling>> GetListActiveHandlings()
         {
             _logger.LogInformation("call GetListActiveHandlings method");
             var serviceCallResult = _userSupportManager.GetListActiveHandlings().ToList();
@@ -31,7 +32,7 @@ namespace App.UserSupport.Controllers
         }
 
         [HttpGet("{id}/last10Message")]
-        public ActionResult<IEnumerable<string>> GetHandling10LastMessages(int id)
+        public ActionResult<IEnumerable<Message>> GetHandling10LastMessages(int id)
         {
             _logger.LogInformation($"call GetHandling10LastMessages method with id = {id}");
             var serviceCallResult = _userSupportManager.GetHandling10LastMessages(id).ToList();

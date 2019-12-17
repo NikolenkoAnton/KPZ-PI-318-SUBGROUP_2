@@ -6,17 +6,20 @@ namespace App.Stocks.Models
 {
     public class Stock
     {
-        public decimal Cost {get;set;}
-        public DateTime Date {get;set;}
+        public int Id { get; set; }
+        public decimal Cost { get; set; }
+        public DateTime Date { get; set; }
 
-        public string DateView 
-        { 
-        get => Date.ToShortDateString();
-            
+        public int CompanyId { get; set; }
+        public virtual Company Company { get; set; }
+        public string DateView
+        {
+            get => Date.ToShortDateString();
+
         }
 
         public bool CompareDate(DateTime date) => date.ToShortDateString().CompareTo(DateView) == 0;
-        
+
     }
 
     public class StocksListItemView
@@ -32,5 +35,5 @@ namespace App.Stocks.Models
 
         public string Company { get; set; }
     }
-   
+
 }

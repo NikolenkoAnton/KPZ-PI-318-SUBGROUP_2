@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using App.Configuration;
 using App.Goods.Common;
+using App.Goods.DTOs;
 using App.Goods.Models;
 using Microsoft.Extensions.Logging;
 
@@ -21,31 +21,29 @@ namespace App.Goods.Services
             _logger = logger;
         }
 
-        public IEnumerable<Order> GetAllOrders()
+        public IEnumerable<OrderDto> GetAllOrders()
         {
             _logger.LogDebug("Call GetAllOrders method");
 
-            return _ordersRepository.GetAll();
+            return _ordersRepository.GetAll().Select(o => new OrderDto(o));
         }
 
-        public Order MakeOrder(IEnumerable<int> products)
+        public OrderDto MakeOrder(IEnumerable<int> products)
         {
             _logger.LogDebug("Call MakeOrder method");
 
             var orderedProducts = _productRepository.GetAll().Where(prod => products.Contains(prod.Id)).ToArray();
 
-            var lastOrder = GetAllOrders().LastOrDefault();
-            int lastId = lastOrder?.Id ?? 0;
+            var ordersProducts = orderedProducts.Select(product => new OrderProduct { ProductId = product.Id }).ToList();
 
             var newOrder = new Order
             {
-                Id = lastId + 1,
-                Products = orderedProducts
+                OrderProducts = ordersProducts
             };
 
             _ordersRepository.Add(newOrder);
 
-            return newOrder;
+            return new OrderDto(_ordersRepository.GetAll().LastOrDefault());
         }
     }
 }

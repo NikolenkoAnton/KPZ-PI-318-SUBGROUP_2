@@ -19,6 +19,6 @@ namespace App.Web
 
     public class Modules
     {
-        
+
     }
 }

@@ -15,6 +15,7 @@ namespace App.Cards
 
         void UnsetCardLimit(int id);
 
+
         void BlockCard(int id);
     }
     public class CardsManager : ICardsManager, ITransientDependency
@@ -34,7 +35,7 @@ namespace App.Cards
 
             if (card == null)
             {
-                throw new EntityNotFoundException(card.GetType());
+                throw new EntityNotFoundException(typeof(Card));
             }
 
             if (card.IsBlocked)

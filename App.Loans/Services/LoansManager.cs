@@ -10,7 +10,7 @@ namespace App.Loans.Services
     public interface ILoansManager
     {
         Loan GetItem(int id);
-        IEnumerable<string> GetListActiveLoans();
+        IEnumerable<Loan> GetListActiveLoans();
         double GetMoneyLeft(int id);
     }
 
@@ -46,7 +46,7 @@ namespace App.Loans.Services
             return get.moneyLeft;
         }
 
-        public IEnumerable<string> GetListActiveLoans()
+        public IEnumerable<Loan> GetListActiveLoans()
         {
             return _repository.GetActiveLoansList();
         }

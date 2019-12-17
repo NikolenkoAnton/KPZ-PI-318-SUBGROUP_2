@@ -4,19 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using App.Repositories;
 
 namespace App.Deposits.Repositories
 {
-    public interface IDepositsRepository
-    {
-        IEnumerable<Deposit> GetAllDeposit();
-
-        Deposit GetDepositById(int id);
-
-        void AddDeposit(Deposit deposit);
-    }
-
-    public class InMemmoryDepositsRepository : IDepositsRepository, ITransientDependency
+    public class InMemmoryDepositsRepository : IDepositsRepository
     {
         private static readonly List<Deposit> deposits = Init();
 

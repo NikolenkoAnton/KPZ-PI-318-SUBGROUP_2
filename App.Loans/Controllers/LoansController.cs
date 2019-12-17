@@ -3,9 +3,12 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using App.Loans.Services;
 using Microsoft.Extensions.Logging;
+using App.Loans.Filters;
+using App.Loans.Models;
 
 namespace App.Loans.Controllers
 {
+    [TypeFilter(typeof(LoansExceptionsFilter), Arguments = new object[] { nameof(LoansController) })]
     [Route("api/loans")]
     [ApiController]
     public class LoansController : ControllerBase
@@ -25,7 +28,7 @@ namespace App.Loans.Controllers
         }
 
         [HttpGet("All")]
-        public ActionResult<IEnumerable<string>> GetActiveLoansList()
+        public ActionResult<IEnumerable<Loan>> GetActiveLoansList()
         {
             _logger.LogInformation("call GetActiveLoansList method");
             return _valuesManager.GetListActiveLoans().ToList();
