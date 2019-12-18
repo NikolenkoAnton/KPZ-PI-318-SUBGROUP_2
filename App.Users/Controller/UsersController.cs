@@ -1,5 +1,5 @@
 using App.Models.Users;
-using App.Users.Filters;
+using App.Users.Filter;
 using App.Users.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -9,7 +9,7 @@ namespace App.Users.Controller
 {
     [Route("api/users")]
     [ApiController]
-    [TypeFilter(typeof(UsersExceptionFilter), Arguments = new object[] { nameof(UsersController) })]
+    [ServiceFilter(typeof(UsersExceptionFilter))]
     public class UsersController : ControllerBase
     {
         private readonly IUserService userService;

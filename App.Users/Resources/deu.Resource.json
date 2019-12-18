@@ -1,0 +1,5 @@
+{
+  "EntityNotFound": "Benutzer wurde nicht gefunden",
+  "UnableProcessUser": "Benutzer kann nicht verarbeitet werden",
+  "UnhandledException": "Es ist eine nicht behandelte Ausnahme aufgetreten!"
+}

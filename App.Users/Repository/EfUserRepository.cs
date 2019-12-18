@@ -2,7 +2,7 @@ using App.Configuration;
 using App.Models.Users;
 using App.Repositories;
 using App.Users.Database;
-using App.Users.Exceptions;
+using App.Users.Exception;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -11,5 +11,16 @@ namespace App.Models.Users
         public string Password { get; set; }
         public string Name { get; set; }
         public bool IsAvailable { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is User user &&
+                   Id == user.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id);
+        }
     }
 }
