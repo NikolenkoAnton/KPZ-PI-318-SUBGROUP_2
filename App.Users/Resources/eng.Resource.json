@@ -1,0 +1,5 @@
+{
+  "EntityNotFound": "User was not found",
+  "UnableProcessUser": "Unable to process user",
+  "UnhandledException": "Unhandled exception occurred!"
+}

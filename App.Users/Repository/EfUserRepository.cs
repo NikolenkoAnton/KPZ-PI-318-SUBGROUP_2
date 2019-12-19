@@ -2,7 +2,7 @@ using App.Configuration;
 using App.Models.Users;
 using App.Repositories;
 using App.Users.Database;
-using App.Users.Exceptions;
+using App.Users.Exception;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +46,7 @@ namespace App.Users.Repository
             {
                 dbContext.SimpleValues.Add(user);
             }
+            dbContext.SaveChanges();
         }
 
         public void Update(User user)
@@ -58,6 +59,7 @@ namespace App.Users.Repository
             {
                 throw new EntityNotFoundException("Unable to update user by id {0}, user does not exist", user.Id);
             }
+            dbContext.SaveChanges();
         }
 
         public void Delete(User user)
@@ -70,6 +72,7 @@ namespace App.Users.Repository
             {
                 throw new EntityNotFoundException("Unable to update user by id {0}, user does not exist", user.Id);
             }
+            dbContext.SaveChanges();
         }
 
         public void Dispose()
