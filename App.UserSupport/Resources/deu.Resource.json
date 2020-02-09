@@ -1,0 +1,5 @@
+{
+  "ResourceNotFound": "Handhabung existiert nicht!",
+  "Handling": "Die Abwicklung ist bereits abgeschlossen!",
+  "UnhandledException": "Es ist eine nicht behandelte Ausnahme aufgetreten!"
+}
