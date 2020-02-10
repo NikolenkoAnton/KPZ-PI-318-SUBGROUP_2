@@ -26,7 +26,10 @@ namespace App.UserSupport
 
             for(int i = 0;i < 5; i++)
             {
-                handlings[i] = new Handling(clients[i], "Some times i have troubles", i, i);
+
+
+                handlings[i] = new Handling(clients[i], "Some times i have troubles", i);
+
             }
 
             handlings[0].status = true;
