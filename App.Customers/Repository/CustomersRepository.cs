@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
-using App.Configuration;
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using App.Customers.Models;
+using App.Customers.Repository;
+using App.Repositories;
+using App.Configuration;
 
 namespace App.Customers.Repository
 {
@@ -12,13 +16,14 @@ namespace App.Customers.Repository
         IEnumerable<Customer> GetCustomers();
     }
 
-    public class CustomerRepository : ICustomerRepository,ITransientDependency
+    public class CustomerRepository : ICustomerRepository, ITransientDependency
     {
-        static List<Customer> customers = new List<Customer>();
+        public static List<Customer> customers = new List<Customer>();
 
         static CustomerRepository()
         {
-            customers.Add(new Customer() { Surname = " Surname", Name = " Name", CardNumber = 9796785587575 });
+            customers.Add(new Customer() { Surname = "Andei ", Name = " Vuhohol", CardNumber = 9796785587575 });
+            customers.Add(new Customer() { Surname="Aleksandr", Name="Svoi", CardNumber = 9796785587576 });
         }
 
 
@@ -45,7 +50,10 @@ namespace App.Customers.Repository
         }
 
 
-        public IEnumerable<Customer> GetCustomers() => customers;
+        public IEnumerable<Customer> GetCustomers()
+        {
+            return customers;
+        }
     }
 
 }

@@ -1,4 +1,8 @@
-﻿namespace App.Customers.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace App.Customers.Models
 {
     public class Customer
     {
@@ -16,5 +20,21 @@
         public Customer()
         {
         }
+
+
+        // public void GetName(string name) => Name = name;
+        // public void EditProp(CreditCard card) => Card = card;
+
+        /*
+        public void EditProp(CreditCard card ,string password)
+        {
+            this.Card = card;
+            this.Password = password;
+        }
+        */
+        // public override string ToString()
+        // {
+        //     return $"Surname:{Surname}, Name:{Name} "+ Card.ToString;
+        // }
     }
 }
