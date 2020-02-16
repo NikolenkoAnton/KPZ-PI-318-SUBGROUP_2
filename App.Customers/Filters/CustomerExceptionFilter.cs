@@ -50,5 +50,4 @@ namespace App.Customers.Exceptions
             context.ExceptionHandled = true;
         }
     }
-
 }

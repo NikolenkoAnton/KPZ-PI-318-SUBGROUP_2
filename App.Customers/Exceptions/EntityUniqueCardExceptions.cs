@@ -11,6 +11,5 @@ namespace App.Customers.Exceptions
         {
             this.CardNumber = cardNumber;
         }
-        
     }
 }
