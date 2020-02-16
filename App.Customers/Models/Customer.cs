@@ -6,6 +6,7 @@ namespace App.Customers.Models
 {
     public class Customer
     {
+        public int Id { get; set; }
         public string Surname { get; set; }
         public string Name { get; set; }
         public long CardNumber { get; set; }
@@ -22,19 +23,6 @@ namespace App.Customers.Models
         }
 
 
-        // public void GetName(string name) => Name = name;
-        // public void EditProp(CreditCard card) => Card = card;
-
-        /*
-        public void EditProp(CreditCard card ,string password)
-        {
-            this.Card = card;
-            this.Password = password;
-        }
-        */
-        // public override string ToString()
-        // {
-        //     return $"Surname:{Surname}, Name:{Name} "+ Card.ToString;
-        // }
+       
     }
 }

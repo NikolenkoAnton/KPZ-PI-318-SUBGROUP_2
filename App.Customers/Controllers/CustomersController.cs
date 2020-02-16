@@ -10,7 +10,7 @@ namespace App.Customers
 {
     [Route("api/Customers")]
     [ApiController]
-    [ServiceFilter(typeof(CustomerExceptionFilter))]
+    [TypeFilter(typeof(CustomerExceptionFilter))]
     public class CustomerController : ControllerBase
     {
         readonly ILogger<CustomerController> _logger;
@@ -39,10 +39,14 @@ namespace App.Customers
             return Ok();
         }
         [HttpPost("{edit}")]
-        public void Edit(Customer customer)
+        public void Edit(int id, Customer customer)
+
         {
+
             _logger.LogDebug("Edit customer");
-            _manager.Edit(customer);
+
+            _manager.Edit(id, customer);
+
         }
         [HttpGet("all")]
         public IEnumerable<Customer> GetAll()

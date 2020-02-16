@@ -13,17 +13,17 @@ namespace App.Customers.Services
     public interface ICustomerManager
     {
         void Add(Customer customer);
-        void Edit(Customer customer);
+        void Edit(int id,Customer new_customer);
         Customer GetById(int id);
         IEnumerable<Customer> GetCustomers();
     }
 
     public class CustomerManager : ICustomerManager,ITransientDependency
     {
-        readonly ICustomerRepository irepository;
+        readonly EfCustomersRepository irepository;
         private readonly ILogger<CustomerManager> logger;
 
-        public CustomerManager(ICustomerRepository repository,ILogger<CustomerManager> logger)
+        public CustomerManager(EfCustomersRepository repository,ILogger<CustomerManager> logger)
         {
             irepository = repository;
             this.logger = logger;
@@ -37,7 +37,8 @@ namespace App.Customers.Services
         public void Add(Customer customer)
         {
             logger.LogDebug($"methodAdd");
-            foreach (Customer person in CustomerRepository.customers)
+            
+            foreach (Customer person in irepository.GetCustomers())
                 if (customer.CardNumber == person.CardNumber)
                     throw new EntityUniqueCardExceptions(person.CardNumber);
             irepository.Add(customer);
@@ -51,12 +52,12 @@ namespace App.Customers.Services
             return irepository.GetById(id);
         }
 
-        public void Edit(Customer customer)
+        public void Edit(int id,Customer new_customer)
         {
             logger.LogDebug($"methodEdit");
-            if (customer.CardNumber <= 0)
+            if (id <= 0)
                 throw new EntityNotFoundException(typeof(Customer));
-            irepository.Edit(customer);
+            irepository.Edit(id,new_customer);
         }
     }
 
