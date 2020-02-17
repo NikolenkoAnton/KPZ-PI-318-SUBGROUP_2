@@ -21,8 +21,6 @@ namespace App.Customers.Models
         public Customer()
         {
         }
-
-
-       
+        
     }
 }
