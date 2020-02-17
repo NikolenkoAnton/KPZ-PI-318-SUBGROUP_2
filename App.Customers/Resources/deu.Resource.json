@@ -1,0 +1,5 @@
+﻿{
+  "EntityNotFound": "Entität wurde nicht gefunden",
+  "EntityUniqueCardExceptions": "Karte bereits verwendet",
+  "UnhandeledException": "Es ist eine nicht behandelte Ausnahme aufgetreten!"
+}

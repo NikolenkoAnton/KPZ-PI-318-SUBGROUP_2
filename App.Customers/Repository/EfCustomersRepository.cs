@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace App.Customers.Repository
+namespace App.Customers.Localization
 {
     public class EfCustomersRepository:ICustomerRepository,ITransientDependency
     {

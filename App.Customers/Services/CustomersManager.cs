@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using App.Customers.Repository;
+using App.Customers.Localization;
 using App.Customers.Models;
 using App.Repositories;
 using App.Configuration;

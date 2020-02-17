@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using App.Customers.Models;
 using App.Configuration;
 
-namespace App.Customers.Repository
+namespace App.Customers.Localization
 {
     public interface ICustomerRepository 
     {

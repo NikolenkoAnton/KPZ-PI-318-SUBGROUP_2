@@ -30,6 +30,7 @@ namespace App.Customers
             var actionResult = _manager.GetById(id);
             return actionResult;
         }
+
         [HttpPost("{add}")]
         public ActionResult<Customer> Add([FromBody]Customer customer)
         {
@@ -39,9 +40,13 @@ namespace App.Customers
         }
         [HttpPost("{edit}")]
         public void Edit(int id, Customer customer)
+
         {
+
             _logger.LogDebug("Edit customer");
+
             _manager.Edit(id, customer);
+
         }
         [HttpGet("all")]
         public IEnumerable<Customer> GetAll()
@@ -50,5 +55,7 @@ namespace App.Customers
             var result = _manager.GetCustomers().ToList();
             return result;
         }
+
     }
+
 }
